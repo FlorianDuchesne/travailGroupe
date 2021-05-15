@@ -31,12 +31,12 @@ class Programmer
     /**
      * @ORM\ManyToOne(targetEntity=Module::class, inversedBy="programmeModule")
      */
-    private $module;
+    // private $module;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    // public function getId(): ?int
+    // {
+    //     return $this->id;
+    // }
 
     public function getDuree(): ?int
     {
