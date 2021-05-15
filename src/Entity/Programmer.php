@@ -23,20 +23,20 @@ class Programmer
     private $duree;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Session::class, inversedBy="programmeSession")
+     * @ORM\ManyToOne(targetEntity=Session::class, inversedBy="session")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $programmeSession;
+    private $session;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Module::class, inversedBy="programmeModule")
+     * @ORM\ManyToOne(targetEntity=Module::class, inversedBy="module")
      */
-    // private $module;
+    private $module;
 
-    // public function getId(): ?int
-    // {
-    //     return $this->id;
-    // }
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     public function getDuree(): ?int
     {
