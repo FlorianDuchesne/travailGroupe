@@ -161,4 +161,9 @@ class Session
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->getFormation() . ' du ' . $this->getDateDebut()->format('d/m/Y') . ' au ' . $this->getDateFin()->format('d/m/Y');
+    }
 }

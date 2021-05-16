@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Formation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use PhpParser\Node\Name;
 
 /**
  * @method Formation|null find($id, $lockMode = null, $lockVersion = null)
