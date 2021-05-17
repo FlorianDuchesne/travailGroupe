@@ -2,9 +2,11 @@
 
 {% block title %}Détail d'une formation{% endblock %}
 
-{% block container %}
-    <h1>Détail d'une formation</h1>
-<div class="card">
+{% block body %}
+<div class="container">
+    <h2 class="text-center">Détail d'une formation</h2>
+    <button class="btn btn-info"><a class="text-white" href="{{ path('formation_index') }}">Retour à la liste</a></button>
+<div class="card" style="width: 18rem;">
 <div class="card-body">
     <h2 class="card-title">{{ formation.nom }}</h2>
     
@@ -12,5 +14,6 @@
         {{ formation.descriptif }}<br>
     </p>
     </div>
+</div>
 </div>
 {% endblock %}

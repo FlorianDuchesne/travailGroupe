@@ -57,7 +57,7 @@ class StagiaireController extends AbstractController
     }
 
     /**
-     * @Route("/stagiaire", name="stagiaire")
+     * @Route("stagiaire/list", name="stagiaire")
      */
     public function index(): Response
     {
@@ -72,7 +72,7 @@ class StagiaireController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="stagiaire_show")
+     * @Route("stagiaire/{id}", name="stagiaire_show")
      */
     public function show(Stagiaire $stagiaire): Response
     {

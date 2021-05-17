@@ -5,6 +5,8 @@
 
 {% block body %}
 	<div class="container">
+	    <button class="btn btn-info"><a class="text-white" href="{{ path('stagiaire') }}">Liste des stagiaires</a></button>
+
 		<h1 class="text-center">Liste des formations</h1>
 
 		<table class="table table-hover">
@@ -19,19 +21,19 @@
 			<tbody>
 				{% for formation in formations %}
 					<tr>
-						{# <td><a href="{{ path('formation_show', {id:formation.id}) }}">{{ formation.nom }}</a></td> #}
- 
-						<td>{{ formation.nom }}
+						<td><a href = "{{ path('formation_show', {id: formation.id}) }}">{{ formation.nom }}</a></td>
+
+						{# <td>{{ formation.nom }} #}
 						<td>{{ formation.descriptif }}
 						</td>
 						<td>
 							<button type="button" class="btn btn-warning">
-								<a class=" text-white" href="#">Modifier</a>
+								<a class=" text-white" href="{{ path('formation_edit', {'id':formation.id}) }}">Modifier</a>
 							</button>
 						</td>
 						<td>
 							<button type="button" class="btn btn-danger">
-								<a class=" text-white" href="#">Supprimer</a>
+								<a class=" text-white" href="{{ path('formation_delete', {'id':formation.id}) }}">Supprimer</a>
 							</button>
 						</td>
 					</tr>
@@ -39,7 +41,7 @@
 
 			</tbody>
 		</table>
-		<button type="button" class="btn btn-info">
+		<button type="button" class="btn btn-success">
 			<a class=" text-white" href="{{ path('formation_add') }}">Ajouter</a>
 		</button>
 	</div>

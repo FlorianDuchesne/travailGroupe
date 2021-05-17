@@ -7,6 +7,8 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 <div class="example-wrapper">
+    <button class="btn btn-info"><a class="text-white" href="{{ path('stagiaire') }}">Retour à la liste</a></button>
+
 <h1 class="text-info">{{ stagiaire}}</h1>
 <ul>
         <li>Date de naissance : {{stagiaire.dateNaissance | date('d-m-Y') }}</li>

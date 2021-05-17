@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Formation;
 use App\Form\FormationType;
+
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,12 +17,12 @@ class FormationController extends AbstractController
     
     
     /**
-     * @Route("formation/new", name="formation_add")
-     * @Route("formation/edit/{id}", name="formation_edit")
+     * @Route("/formation/new", name="formation_add")
+     * @Route("/formation/{id}/edit", name="formation_edit")
      */
-    public function new(Request $request, Formation $formation = null): Response
+    public function new(Formation $formation = null, Request $request): Response
     {
-        if(!$formation){
+        if(!$formation) {
             $formation = new Formation();
         }
         
@@ -40,6 +42,8 @@ class FormationController extends AbstractController
         
         return $this->render('formation/new.html.twig', [
             'formAddFormation' => $form->createView(),
+            'editMode' => $formation->getId() !== null
+
             ]);
         }
         /**
@@ -58,10 +62,25 @@ class FormationController extends AbstractController
 
 
         /**
-     *  @Route("/{id}", name="formation_show", methods="GET")
+     *  @Route("formation/{id}", name="formation_show")
      */
-    public function show(Formation $formation): Response {
-        return $this->render('formation/show.html.twig', ['formation' => $formation]);
+    public function show(Formation $formation): Response 
+    {
+        return $this->render('formation/show.html.twig', [
+            'formation' => $formation
+        ]);
     }
+
+        /**
+     * @Route("/formation/delete", name="formation_delete")
+     * @Route("/formation/{id}/delete", name="formation_delete")
+     */
+    public function delete(Formation $formation = null, Request $request, EntityManagerInterface $manager)
+    {
+        $manager->remove($formation);
+        $manager->flush();
+        return $this->redirectToRoute('formation_index');
+    }
+
 
 }
