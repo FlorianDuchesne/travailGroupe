@@ -72,4 +72,20 @@ class Module
 
         return $this;
     }
+
+    /**
+     * Set the value of id
+     *
+     * @return  self
+     */ 
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return $this->getLibelle();
+    }
 }
