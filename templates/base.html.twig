@@ -22,19 +22,14 @@
 
 			<nav class="container">
 
-				<figure class="navbar-brand">
-
-					<img class="w-25" src="{{ asset('img/hibou.png') }}">
-
-				</figure>
-
-				<a class="text-white" href="{{ path('formation_index') }}">Formations</a>
-
-				<a class="text-white" href="{{ path('categorie') }}">Catégories</a>
-
-				<a class="text-white" href="{{ path('stagiaire') }}">Stagiaires</a>
-
-				<a class="text-white" href="{{ path('session') }}">Sessions</a>
+			<figure class="navbar-brand m-0">
+			<img class="w-50" src="{{ asset('img/hibouSmall.png') }}">
+			</figure>
+			<a class="text-white" href="{{ path('formation_index') }}">Formations</a>
+			<a class="text-white" href="{{ path('stagiaire') }}">Stagiaires</a>
+			<a class="text-white" href="{{ path('session') }}">Sessions</a>
+			<a class="text-white" href="{{ path('module') }}">Modules</a>
+			<a class="text-white" href="{{ path('categorie') }}">Catégories</a>
 
 			</nav>
 
