@@ -13,6 +13,6 @@
   <li>catégorie : {{ module.categorie.nom }}</li>
 </ul>
         <a class="btn btn-warning rounded-pill m-2" href="{{ path('module_edit', {'id':module.id}) }}">Modifier les informations</a>
-        {# <a class="btn btn-danger rounded-pill m-2" href="{{ path('session_delete', {'id':session.id}) }}">Supprimer la session</a> #}
+        <a class="btn btn-danger rounded-pill m-2" href="{{ path('module_delete', {'id':module.id}) }}">Supprimer le module</a>
 </div>
 {% endblock %}
