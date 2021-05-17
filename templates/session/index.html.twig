@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SessionController!{% endblock %}
+{% block title %}Liste Sessions{% endblock %}
 
 {% block body %}
 <style>
@@ -8,13 +8,16 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
+    <h1>Liste des sessions</h1>
+{% for session in sessions %}
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Applications/XAMPP/xamppfiles/htdocs/travailGroupe/src/Controller/SessionController.php'|file_link(0) }}">src/Controller/SessionController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Applications/XAMPP/xamppfiles/htdocs/travailGroupe/templates/session/index.html.twig'|file_link(0) }}">templates/session/index.html.twig</a></code></li>
-    </ul>
+        <ul>
+        <li>intitulé formation : <a href = "{{ path('session_show', {id: session.id}) }}">{{session.formation}}</a></li>
+        <li>date début : {{ session.dateDebut | date('d-m-Y') }}</li>
+        <li>date fin : {{ session.dateFin | date('d-m-Y') }}</li>
+        <a class="btn btn-danger rounded-pill m-2" href="{{ path('session_delete', {'id':session.id}) }}">Supprimer la session</a>
+        </ul>
 </div>
+{% endfor %}
+<a class="btn btn-success rounded-pill" href="{{ path('session_add') }}">Rajouter une session</a>
 {% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ module}}{% endblock %}
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+<div class="example-wrapper">
+<h1 class="text-info">{{ module }}</h1>
+<ul>
+  <li>descriptif : {{ module.descriptif }}</li>
+  <li>catégorie : {{ module.categorie.nom }}</li>
+</ul>
+        <a class="btn btn-warning rounded-pill m-2" href="{{ path('module_edit', {'id':module.id}) }}">Modifier les informations</a>
+        {# <a class="btn btn-danger rounded-pill m-2" href="{{ path('session_delete', {'id':session.id}) }}">Supprimer la session</a> #}
+</div>
+{% endblock %}

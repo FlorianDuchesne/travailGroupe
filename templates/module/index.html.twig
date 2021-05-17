@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ModuleController!{% endblock %}
+{% block title %} Liste modules {% endblock %}
 
 {% block body %}
 <style>
@@ -9,12 +9,24 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/jpgur/OneDrive/Bureau/travail_groupe_synfony/travailGroupe/src/Controller/ModuleController.php'|file_link(0) }}">src/Controller/ModuleController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/jpgur/OneDrive/Bureau/travail_groupe_synfony/travailGroupe/templates/module/index.html.twig'|file_link(0) }}">templates/module/index.html.twig</a></code></li>
-    </ul>
+    <h1 class="text-info m-3">Liste des modules</h1>
+    <table class="table table-striped table-hover table-sm">
+    <thead>
+    <tr>
+    <td>intitulé :</td>
+    <td>descriptif :</td>
+    <td>catégorie :</td>
+    </tr>
+    <tbody>
+{% for module in modules %}
+        <tr>
+        <td><a href = "{{ path('module_show', {id: module.id}) }}">{{module.libelle}}</a></td>
+        <td>{{ module.descriptif }}</td>
+        <td>{{ module.categorie.nom }}</td>
+        </tr>
 </div>
+{% endfor %}
+</tbody>
+</table>
+<a class="btn btn-success rounded-pill" href="{{ path('module_add') }}">Rajouter un module</a>
 {% endblock %}

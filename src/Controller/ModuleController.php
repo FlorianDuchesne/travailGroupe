@@ -2,19 +2,78 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Module;
+use App\Form\ModuleType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ModuleController extends AbstractController
 {
+
     /**
-     * @Route("/module", name="module")
+     * @Route("/module/delete", name="module_delete")
+     * @Route("/module/{id}/delete", name="module_delete")
+     */
+    public function delete(Module $module = null, Request $request): Response
+    {
+        $manager->remove($session);
+        $manager->flush();
+        return $this->redirectToRoute('session');
+    }
+
+    /**
+     * @Route("/module/add", name="module_add")
+     * @Route("/module/{id}/edit", name="module_edit")
+     */
+    public function add(Module $module = null, Request $request): Response
+    {
+        if (!$module) {
+            $module = new Module();
+        }
+
+        $form = $this->createForm(ModuleType::class, $module);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $module = $form->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($module);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('module');
+        }
+
+        return $this->render('module/add_edit.html.twig', [
+            'formAddModule' => $form->createView(),
+            'editMode' => $module->getId() !== null
+        ]);
+    }
+
+    /**
+     * @Route("/module/list", name="module")
      */
     public function index(): Response
     {
+
+        $modules = $this->getDoctrine()
+            ->getRepository(Module::class)
+            ->findAll();
+
         return $this->render('module/index.html.twig', [
-            'controller_name' => 'ModuleController',
+            'modules' => $modules,
+        ]);
+    }
+
+    /**
+     * @Route("module/{id}", name="module_show")
+     */
+    public function show(Module $module): Response
+    {
+        return $this->render('module/show.html.twig', [
+            'module' => $module
         ]);
     }
 }
