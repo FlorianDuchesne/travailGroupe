@@ -13,6 +13,13 @@
     <p class="card-text">
         {{ formation.descriptif }}<br>
     </p>
+            <h4 class="text-info text-center">Sessions prévues :</h4>
+        {% for session in formation.session %}
+        <ul>
+        <li>{{ session }}</li>
+        </ul>
+        {% endfor %}
+
     </div>
 </div>
 </div>
