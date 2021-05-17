@@ -3,7 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Module;
-use App\Form\ModuleType;
+use App\Entity\Categorie;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,11 +17,11 @@ class ModuleController extends AbstractController
      * @Route("/module/delete", name="module_delete")
      * @Route("/module/{id}/delete", name="module_delete")
      */
-    public function delete(Module $module = null, Request $request): Response
+    public function delete(Module $module = null, Request $request, EntityManagerInterface $manager): Response
     {
-        $manager->remove($session);
+        $manager->remove($module);
         $manager->flush();
-        return $this->redirectToRoute('session');
+        return $this->redirectToRoute('module');
     }
 
     /**
