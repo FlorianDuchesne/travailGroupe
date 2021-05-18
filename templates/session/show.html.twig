@@ -35,13 +35,13 @@
 					{{ session.nbPlaces }}<br>
 				</p>
 				<p class="card-text">
-					Stagiaires inscrits :
+					Stagiaires inscrits :<br>
 					{% if session.inscrit is empty %}
 						<li>Pas de stagiaires inscrits pour le moment</li>
 					{% else %}
 						{% for inscrit in session.inscrit %}
 
-							{{ inscrit }}<br>
+							<li> {{ inscrit }}<br> </li>
 						{% endfor %}
 					{% endif %}
 
