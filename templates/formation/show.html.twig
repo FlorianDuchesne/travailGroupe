@@ -1,26 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Détail d'une formation{% endblock %}
+{% block title %}Détail d'une formation
+{% endblock %}
 
 {% block body %}
-<div class="container">
-    <h2 class="text-center">Détail d'une formation</h2>
-    <button class="btn btn-info"><a class="text-white" href="{{ path('formation_index') }}">Retour à la liste</a></button>
-<div class="card" style="width: 18rem;">
-<div class="card-body">
-    <h2 class="card-title">{{ formation.nom }}</h2>
-    
-    <p class="card-text">
-        {{ formation.descriptif }}<br>
-    </p>
-            <h4 class="text-info text-center">Sessions prévues :</h4>
-        {% for session in formation.session %}
-        <ul>
-        <li>{{ session }}</li>
-        </ul>
-        {% endfor %}
+	<div class="container">
+		<h2 class="text-center">Détail d'une formation</h2>
+		<button class="btn btn-info">
+			<a class="text-white" href="{{ path('formation_index') }}">Retour à la liste</a>
+		</button>
+		<div class="card" style="width: 18rem;">
+			<div class="card-body">
+				<h2 class="card-title">{{ formation.nom }}</h2>
 
-    </div>
-</div>
-</div>
+				<p class="card-text">
+					{{ formation.descriptif }}<br>
+				</p>
+				<h4 class="text-info text-center">Sessions prévues :</h4>
+				{% for session in formation.session %}
+					<ul>
+						<li>{{ session }}</li>
+					</ul>
+				{% endfor %}
+
+			</div>
+		</div>
+	</div>
 {% endblock %}

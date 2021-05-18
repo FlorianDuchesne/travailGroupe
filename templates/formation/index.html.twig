@@ -22,7 +22,7 @@
 			<tbody>
 				{% for formation in formations %}
 					<tr>
-						<td><a href = "{{ path('formation_show', {id: formation.id}) }}">{{ formation.nom }}</a></td>
+						<td><a class="text-body" href = "{{ path('formation_show', {id: formation.id}) }}">{{ formation.nom }}</a></td>
 
 						{# <td>{{ formation.nom }} #}
 						<td>{{ formation.descriptif }}
@@ -43,7 +43,7 @@
 			</tbody>
 		</table>
 		<button type="button" class="btn btn-success">
-			<a class=" text-white" href="{{ path('formation_add') }}">Ajouter</a>
+			<a class=" text-white" href="{{ path('formation_add') }}">Ajouter une formation</a>
 		</button>
 	</div>
 {% endblock %}

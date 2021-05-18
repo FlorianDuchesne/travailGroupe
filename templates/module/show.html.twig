@@ -1,18 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ module}}{% endblock %}
+{% block title %}
+	{{ module}}
+{% endblock %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-<div class="example-wrapper">
-<h1 class="text-info">{{ module }}</h1>
-<ul>
-  <li>descriptif : {{ module.descriptif }}</li>
-  <li>catégorie : {{ module.categorie.nom }}</li>
-</ul>
-        <a class="btn btn-warning rounded-pill m-2" href="{{ path('module_edit', {'id':module.id}) }}">Modifier les informations</a>
-        <a class="btn btn-danger rounded-pill m-2" href="{{ path('module_delete', {'id':module.id}) }}">Supprimer le module</a>
-</div>
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
+	<div class="container">
+		<h2 class="text-center">Détail d'un module</h2>
+		<button class="btn btn-info">
+			<a class="text-white" href="{{ path('module') }}">Retour à la liste</a>
+		</button>
+
+		<div class="card" style="width: 18rem;">
+			<div class="card-body">
+				<h2 class="card-title">{{ module }}</h2>
+			</div>
+			<div class="card-text">
+
+				<h6>Descriptif :</h6>
+
+				<ul>
+
+					<li>{{ module.descriptif }}</li>
+				</ul>
+
+					<h6>Catégorie :</h6>
+				<ul>
+					<li>
+						{{ module.categorie.nom }}</li>
+				</ul>
+
+				{# <a class="btn btn-warning rounded-pill m-2" href="{{ path('module_edit', {'id':module.id}) }}">Modifier les informations</a>
+																			        <a class="btn btn-danger rounded-pill m-2" href="{{ path('module_delete', {'id':module.id}) }}">Supprimer le module</a> #}
+			</div>
+		</div>
+	</div>
 {% endblock %}

@@ -1,27 +1,66 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ session}}{% endblock %}
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-<div class="example-wrapper">
-    <button class="btn btn-info"><a class="text-white" href="{{ path('session') }}">Retour à la liste</a></button>
-
-<h1 class="text-info">{{ session }}</h1>
-<ul>
-        <li>nombre de places : {{ session.nbPlaces }}</li>
-        <li>Stagiaires inscrits : </li>
-        {% if session.inscrits is empty %}
-        <li>Pas de stagiaires inscrits pour le moment</li>
-        {% else %}
-        {% for inscrit in session.inscrits %}
-        <li>{{ inscrit }}</li>
-        {% endfor %}
-        {% endif %}
-</ul>
-        <a class="btn btn-warning rounded-pill m-2" href="{{ path('session_edit', {'id':session.id}) }}">Modifier les informations</a>
-        <a class="btn btn-danger rounded-pill m-2" href="{{ path('session_delete', {'id':session.id}) }}">Supprimer la session</a>
-</div>
+{% block title %}
+	{{ session}}
 {% endblock %}
+{% block body %}
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
+	<div class="container">
+		<h2 class="text-center">Détail d'une session</h2>
+
+		<button class="btn btn-info">
+			<a class="text-white" href="{{ path('session') }}">Retour à la liste</a>
+		</button>
+		<div class="card" style="width: 18rem;">
+			<div class="card-body">
+
+				<h2 class="card-title">{{ session.formation }}</h2>
+				<p class="card-text">
+					Période :<br>
+					Du {{ session.dateDebut | date('d-m-Y') }} au {{ session.dateFin | date('d-m-Y') }} <br>
+				</p>
+				<p class="card-text">
+					Nombre de places :<br>
+					{{ session.nbPlaces }}<br>
+				</p>
+				<p class="card-text">
+					Stagiaires inscrits :
+					{% if session.inscrit is empty %}
+						<li>Pas de stagiaires inscrits pour le moment</li>
+					{% else %}
+						{% for inscrit in session.inscrit %}
+
+							{{ inscrit }}<br>
+						{% endfor %}
+					{% endif %}
+
+				</p>
+
+				{# <ul>
+									<li>nombre de places :
+										{{ session.nbPlaces }}</li>
+									<li>Stagiaires inscrits :
+									</li>
+									{% if session.inscrit is empty %}
+										<li>Pas de stagiaires inscrits pour le moment</li>
+									{% else %}
+										{% for inscrit in session.inscrit %}
+											<li>{{ inscrit }}</li>
+										{% endfor %}
+									{% endif %}
+								</ul> #}
+				{# <a class="btn btn-warning rounded-pill m-2" href="{{ path('session_edit', {'id':session.id}) }}">Modifier les informations</a>
+								        <a class="btn btn-danger rounded-pill m-2" href="{{ path('session_delete', {'id':session.id}) }}">Supprimer la session</a> #}
+			</div>
+		{% endblock %}

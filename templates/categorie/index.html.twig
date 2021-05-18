@@ -21,7 +21,7 @@
 			<tbody>
 				{% for categorie in categories %}
 					<tr>
-						<td><a href = "{{ path('categorie_show', {id: categorie.id}) }}">{{ categorie.nom }}</a></td>
+						<td><a class="text-body" href = "{{ path('categorie_show', {id: categorie.id}) }}">{{ categorie.nom }}</a></td>
 
 						{# <td>{{ formation.nom }} #}
 						{# <td>{{ categorie.nom }}
