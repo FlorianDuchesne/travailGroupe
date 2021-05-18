@@ -44,10 +44,10 @@ class Session
      */
     private $inscrit;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Programmer::class, mappedBy="programmeSession", orphanRemoval=true)
-     */
-    private $programmeSession;
+    // /**
+    //  * @ORM\OneToMany(targetEntity=Programmer::class, mappedBy="programmeSession", orphanRemoval=true)
+    //  */
+    // private $programmeSession;
 
     public function __construct()
     {
@@ -132,35 +132,35 @@ class Session
         return $this;
     }
 
-    /**
-     * @return Collection|Programmer[]
-     */
-    public function getProgrammeSession(): Collection
-    {
-        return $this->programmeSession;
-    }
+    // /**
+    //  * @return Collection|Programmer[]
+    //  */
+    // public function getProgrammeSession(): Collection
+    // {
+    //     return $this->programmeSession;
+    // }
 
-    public function addProgrammeSession(Programmer $programmeSession): self
-    {
-        if (!$this->programmeSession->contains($programmeSession)) {
-            $this->programmeSession[] = $programmeSession;
-            $programmeSession->setProgrammeSession($this);
-        }
+    // public function addProgrammeSession(Programmer $programmeSession): self
+    // {
+    //     if (!$this->programmeSession->contains($programmeSession)) {
+    //         $this->programmeSession[] = $programmeSession;
+    //         $programmeSession->setProgrammeSession($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeProgrammeSession(Programmer $programmeSession): self
-    {
-        if ($this->programmeSession->removeElement($programmeSession)) {
-            // set the owning side to null (unless already changed)
-            if ($programmeSession->getProgrammeSession() === $this) {
-                $programmeSession->setProgrammeSession(null);
-            }
-        }
+    // public function removeProgrammeSession(Programmer $programmeSession): self
+    // {
+    //     if ($this->programmeSession->removeElement($programmeSession)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($programmeSession->getProgrammeSession() === $this) {
+    //             $programmeSession->setProgrammeSession(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function __toString()
     {
@@ -171,7 +171,7 @@ class Session
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setId($id)
     {
         $this->id = $id;
