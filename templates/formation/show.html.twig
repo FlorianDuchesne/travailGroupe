@@ -17,12 +17,15 @@
 					{{ formation.descriptif }}<br>
 				</p>
 				<h4 class="text-info text-center">Sessions prévues :</h4>
-				{% for session in formation.session %}
-					<ul>
-						<li>{{ session }}</li>
-					</ul>
-				{% endfor %}
-
+				{% if formation.session is empty %}
+					<li>Pas de session prévue pour le moment</li>
+				{% else %}
+					{% for session in formation.session %}
+						<ul>
+							<li><a class="text-info"href="{{ path('session_show', {id:session.id})}}">{{ session }}</a></li>
+						</ul>
+					{% endfor %}
+				{% endif %}
 			</div>
 		</div>
 	</div>
