@@ -18,18 +18,26 @@ class ModuleType extends AbstractType
     {
         $builder
             ->add('libelle', TextType::class, [
-                'attr' => [],
+                'attr' => [
+                    'class' => 'form-control'
+                ],
                 'required' => true,
             ])
             ->add('descriptif', TextareaType::class, [
-                'attr' => [],
+                'attr' => [
+                    'class' => 'form-control'
+                ],
             ])
             ->add('categorie', EntityType::class, [
-                'attr' => [],
+                'attr' => [
+                    'class' => 'form-control'
+                ],
                 'class' => Categorie::class
             ])
             ->add('envoyer', SubmitType::class, [
-                'attr' => [],
+                'attr' => [
+                    'class' => 'btn btn-success m-3'
+                ],
             ]);
     }
 

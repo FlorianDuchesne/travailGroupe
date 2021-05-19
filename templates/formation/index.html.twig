@@ -4,11 +4,12 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container">
-	    {# <button class="btn btn-info"><a class="text-white" href="{{ path('stagiaire') }}">Liste des stagiaires</a></button>
-	    <button class="btn btn-info"><a class="text-white" href="{{ path('categorie') }}">Liste des catégories</a></button> #}
+	<div
+		class="container">
+		{# <button class="btn btn-info"><a class="text-white" href="{{ path('stagiaire') }}">Liste des stagiaires</a></button>
+			    <button class="btn btn-info"><a class="text-white" href="{{ path('categorie') }}">Liste des catégories</a></button> #}
 
-		<h1 class="text-center">Liste des formations</h1>
+		<h1 class="text-center m-3">Liste des formations</h1>
 
 		<table class="table table-hover">
 			<thead>
@@ -22,7 +23,9 @@
 			<tbody>
 				{% for formation in formations %}
 					<tr>
-						<td><a class="text-body" href = "{{ path('formation_show', {id: formation.id}) }}">{{ formation.nom }}</a></td>
+						<td>
+							<a class="text-body" href="{{ path('formation_show', {id: formation.id}) }}">{{ formation.nom }}</a>
+						</td>
 
 						{# <td>{{ formation.nom }} #}
 						<td>{{ formation.descriptif }}

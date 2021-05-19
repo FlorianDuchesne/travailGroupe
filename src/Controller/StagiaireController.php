@@ -15,11 +15,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class StagiaireController extends AbstractController
 {
 
+    // routes et noms correspondant à la fonction ci-dessous. 
+
     /**
      * @Route("/stagiaire/delete", name="stagiaire_delete")
      * @Route("/stagiaire/{id}/delete", name="stagiaire_delete")
      */
-    public function delete(Stagiaire $stagiaire = null, Request $request, EntityManagerInterface $manager)
+    public function delete(Stagiaire $stagiaire = null, EntityManagerInterface $manager)
     {
         $manager->remove($stagiaire);
         $manager->flush();

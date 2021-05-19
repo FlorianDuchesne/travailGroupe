@@ -18,39 +18,39 @@ class StagiaireType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, [
-                'attr' => [],
+                'attr' => ['class' => 'form-control'],
                 'required' => true,
             ])
             ->add('prenom', TextType::class, [
-                'attr' => [],
+                'attr' => ['class' => 'form-control'],
                 'required' => true,
             ])
             ->add('dateNaissance', DateType::class, [
-                'attr' => [],
+                'attr' => ['class' => 'form-control'],
                 'widget' => 'single_text',
             ])
             ->add('adresse', TextType::class, [
-                'attr' => [],
+                'attr' => ['class' => 'form-control'],
                 'required' => true,
             ])
             ->add('codePostal', TextType::class, [
-                'attr' => [],
+                'attr' => ['class' => 'form-control'],
                 'required' => true,
             ])
             ->add('ville', TextType::class, [
-                'attr' => [],
+                'attr' => ['class' => 'form-control'],
                 'required' => true,
             ])
             ->add('courriel', TextType::class, [
-                'attr' => [],
+                'attr' => ['class' => 'form-control'],
                 'required' => true,
             ])
             ->add('telephone', TextType::class, [
-                'attr' => [],
+                'attr' => ['class' => 'form-control'],
                 'required' => true,
             ])
             ->add('sexe', TextType::class, [
-                'attr' => [],
+                'attr' => ['class' => 'form-control'],
                 'required' => true,
             ])
             // ->add('sessions', EntityType::class, [
@@ -61,7 +61,7 @@ class StagiaireType extends AbstractType
             //     },
             // ])
             ->add('envoyer', SubmitType::class, [
-                'attr' => [],
+                'attr' => ['class' => 'btn btn-success m-3'],
             ]);
     }
 

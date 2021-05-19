@@ -17,7 +17,7 @@
 		}
 	</style>
 	<div class="container">
-		<h2 class="text-center">Détail d'une session</h2>
+		<h2 class="text-center m-3">Détail d'une session</h2>
 
 		<button class="btn btn-info">
 			<a class="text-white" href="{{ path('session') }}">Retour à la liste</a>
@@ -57,19 +57,19 @@
 				</p>
 
 				{# <ul>
-																					<li>nombre de places :
-																						{{ session.nbPlaces }}</li>
-																					<li>Stagiaires inscrits :
-																					</li>
-																					{% if session.inscrit is empty %}
-																						<li>Pas de stagiaires inscrits pour le moment</li>
-																					{% else %}
-																						{% for inscrit in session.inscrit %}
-																							<li>{{ inscrit }}</li>
-																						{% endfor %}
-																					{% endif %}
-																				</ul> #}
+																									<li>nombre de places :
+																										{{ session.nbPlaces }}</li>
+																									<li>Stagiaires inscrits :
+																									</li>
+																									{% if session.inscrit is empty %}
+																										<li>Pas de stagiaires inscrits pour le moment</li>
+																									{% else %}
+																										{% for inscrit in session.inscrit %}
+																											<li>{{ inscrit }}</li>
+																										{% endfor %}
+																									{% endif %}
+																								</ul> #}
 				{# <a class="btn btn-warning rounded-pill m-2" href="{{ path('session_edit', {'id':session.id}) }}">Modifier les informations</a>
-																				        <a class="btn btn-danger rounded-pill m-2" href="{{ path('session_delete', {'id':session.id}) }}">Supprimer la session</a> #}
+																								        <a class="btn btn-danger rounded-pill m-2" href="{{ path('session_delete', {'id':session.id}) }}">Supprimer la session</a> #}
 			</div>
 		{% endblock %}
