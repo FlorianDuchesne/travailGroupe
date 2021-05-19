@@ -36,6 +36,10 @@
 					{{ session.dateFin | date('d-m-Y') }}
 					<br>
 				</p>
+				<p class="card-text">Contenu :<br>
+					{% for programmeSession in session.programmeSession %}
+						{{ programmeSession }}</p>
+				{% endfor %}
 				<p class="card-text">
 					Nombre de places :<br>
 					{{ session.nbPlaces }}<br>
@@ -55,21 +59,5 @@
 					{% endif %}
 
 				</p>
-
-				{# <ul>
-																									<li>nombre de places :
-																										{{ session.nbPlaces }}</li>
-																									<li>Stagiaires inscrits :
-																									</li>
-																									{% if session.inscrit is empty %}
-																										<li>Pas de stagiaires inscrits pour le moment</li>
-																									{% else %}
-																										{% for inscrit in session.inscrit %}
-																											<li>{{ inscrit }}</li>
-																										{% endfor %}
-																									{% endif %}
-																								</ul> #}
-				{# <a class="btn btn-warning rounded-pill m-2" href="{{ path('session_edit', {'id':session.id}) }}">Modifier les informations</a>
-																								        <a class="btn btn-danger rounded-pill m-2" href="{{ path('session_delete', {'id':session.id}) }}">Supprimer la session</a> #}
 			</div>
 		{% endblock %}

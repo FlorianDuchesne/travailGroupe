@@ -73,4 +73,9 @@ class Programmer
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return "Le module " . $this->module . " dure " .  $this->duree . ' jours';
+    }
 }
