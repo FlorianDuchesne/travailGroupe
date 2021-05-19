@@ -24,7 +24,6 @@
 
 			{% for session in sessions %}
 
-<<<<<<< Updated upstream
 				<div class="card" style="width: 18rem;">
 					<div class="card-body">
 						<a href="{{ path('session_show', {id: session.id}) }}">
@@ -33,27 +32,13 @@
 						<p class="card-text">
 							<ul>
 								<li>nombre de places :
-									{{ session.nbPlaces }}</li>
-							</p>
+									{{ session.nbPlaces }}
+								</li>
+							</ul>
 						</p>
 					</div>
 				</div>
 			{% endfor %}
 		</div>
 	</div>
-
-=======
-<div class="card" style="width: 18rem;">
-<div class="card-body">
-<a href = "{{ path('session_show', {id: session.id}) }}"><h2 class="card-title text-info">{{ session }}</h2></a>
-    <p class="card-text">
-        <ul>
-        <li>nombre de places : {{ session.nbPlaces }}</li>
-    </p>
-    </div>
-</div>
-{% endfor %}
-</div>
-</div>
->>>>>>> Stashed changes
 {% endblock %}
