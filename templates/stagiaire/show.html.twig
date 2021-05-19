@@ -17,7 +17,7 @@
 		}
 	</style>
 	<div class="container">
-		<h2 class="text-center">Fiche descriptive</h2>
+		<h2 class="text-center m-3">Fiche descriptive</h2>
 
 		<button class="btn btn-info">
 			<a class="text-white" href="{{ path('stagiaire') }}">Retour à la liste</a>
@@ -40,16 +40,16 @@
 				<h4 class="text-info text-center">Sessions prévues :<br></h4>
 
 
-					{% if stagiaire.sessions is empty %}
-						<li>Pas incrit à une session pour le moment</li>
-					{% else %}
-				{% for session in stagiaire.sessions %}
+				{% if stagiaire.sessions is empty %}
+					<li>Pas incrit à une session pour le moment</li>
+				{% else %}
+					{% for session in stagiaire.sessions %}
 
-					<ul>
-						<li>{{session}}</li>
-					</ul>
-						{% endfor %}
-					{% endif %}
+						<ul>
+							<li><a class="text-info"href="{{ path('session_show', {id:session.id})}}">{{session}}</a></li>
+						</ul>
+					{% endfor %}
+				{% endif %}
 
 
 			</div>

@@ -1,21 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Détail d'une catégorie{% endblock %}
+{% block title %}Détail d'une catégorie
+{% endblock %}
 
 {% block body %}
-<div class="container">
-    <h2 class="text-center">Détail d'une catégorie</h2>
-    <button class="btn btn-info"><a class="text-white" href="{{ path('categorie') }}">Retour à la liste</a></button>
-<div class="card" style="width: 18rem;">
-<div class="card-body">
-    <h2 class="card-title">{{ categorie.nom }}</h2>
-        <h4 class="text-info text-center">Modules inclus :</h4>
-        {% for module in categorie.modules %}
-        <ul>
-        <li>{{module}}</li>
-        </ul>
-        {% endfor %}
-    </div>
-</div>
-</div>
+	<div class="container">
+		<h2 class="text-center m-3">Détail d'une catégorie</h2>
+		<button class="btn btn-info">
+			<a class="text-white" href="{{ path('categorie') }}">Retour à la liste</a>
+		</button>
+		<div class="card" style="width: 18rem;">
+			<div class="card-body">
+				<h2 class="card-title">{{ categorie.nom }}</h2>
+				<h4 class="text-info text-center">Modules inclus :</h4>
+				{% for module in categorie.modules %}
+					<ul>
+						<li><a class="text-body"href="{{ path('module_show',{id:module.id})}}">{{module}}</a></li>
+					</ul>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
 {% endblock %}

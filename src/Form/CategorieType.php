@@ -14,12 +14,18 @@ class CategorieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('nom', TextType::class, [
-            'label' => 'Nom de la categorie',
-            'required' => true,
-        ])
-        ->add('envoyer', SubmitType::class)
-        ;
+            ->add('nom', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control'
+                ],
+                'label' => 'Nom de la categorie',
+                'required' => true,
+            ])
+            ->add('envoyer', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-success m-3'
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

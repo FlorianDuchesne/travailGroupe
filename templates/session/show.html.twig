@@ -17,7 +17,7 @@
 		}
 	</style>
 	<div class="container">
-		<h2 class="text-center">Détail d'une session</h2>
+		<h2 class="text-center m-3">Détail d'une session</h2>
 
 		<button class="btn btn-info">
 			<a class="text-white" href="{{ path('session') }}">Retour à la liste</a>
@@ -25,11 +25,21 @@
 		<div class="card" style="width: 18rem;">
 			<div class="card-body">
 
-				<h2 class="card-title">{{ session.formation }}</h2>
+				<h2 class="card-title">
+					<a class="text-info" href="{{ path('formation_show', {id:session.formation.id})}}">{{ session.formation }}</a>
+				</h2>
 				<p class="card-text">
 					Période :<br>
-					Du {{ session.dateDebut | date('d-m-Y') }} au {{ session.dateFin | date('d-m-Y') }} <br>
+					Du
+					{{ session.dateDebut | date('d-m-Y') }}
+					au
+					{{ session.dateFin | date('d-m-Y') }}
+					<br>
 				</p>
+				<p class="card-text">Contenu :<br>
+					{% for programmeSession in session.programmeSession %}
+						{{ programmeSession }}</p>
+				{% endfor %}
 				<p class="card-text">
 					Nombre de places :<br>
 					{{ session.nbPlaces }}<br>
@@ -41,26 +51,13 @@
 					{% else %}
 						{% for inscrit in session.inscrit %}
 
-							<li> {{ inscrit }}<br> </li>
+							<li>
+								<a class="text-info" href="{{ path('stagiaire_show', {id:inscrit.id})}}">
+									{{ inscrit }}</a>
+							</li>
 						{% endfor %}
 					{% endif %}
 
 				</p>
-
-				{# <ul>
-									<li>nombre de places :
-										{{ session.nbPlaces }}</li>
-									<li>Stagiaires inscrits :
-									</li>
-									{% if session.inscrit is empty %}
-										<li>Pas de stagiaires inscrits pour le moment</li>
-									{% else %}
-										{% for inscrit in session.inscrit %}
-											<li>{{ inscrit }}</li>
-										{% endfor %}
-									{% endif %}
-								</ul> #}
-				{# <a class="btn btn-warning rounded-pill m-2" href="{{ path('session_edit', {'id':session.id}) }}">Modifier les informations</a>
-								        <a class="btn btn-danger rounded-pill m-2" href="{{ path('session_delete', {'id':session.id}) }}">Supprimer la session</a> #}
 			</div>
 		{% endblock %}

@@ -52,12 +52,12 @@ class Programmer
 
     public function getProgrammeSession(): ?Session
     {
-        return $this->programmeSession;
+        return $this->session;
     }
 
     public function setProgrammeSession(?Session $programmeSession): self
     {
-        $this->programmeSession = $programmeSession;
+        $this->session = $programmeSession;
 
         return $this;
     }
@@ -72,5 +72,10 @@ class Programmer
         $this->module = $module;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return "Le module " . $this->module . " dure " .  $this->duree . ' jours';
     }
 }

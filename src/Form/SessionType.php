@@ -19,21 +19,29 @@ class SessionType extends AbstractType
     {
         $builder
             ->add('dateDebut', DateType::class, [
-                'attr' => [],
+                'attr' => [
+                    'class' => 'form-control',
+                ],
                 'widget' => 'single_text',
                 'required' => true,
             ])
             ->add('dateFin', DateType::class, [
-                'attr' => [],
+                'attr' => [
+                    'class' => 'form-control',
+                ],
                 'widget' => 'single_text',
                 'required' => true,
             ])
             ->add('nbPlaces', IntegerType::class, [
-                'attr' => [],
+                'attr' => [
+                    'class' => 'form-control',
+                ],
                 'required' => true,
             ])
             ->add('formation', EntityType::class, [
-                'attr' => [],
+                'attr' => [
+                    'class' => 'form-control',
+                ],
                 'required' => true,
                 'class' => Formation::class,
                 'choice_label' => function ($formation) {
@@ -41,7 +49,9 @@ class SessionType extends AbstractType
                 },
 
             ])
-            ->add('Envoyer', SubmitType::class);
+            ->add('Envoyer', SubmitType::class, [
+                'attr' => ['class' => 'btn btn-success m-3'],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -17,14 +17,23 @@ class FormationType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control'
+                ],
                 'label' => 'Nom de la formation',
                 'required' => true,
             ])
             ->add('descriptif', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control'
+                ],
                 'label' => 'Descriptif',
             ])
-            ->add('envoyer', SubmitType::class)
-        ;
+            ->add('envoyer', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-success m-3'
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

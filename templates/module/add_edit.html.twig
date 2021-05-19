@@ -1,14 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajout module{% endblock %}
+{% block title %}Ajout module
+{% endblock %}
 
 {% block body %}
-  {% if editMode %}
-    <h1>Modification d'un module</h1>
-  {% else %}
-<h1>Ajout d'un module</h1>
-  {% endif %}
-{# <div class="m-auto col-3"> #}
-{{ form(formAddModule) }}
-{# </div> #}
-{% endblock %}
+	{% if editMode %}
+		<h1 class="text-center m-3">Modification d'un module</h1>
+	{% else %}
+		<h1 class="text-center m-3">Ajout d'un module</h1>
+	{% endif %}
+	<div class="m-auto col-3">
+		{{ form(formAddModule) }}
+		</div>
+	{% endblock %}

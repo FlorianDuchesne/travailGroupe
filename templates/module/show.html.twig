@@ -17,7 +17,7 @@
 		}
 	</style>
 	<div class="container">
-		<h2 class="text-center">Détail d'un module</h2>
+		<h2 class="text-center m-3">Détail d'un module</h2>
 		<button class="btn btn-info">
 			<a class="text-white" href="{{ path('module') }}">Retour à la liste</a>
 		</button>
@@ -35,14 +35,13 @@
 					<li>{{ module.descriptif }}</li>
 				</ul>
 
-					<h6>Catégorie :</h6>
+				<h6>Catégorie :</h6>
 				<ul>
-					<li>
-						{{ module.categorie.nom }}</li>
+					<li><a class="text-info"href="{{ path('categorie_show', {id:module.categorie.id})}}">{{ module.categorie.nom }}</a></li>
 				</ul>
 
 				{# <a class="btn btn-warning rounded-pill m-2" href="{{ path('module_edit', {'id':module.id}) }}">Modifier les informations</a>
-																			        <a class="btn btn-danger rounded-pill m-2" href="{{ path('module_delete', {'id':module.id}) }}">Supprimer le module</a> #}
+																																			        <a class="btn btn-danger rounded-pill m-2" href="{{ path('module_delete', {'id':module.id}) }}">Supprimer le module</a> #}
 			</div>
 		</div>
 	</div>
