@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Module;
-use App\Entity\Categorie;
+use App\Entity\Session;
 use App\Form\ModuleType;
+use App\Entity\Categorie;
+use App\Entity\Programmer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -72,10 +74,13 @@ class ModuleController extends AbstractController
     /**
      * @Route("module/{id}", name="module_show")
      */
-    public function show(Module $module): Response
+    public function show(Module $module)
     {
+        $programmes = $this->getDoctrine()->getRepository(Programmer::class)->findBy(["module" => $module->getId()]);
+
         return $this->render('module/show.html.twig', [
-            'module' => $module
+            'module' => $module,
+            'programmes' => $programmes
         ]);
     }
 }

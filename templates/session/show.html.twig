@@ -38,7 +38,11 @@
 				</p>
 				<p class="card-text">Contenu :<br>
 					{% for programmeSession in session.programmeSession %}
-						{{ programmeSession }}</p>
+						Le module
+						<a class="text-info" href="{{ path('module_show', {id:programmeSession.module.id})}}">{{ programmeSession.module }}</a>
+						dure
+						{{ programmeSession.duree}}
+						jours</p>
 				{% endfor %}
 				<p class="card-text">
 					Nombre de places :<br>
