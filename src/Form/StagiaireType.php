@@ -1,7 +1,11 @@
 <?php
 
 namespace App\Form;
-
+// dans le terminal   php bin/console make:form
+//                      je choisis comment le nommer
+//                      je lui indique s'il se rapporte à une entité ou non
+// création d'un form dédié et séparé du controller pour des raisons de performances
+// également pour un code propre et lisible et avec une maintenabilité accrue.
 use App\Entity\Session;
 use App\Entity\Stagiaire;
 use Symfony\Component\Form\AbstractType;
@@ -10,6 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+//ci-dessus il ne faut pas oublier d'apeller la ou les class que l'on utilise comme TexteType ou DateType
 
 class StagiaireType extends AbstractType
 {
@@ -19,6 +24,8 @@ class StagiaireType extends AbstractType
         //$builder (instanciation de la classe FormBuilderInterface, qui permet de créer un générateur de formulaire)
         // ajoute des champs au formulaires avec un nom, un type (qui correspond à une class de symfony), et d'éventuels attributs.
         $builder
+        // lorsque le form est crée pour une entité il récupère les élément de celle-ci pour créer les champs
+        //les champs sont décris par leur class et donc les attibuts qui vont avec.
             ->add('nom', TextType::class, [
                 'attr' => ['class' => 'form-control'],
                 'required' => true,
@@ -55,13 +62,7 @@ class StagiaireType extends AbstractType
                 'attr' => ['class' => 'form-control'],
                 'required' => true,
             ])
-            // ->add('sessions', EntityType::class, [
-            // 'att' =>[],
-            //     'class' => Session::class,
-            //     'choice_label' => function ($session) {
-            //         return $session;
-            //     },
-            // ])
+            // ne pas oublier le bouton submit qui n'est pas crée au moment de la création du form
             ->add('envoyer', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-success m-3'],
             ]);
