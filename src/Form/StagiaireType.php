@@ -9,13 +9,15 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class StagiaireType extends AbstractType
 {
+    // La fonction suivante permet de créer un type de formulaire précis lorsque la classe StagiaireType sera appelée
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        //$builder (instanciation de la classe FormBuilderInterface, qui permet de créer un générateur de formulaire)
+        // ajoute des champs au formulaires avec un nom, un type (qui correspond à une class de symfony), et d'éventuels attributs.
         $builder
             ->add('nom', TextType::class, [
                 'attr' => ['class' => 'form-control'],
