@@ -45,7 +45,9 @@
 				{% if programmes %}
 					<ul>
 						{% for programme in programmes %}
-							<li>{{ programme.programmeSession }}</li>
+							<a class="text-info" href=" {{ path('session_show', {id:programme.programmeSession.id})}}">
+								<li>{{ programme.programmeSession }}</li>
+							</a>
 						{% endfor %}
 					</ul>
 				{% else %}

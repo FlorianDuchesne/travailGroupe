@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Session;
+use App\Entity\Stagiaire;
 use App\Form\SessionType;
+use App\Form\InscriptionType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,6 +14,36 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SessionController extends AbstractController
 {
+
+    /**
+     * @Route("/session/{id}/inscription", name="session_inscription")
+     */
+    public function inscription(Session $session, Request $request): Response
+    {
+
+        $form = $this->createForm(InscriptionType::class);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $stagiaire = $form->getData();
+            $session->addInscrit($stagiaire);
+            $entityManager = $this->getDoctrine()->getManager();
+            // $entityManager->persist($session);
+            $entityManager->flush();
+
+            // dump($inscription);
+            // $entityManager = $this->getDoctrine()->getManager();
+            // $entityManager->persist($inscription);
+            // $entityManager->flush();
+
+            return $this->redirectToRoute('session');
+        }
+
+        return $this->render('session/inscription.html.twig', [
+            'formInscription' => $form->createView(),
+            'session' => $session
+        ]);
+    }
 
     /**
      * @Route("/session/delete", name="session_delete")

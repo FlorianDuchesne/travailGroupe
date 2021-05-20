@@ -19,6 +19,22 @@ class SessionRepository extends ServiceEntityRepository
         parent::__construct($registry, Session::class);
     }
 
+    // public function placesRestantes()
+    // {
+    //     $entityManager = $this->getEntityManager();
+    //     $query = $entityManager->createQuery(
+
+    //         // SELECT (s.nb_places - COUNT(inscrits.`session_id`)) As nbPlacesRestantes FROM 
+    //         // App\Entity\Session inscrits, session s WHERE inscrits.session_id = s.id 
+
+
+    //         'SELECT s.nbPlaces 
+    //         FROM App\Entity\Session s AND 
+    //         ORDER BY e.raisonSociale DESC'
+    //     );
+    //     return $query->execute();
+    // }
+
     // /**
     //  * @return Session[] Returns an array of Session objects
     //  */
