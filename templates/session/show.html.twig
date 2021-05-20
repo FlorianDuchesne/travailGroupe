@@ -40,7 +40,9 @@
 					{% for programmeSession in session.programmeSession %}
 						Le module
 						<a class="text-info" href="{{ path('module_show', {id:programmeSession.module.id})}}">{{ programmeSession.module }}</a>
-						dure
+						(catégorie :
+						<a class="text-info" href="{{ path('categorie_show', {id:programmeSession.module.categorie.id})}}">{{ programmeSession.module.categorie }}</a>)
+													dure
 						{{ programmeSession.duree}}
 						jours</p>
 				{% endfor %}
@@ -61,7 +63,7 @@
 							</li>
 						{% endfor %}
 					{% endif %}
-
+					<a class="btn btn-info text-white m-3" href="{{ path('session_inscription', {id:session.id})}}">Inscrire un stagiaire à cette session</a>
 				</p>
 			</div>
 		{% endblock %}
