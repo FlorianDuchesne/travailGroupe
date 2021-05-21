@@ -22,7 +22,8 @@ class StagiaireController extends AbstractController
      */
 
     // Dans cette fonction, on a besoin d'un objet stagiaire (instancié de l'entité Stagiaire), 
-    //et de l'Entity Manager, objet de Doctrine (mapping objet-relationnel par défaut de Symfony), qui permet de faire des ajouts, modifications et suppressions de lignes en base de données
+    //et de l'Entity Manager, objet de Doctrine (mapping objet-relationnel par défaut de Symfony), 
+    //qui permet de faire des ajouts, modifications et suppressions de lignes en base de données
     public function delete(Stagiaire $stagiaire, EntityManagerInterface $manager)
     {
         // On demande au manager de supprimer le stagiaire paramétré
@@ -34,7 +35,7 @@ class StagiaireController extends AbstractController
     }
 
     // Ci-dessous, deux routes différentes sont attribuées à la fonction.
-    // La première petmet d'ajouter un stagiaire,
+    // La première permet d'ajouter un stagiaire,
     // la deuxième de modifier un stagiaire en particulier
 
     /**
@@ -42,19 +43,22 @@ class StagiaireController extends AbstractController
      * @Route("/stagiaire/{id}/edit", name="stagiaire_edit")
      */
 
-    // Dans les paramètres de la fonction ci-dessous, on laisse la possibilité à l'objet de stagiaire d'être nul, 
+    // Dans les paramètres de la fonction ci-dessous, on laisse la possibilité 
+    //à l'objet de stagiaire d'être nul, 
     // de manière à pouvoir soit en ajouter un, soit en modifier un existant.
-    // l'objet request est instancié de la classe Request, qui permet de représenter une requête HTTP et d'accéder à ses informations.
+    // l'objet request est instancié de la classe Request, qui permet de représenter 
+    //une requête HTTP et d'accéder à ses informations.
 
     public function add(Stagiaire $stagiaire = null, EntityManagerInterface $manager, Request $request)
     {
-        // S'il n'y a pas de stagiaire lorsque la fonction est appelé (cas de la route stagiaire_add),
+        // S'il n'y a pas de stagiaire lorsque la fonction est appelée (cas de la route stagiaire_add),
         // On instancie un nouvel objet stagiaire
         if (!$stagiaire) {
             $stagiaire = new Stagiaire();
         }
         // On crée un formulaire à partir de la classe StagiaireType et de l'objet stagiaire
-        // Si l'objet stagiaire vient d'être créé, le formulaire sera vide, sinon il intégrera les informations du stagiaire
+        // Si l'objet stagiaire vient d'être créé, le formulaire sera vide, sinon il intégrera 
+        //les informations du stagiaire
         $form = $this->createForm(StagiaireType::class, $stagiaire);
 
         // handleRequest sert à inspecter si le formulaire est soumis, et le cas échéant à appeler la requête
