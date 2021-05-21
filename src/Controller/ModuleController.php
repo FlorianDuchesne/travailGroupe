@@ -55,7 +55,7 @@ class ModuleController extends AbstractController
             'editMode' => $module->getId() !== null
         ]);
     }
-
+ 
     /**
      * @Route("/module/list", name="module")
      */
