@@ -30,7 +30,7 @@ class Formation
     private $descriptif;
 
     /**
-     * @ORM\OneToMany(targetEntity=Session::class, mappedBy="formation")
+     * @ORM\OneToMany(targetEntity=Session::class, mappedBy="formation", orphanRemoval=true)
      */
     private $session;
 
@@ -100,7 +100,7 @@ class Formation
 
     /**
      * Get the value of id
-     */ 
+     */
     public function getId()
     {
         return $this->id;
@@ -110,7 +110,7 @@ class Formation
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setId($id)
     {
         $this->id = $id;

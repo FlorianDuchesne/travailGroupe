@@ -4,10 +4,27 @@
 {% endblock %}
 
 {% block body %}
-	<div
-		class="container">
-		{# <button class="btn btn-info"><a class="text-white" href="{{ path('stagiaire') }}">Liste des stagiaires</a></button>
-			    <button class="btn btn-info"><a class="text-white" href="{{ path('categorie') }}">Liste des catégories</a></button> #}
+
+	{# <!-- TestModal -->
+			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Suppression irréversible</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<p>Êtes-vous sûr de vouloir effectuer cette action ?</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+							<button type="button" class="btn btn-primary">Oui</button>
+						</div>
+					</div>
+				</div>
+			</div> #}
+
+	<div class="container">
 
 		<h1 class="text-center m-3">Liste des formations</h1>
 
@@ -27,7 +44,6 @@
 							<a class="text-body" href="{{ path('formation_show', {id: formation.id}) }}">{{ formation.nom }}</a>
 						</td>
 
-						{# <td>{{ formation.nom }} #}
 						<td>{{ formation.descriptif }}
 						</td>
 						<td>
@@ -36,7 +52,7 @@
 							</button>
 						</td>
 						<td>
-							<button type="button" class="btn btn-danger">
+							<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
 								<a class=" text-white" href="{{ path('formation_delete', {'id':formation.id}) }}">Supprimer</a>
 							</button>
 						</td>

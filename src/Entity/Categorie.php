@@ -25,7 +25,7 @@ class Categorie
     private $nom;
 
     /**
-     * @ORM\OneToMany(targetEntity=Module::class, mappedBy="categorie")
+     * @ORM\OneToMany(targetEntity=Module::class, mappedBy="categorie", orphanRemoval=true)
      */
     private $modules;
 
