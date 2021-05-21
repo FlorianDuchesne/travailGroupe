@@ -8,7 +8,7 @@
 			{% endblock %}
 		</title>
 		{# Run `composer require symfony/webpack-encore-bundle`
-				           and uncomment the following Encore helpers to start using Symfony UX #}
+																																           and uncomment the following Encore helpers to start using Symfony UX #}
 		{% block stylesheets %}
 			<link
 			rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -18,13 +18,13 @@
 
 	</head>
 
-		<header class="navbar container-fluid bg-info">
+	<header class="navbar container-fluid bg-info">
 
-			<nav class="container">
+		<nav class="container">
 			<a href=" {{ path('home') }}">
-			<figure class="navbar-brand m-0">
-			<img class="w-50" src="{{ asset('img/hibouSmall.png') }}">
-			</figure>
+				<figure class="navbar-brand m-0">
+					<img class="w-50" src="{{ asset('img/hibouSmall.png') }}">
+				</figure>
 			</a>
 			<a class="text-white" href="{{ path('formation_index') }}">Formations</a>
 			<a class="text-white" href="{{ path('stagiaire') }}">Stagiaires</a>
@@ -32,16 +32,14 @@
 			<a class="text-white" href="{{ path('module') }}">Modules</a>
 			<a class="text-white" href="{{ path('categorie') }}">Catégories</a>
 
-			</nav>
+		</nav>
 
-		</header>
-		{% block body %}{% endblock %}
+	</header>
+	{% block body %}{% endblock %}
 
-		{% block javascripts %}
-			<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-			<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-
-			{#{{ encore_entry_script_tags('app') }}#}
-		{% endblock %}
-	</body>
-</html>
+	{% block javascripts %}
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+		{#{{ encore_entry_script_tags('app') }}#}
+	{% endblock %}
+</html></body></html>

@@ -17,10 +17,7 @@
 		}
 	</style>
 
-	<div
-		class="container">
-		{# <button class="btn btn-info"><a class="text-white" href="{{ path('formation_index') }}">Liste des formations</a></button>
-								    <button class="btn btn-info"><a class="text-white" href="{{ path('categorie') }}">Liste des catégories</a></button> #}
+	<div class="container">
 
 		<h1 class="text-center m-3">Liste des stagiaires catalogués</h1>
 		<table class="table table-hover">
@@ -49,7 +46,7 @@
 							<a class="btn btn-warning" href="{{ path('stagiaire_edit', {'id':stagiaire.id}) }}">Modifier</a>
 						</td>
 						<td>
-							<a class="btn btn-danger" href="{{ path('stagiaire_delete', {'id':stagiaire.id}) }}">Supprimer</a>
+							<a class="btn btn-danger" {# data-toggle="modal" data-target="#exampleModal" #} href="{{ path('stagiaire_delete', {'id':stagiaire.id}) }}">Supprimer</a>
 						</td>
 					{% endfor %}
 				</tr>

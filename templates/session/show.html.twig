@@ -42,13 +42,15 @@
 						<a class="text-info" href="{{ path('module_show', {id:programmeSession.module.id})}}">{{ programmeSession.module }}</a>
 						(catégorie :
 						<a class="text-info" href="{{ path('categorie_show', {id:programmeSession.module.categorie.id})}}">{{ programmeSession.module.categorie }}</a>)
-													dure
+																																		dure
 						{{ programmeSession.duree}}
 						jours</p>
 				{% endfor %}
 				<p class="card-text">
 					Nombre de places :<br>
 					{{ session.nbPlaces }}<br>
+					Nombre de places restantes :<br>
+					{{ session.nbPlaces - session.inscrit | length }}
 				</p>
 				<p class="card-text">
 					Stagiaires inscrits :<br>
@@ -63,7 +65,9 @@
 							</li>
 						{% endfor %}
 					{% endif %}
-					<a class="btn btn-info text-white m-3" href="{{ path('session_inscription', {id:session.id})}}">Inscrire un stagiaire à cette session</a>
+					{% if (session.nbPlaces - session.inscrit | length != 0) %}
+						<a class="btn btn-info text-white m-3" href="{{ path('session_inscription', {id:session.id})}}">Inscrire un stagiaire à cette session</a>
+					{% endif %}
 				</p>
 			</div>
 		{% endblock %}
