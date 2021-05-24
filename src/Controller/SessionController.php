@@ -85,6 +85,34 @@ class SessionController extends AbstractController
         ]);
     }
 
+        /**
+     * @Route("/session/addInscrit", name="inscrit_add")
+     */
+    public function addInscrit(Session $session = null, Request $request): Response
+    {
+        if (!$session) {
+            $session = new Session();
+        }
+
+        $form = $this->createForm(InscriptionType::class, $session);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $session = $form->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($session);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('session');
+        }
+
+        return $this->render('session/inscription.html.twig', [
+            'formInscription' => $form->createView(),
+        ]);
+    }
+
+
     /**
      * @Route("/session/list", name="session")
      */

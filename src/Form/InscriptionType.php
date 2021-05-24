@@ -20,7 +20,7 @@ class InscriptionType extends AbstractType
                     'class' => 'form-control'
                 ],
                 'class' => Stagiaire::class,
-                // 'mapped' => false,
+                'mapped' => true,
                 'choice_label' => function ($stagiaire) {
                     return $stagiaire;
                 },

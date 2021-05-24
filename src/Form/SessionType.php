@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Session;
 use App\Entity\Formation;
+use App\Entity\Stagiaire;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -49,6 +50,17 @@ class SessionType extends AbstractType
                 },
 
             ])
+            ->add('inscrit', EntityType::class, [
+                'attr' => [
+                    'class' => 'form-control'
+                ],
+                'class' => Stagiaire::class,
+                'mapped' => false,
+                'choice_label' => function ($inscrit) {
+                    return $inscrit;
+                },
+            ])
+
             ->add('Envoyer', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-success m-3'],
             ]);
