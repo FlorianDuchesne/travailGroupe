@@ -6,12 +6,15 @@ use App\Entity\Stagiaire;
 use App\Form\StagiaireType;
 use App\Repository\StagiaireRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-
+/** 
+ * @IsGranted("ROLE_ADMIN")
+ */
 class StagiaireController extends AbstractController
 {
 
@@ -28,7 +31,7 @@ class StagiaireController extends AbstractController
     {
         // On demande au manager de supprimer le stagiaire paramétré
         $manager->remove($stagiaire);
-        // flush permet de mettre à jour la base de données une fois des modifications effectuées l
+        // flush permet de mettre à jour la base de données une fois des modifications effectuées 
         $manager->flush();
         // On se rend à la page dont la route porte le nom "stagiaire"
         return $this->redirectToRoute('stagiaire');
@@ -88,7 +91,8 @@ class StagiaireController extends AbstractController
      */
     public function index()
     {
-        // On appelle la méthode findAll du repository de la classe Stagiaire grâce à Doctrine, qui permet d'accédé au data de tous les objets de la classe
+        // On appelle la méthode findAll du repository de la classe Stagiaire grâce à Doctrine, 
+        // qui permet d'accéder au data de tous les objets de la classe
         $stagiaires = $this->getDoctrine()
             ->getRepository(Stagiaire::class)
             ->findAll();

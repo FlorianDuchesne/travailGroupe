@@ -25,8 +25,10 @@
 					<th scope="col">Intitulé</th>
 					<th scope="col">Date de début</th>
 					<th scope="col">Date de fin</th>
-					<th scope="col">Modifier</th>
-					<th scope="col">Supprimer</th>
+					{% if is_granted("ROLE_ADMIN") %}
+						<th scope="col">Modifier</th>
+						<th scope="col">Supprimer</th>
+					{% endif %}
 				</tr>
 			</thead>
 			<tbody>
@@ -41,13 +43,14 @@
 						<td>
 							{{ session.dateFin | date('d-m-Y') }}
 						</td>
-						<td>
-							<a class="btn btn-warning" href="{{ path('session_edit', {'id':session.id}) }}">Modifier</a>
-						</td>
-						<td>
-							<a class="btn btn-danger" onclick="alert()" href="{{ path('session_delete', {'id':session.id}) }}">Supprimer</a>
-						</td>
-
+						{% if is_granted("ROLE_ADMIN") %}
+							<td>
+								<a class="btn btn-warning" href="{{ path('session_edit', {'id':session.id}) }}">Modifier</a>
+							</td>
+							<td>
+								<a class="btn btn-danger" onclick="alert()" href="{{ path('session_delete', {'id':session.id}) }}">Supprimer</a>
+							</td>
+						{% endif %}
 					</tr>
 				</div>
 			{% endfor %}

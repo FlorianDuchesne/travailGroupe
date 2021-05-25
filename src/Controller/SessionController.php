@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SessionController extends AbstractController
@@ -17,6 +18,7 @@ class SessionController extends AbstractController
 
     /**
      * @Route("/session/{id}/inscription", name="session_inscription")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function inscription(Session $session, Request $request): Response
     {
@@ -46,6 +48,7 @@ class SessionController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/session/delete", name="session_delete")
      * @Route("/session/{id}/delete", name="session_delete")
      */
@@ -59,6 +62,7 @@ class SessionController extends AbstractController
     /**
      * @Route("/session/add", name="session_add")
      * @Route("/session/{id}/edit", name="session_edit")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function add(Session $session = null, Request $request): Response
     {
@@ -85,7 +89,8 @@ class SessionController extends AbstractController
         ]);
     }
 
-        /**
+    /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/session/addInscrit", name="inscrit_add")
      */
     public function addInscrit(Session $session = null, Request $request): Response
