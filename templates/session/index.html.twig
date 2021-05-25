@@ -50,15 +50,14 @@
 							<td>
 								<a class="btn btn-danger" onclick="alert()" href="{{ path('session_delete', {'id':session.id}) }}">Supprimer</a>
 							</td>
-						{% endif %}
-					</tr>
-				</div>
-			{% endfor %}
-		</tbody>
-	</table>
-	{% if is_granted("ROLE_ADMIN") %}
+						{% endfor %}
+					{% endif %}
+				</tr>
+			</tbody>
+		</div>
+	</tbody>
+</table>
+{% if is_granted("ROLE_ADMIN") %}
 
-		<a class="btn btn-success" href="{{ path('session_add') }}">Ajouter une session</a>
-	{% endif %}
-</div>
-{# <a class="btn btn-secondary" href="{{ path('inscrit_add') }}">Ajouter un stagiaire à une session</a> #}{% endblock %}
+	<a class="btn btn-success" href="{{ path('session_add') }}">Ajouter une session</a>
+{% endif %}</div>{# <a class="btn btn-secondary" href="{{ path('inscrit_add') }}">Ajouter un stagiaire à une session</a> #}{% endblock %}
