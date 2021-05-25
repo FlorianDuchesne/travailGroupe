@@ -28,31 +28,39 @@
 					<th scope="col">Intitulé</th>
 					<th scope="col">Descriptif</th>
 					<th scope="col">Catégorie</th>
-					<th scope="col">Modifier</th>
-					<th scope="col">Supprimer</th>
+					{% if is_granted("ROLE_ADMIN") %}
+						<th scope="col">Modifier</th>
+						<th scope="col">Supprimer</th>
+					{% endif %}
 				</tr>
 			</thead>
-			<tbody>
-				{% for module in modules %}
-					<tr>
-						<td>
-							<a class="text-body" href="{{ path('module_show', {id: module.id}) }}">{{module.libelle}}</a>
-						</td>
-						<td>{{ module.descriptif }}</td>
-						<td>
-							<a class="text-body" href="{{ path('categorie_show', {id:module.categorie.id})}}">{{ module.categorie.nom }}</a>
-						</td>
-						<td>
-							<a class="btn btn-warning" href="{{ path('module_edit', {'id':module.id}) }}">Modifier</a>
-						</td>
-						<td>
-							<a class="btn btn-danger" onclick="alert()" href="{{ path('module_delete', {'id':module.id}) }}">Supprimer</a>
-						</td>
+		</tr>
+	</thead>
+	<tbody>
+		{% for module in modules %}
+			<tr>
+				<td>
+					<a class="text-body" href="{{ path('module_show', {id: module.id}) }}">{{module.libelle}}</a>
+				</td>
+				<td>{{ module.descriptif }}</td>
+				<td>
+					<a class="text-body" href="{{ path('categorie_show', {id:module.categorie.id})}}">{{ module.categorie.nom }}</a>
+				</td>
+				{% if is_granted("ROLE_ADMIN") %}
 
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-		<a class="btn btn-success" href="{{ path('module_add') }}">Ajouter un module</a>
-	</div>
-{% endblock %}
+					<td>
+						<a class="btn btn-warning" href="{{ path('module_edit', {'id':module.id}) }}">Modifier</a>
+					</td>
+					<td>
+						<a class="btn btn-danger" onclick="alert()" href="{{ path('module_delete', {'id':module.id}) }}">Supprimer</a>
+					</td>
+				{% endif %}
+			</tr>
+		{% endfor %}
+		{# </tbody> #}
+	</tbody>
+</table>
+{% if is_granted("ROLE_ADMIN") %}
+
+	<a class="btn btn-success" href="{{ path('module_add') }}">Ajouter un module</a>
+{% endif %}</div>{% endblock %}
