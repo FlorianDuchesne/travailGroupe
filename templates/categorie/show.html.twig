@@ -18,7 +18,20 @@
 						<li><a class="text-body"href="{{ path('module_show',{id:module.id})}}">{{module}}</a></li>
 					</ul>
 				{% endfor %}
+				{% if is_granted("ROLE_ADMIN") %}
+					<div class="d-flex">
+						<a class="btn btn-info text-white w-50 m-3" href="{{ path('categorie_edit', {'id':categorie.id}) }}">
+							<i class="fas fa-edit"></i>
+							{# Modifier #}
+						</a>
+						<a class="btn btn-danger text-white w-50 m-3" onclick="alert()" href="{{ path('categorie_delete', {'id':categorie.id}) }}">
+							<i class="fas fa-trash-alt"></i>
+							{# Supprimer #}
+						</a>
+					</div>
+				{% endif %}
 			</div>
 		</div>
+
 	</div>
 {% endblock %}
