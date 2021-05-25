@@ -11,12 +11,14 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ModuleController extends AbstractController
 {
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/module/delete", name="module_delete")
      * @Route("/module/{id}/delete", name="module_delete")
      */
@@ -28,6 +30,7 @@ class ModuleController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/module/add", name="module_add")
      * @Route("/module/{id}/edit", name="module_edit")
      */

@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class FormationController extends AbstractController
 {
@@ -17,6 +18,7 @@ class FormationController extends AbstractController
     
     
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/formation/new", name="formation_add")
      * @Route("/formation/{id}/edit", name="formation_edit")
      */
@@ -71,10 +73,11 @@ class FormationController extends AbstractController
         ]);
     }
 
-        /**
-     * @Route("/formation/delete", name="formation_delete")
-     * @Route("/formation/{id}/delete", name="formation_delete")
-     */
+    /**
+    * @IsGranted("ROLE_ADMIN")
+    * @Route("/formation/delete", name="formation_delete")
+    * @Route("/formation/{id}/delete", name="formation_delete")
+    */
     public function delete(Formation $formation = null, Request $request, EntityManagerInterface $manager)
     {
         $manager->remove($formation);

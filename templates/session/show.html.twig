@@ -42,7 +42,7 @@
 						<a class="text-info" href="{{ path('module_show', {id:programmeSession.module.id})}}">{{ programmeSession.module }}</a>
 						(catégorie :
 						<a class="text-info" href="{{ path('categorie_show', {id:programmeSession.module.categorie.id})}}">{{ programmeSession.module.categorie }}</a>)
-																																																																																																																																																																																																																																													dure
+						<<<<<<<HEADdure=======dure>>>>>>> 49a347173c175636d07e22a9a754e8d51755b603
 						{{ programmeSession.duree}}
 						jours</p>
 				{% endfor %}
@@ -52,32 +52,46 @@
 					Nombre de places restantes :<br>
 					{{ session.nbPlaces - session.inscrit | length }}
 				</p>
-				<p class="card-text">
-					Stagiaires inscrits :<br>
-					{% if session.inscrit is empty %}
-						<li>Pas de stagiaires inscrits pour le moment</li>
-					{% else %}
-						{% for inscrit in session.inscrit %}
+				{% if is_granted("ROLE_ADMIN") %}
 
-							<li>
-								<a class="text-info" href="{{ path('stagiaire_show', {id:inscrit.id})}}">
-									{{ inscrit }}</a>
-							</li>
-						{% endfor %}
-					{% endif %}
-					{% if (session.nbPlaces - session.inscrit | length != 0) %}
-						<a class="btn btn-info text-white m-3" href="{{ path('session_inscription', {id:session.id}) }}">Inscrire un stagiaire à cette session</a>
-					{% endif %}
-					<div class="d-flex">
-						<a class="btn btn-info text-white w-50 m-3" href="{{ path('session_edit', {'id':session.id}) }}">
-							<i class="fas fa-edit"></i>
-							{# Modifier #}
-						</a>
-						<a class="btn btn-danger text-white w-50 m-3" href="{{ path('session_delete', {'id':session.id}) }}">
-							<i class="fas fa-trash-alt"></i>
-							{# Supprimer #}
-						</a>
-						<div></p>
+					<p class="card-text">
+						Stagiaires inscrits :<br>
+						{% if session.inscrit is empty %}
+							<li>Pas de stagiaires inscrits pour le moment</li>
+						{% else %}
+							{% for inscrit in session.inscrit %}
+
+								<li>
+									<a class="text-info" href="{{ path('stagiaire_show', {id:inscrit.id})}}">
+										{{ inscrit }}</a>
+								</li>
+							{% endfor %}
+						{% endif %}
+						{% if (session.nbPlaces - session.inscrit | length != 0) %}
+							<a class="btn btn-info text-white m-3" href="{{ path('session_inscription', {id:session.id})}}">Inscrire un stagiaire à cette session</a>
+						{% endif %}
 					</p>
-				</p>
-			{% endblock %}
+				{% endif %}
+
+				<li>
+					<a class="text-info" href="{{ path('stagiaire_show', {id:inscrit.id})}}">
+						{{ inscrit }}</a>
+				</li>
+			{% endfor %}
+		{% endif %}
+		{% if (session.nbPlaces - session.inscrit | length != 0) %}
+			<a class="btn btn-info text-white m-3" href="{{ path('session_inscription', {id:session.id}) }}">Inscrire un stagiaire à cette session</a>
+		{% endif %}
+		<div class="d-flex">
+			<a class="btn btn-info text-white w-50 m-3" href="{{ path('session_edit', {'id':session.id}) }}">
+				<i class="fas fa-edit"></i>
+				{# Modifier #}
+			</a>
+			<a class="btn btn-danger text-white w-50 m-3" href="{{ path('session_delete', {'id':session.id}) }}">
+				<i class="fas fa-trash-alt"></i>
+				{# Supprimer #}
+			</a>
+			<div></p>
+		</p>
+	</p>
+{% endblock %}
