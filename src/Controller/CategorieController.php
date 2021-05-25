@@ -22,49 +22,32 @@ class CategorieController extends AbstractController
      */
     public function new(Categorie $categorie = null, Request $request): Response
     {
-        if(!$categorie) {
+        if (!$categorie) {
             $categorie = new Categorie();
         }
-        
+
         $form = $this->createForm(CategorieType::class, $categorie);
-        
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            
+
             $categorie = $form->getData();
-            
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($categorie);
             $entityManager->flush();
-            
+
             return $this->redirectToRoute('categorie');
         }
-        
+
         return $this->render('categorie/new.html.twig', [
             'formAddCategorie' => $form->createView(),
             'editMode' => $categorie->getId() !== null
 
-            ]);
-        }
+        ]);
+    }
 
-
-
-
-
-
-
-
-    // /**
-    //  * @Route("/categorie", name="categorie")
-    //  */
-    // public function index(): Response
-    // {
-    //     return $this->render('categorie/index.html.twig', [
-    //         'controller_name' => 'CategorieController',
-    //     ]);
-    // }
-
-        /**
+    /**
      * @Route("categorie/list", name="categorie")
      */
     public function index(): Response
@@ -78,17 +61,18 @@ class CategorieController extends AbstractController
             'categories' => $categories
         ]);
     }
-            /**
+    /**
      *  @Route("categorie/{id}", name="categorie_show")
      */
-    public function show(Categorie $categorie): Response 
+    public function show(Categorie $categorie): Response
     {
         return $this->render('categorie/show.html.twig', [
             'categorie' => $categorie
         ]);
     }
 
-        /**
+    /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/categorie/delete", name="categorie_delete")
      * @Route("/categorie/{id}/delete", name="categorie_delete")
      */
@@ -98,6 +82,4 @@ class CategorieController extends AbstractController
         $manager->flush();
         return $this->redirectToRoute('categorie');
     }
-
-
 }
