@@ -35,6 +35,10 @@ class SessionType extends AbstractType
             ])
             ->add('nbPlaces', IntegerType::class, [
                 'attr' => [
+                    // seuils minimum et maximum de valeurs numériques qu'on veut bien pouvoir rentrer
+                    'min' => 0,
+                    'max' => 20,
+                    //**** */
                     'class' => 'form-control',
                 ],
                 'required' => true,
