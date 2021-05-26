@@ -27,7 +27,7 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_USER")
      * @Route("/adminPanel", name="usersList")
 
      */
@@ -43,7 +43,7 @@ class HomeController extends AbstractController
         ]);
     }
     /**
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_USER")
      * @Route("adminPanel/{id}", name="userShow")
      */
     public function show(User $user)

@@ -9,19 +9,19 @@
 
 			<div class="card-body">
 				<h2 class="card-title">Profil de:
-					{{ app.user.pseudo }}
+					{{ user.pseudo }}
 				</h2>
 				<p class="card-text">
 					Identité:
-					{{ app.user.prenom ~ ' ' ~ app.user.nom }}<br>
+					{{ user.prenom ~ ' ' ~ user.nom }}<br>
 				</p>
 				<p class="card-text">
 					Email:
-					{{ app.user.email }}<br>
+					{{ user.email }}<br>
 				</p>
 				<p class="card-text">
 					Inscrit depuis le:
-					{{ app.user.dateEntree | date('d/m/Y') }}<br>
+					{{ user.dateEntree | date('d/m/Y') }}<br>
 				</p>
 			</div>
 		</div>
@@ -29,6 +29,18 @@
 			<button class="btn btn-info">
 				<a class="text-white" href="{{ path('usersList') }}">Retour à la liste</a>
 			</button>
+
+			{% if user == app.user %}
+
+				<button class="btn btn-info">
+					<a class="text-white" {#href="{{ path('editProfil') }}"#}>Modifier profil</a>
+				</button>
+
+				<button class="btn btn-warning">
+					<a class="text-white" {#href="{{ path('deleteProfil') }}"#}>Supprimer le compte</a>
+				</button>
+
+			{% endif %}
 
 		</div>
 	</div>
