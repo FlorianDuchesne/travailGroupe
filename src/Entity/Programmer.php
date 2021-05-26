@@ -23,13 +23,13 @@ class Programmer
     private $duree;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Session::class, inversedBy="session")
+     * @ORM\ManyToOne(targetEntity=Session::class, inversedBy="session", cascade="persist")
      * @ORM\JoinColumn(nullable=false)
      */
     private $session;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Module::class, inversedBy="module")
+     * @ORM\ManyToOne(targetEntity=Module::class, inversedBy="module", cascade="persist")
      */
     private $module;
 

@@ -33,6 +33,20 @@
 			{% endfor %}
 
 		</ul>
+
+		<ul id="modules" data-prototype="{{ form_row(formAddSession.programmeSession.vars.prototype) |e }}">
+
+			{% for module in formAddSession.programmeSession %}
+
+				<li class="module">
+
+					{{ form_row(module) }}
+
+				</li>
+			{% endfor %}
+
+		</ul>
+
 		{{ form_row(formAddSession.Envoyer) }}
 
 		{{ form_end(formAddSession) }}
@@ -43,5 +57,6 @@
 	{{ parent() }}
 
 	<script src="/js/collectionHandler.js"></script>
+	<script src="/js/moduleCollectionHandler.js"></script>
 
 {% endblock %}

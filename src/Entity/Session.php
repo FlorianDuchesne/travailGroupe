@@ -45,7 +45,7 @@ class Session
     private $inscrit;
 
     /**
-     * @ORM\OneToMany(targetEntity=Programmer::class, mappedBy="session", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Programmer::class, mappedBy="session", orphanRemoval=true, cascade="persist")
      */
     private $programmeSession;
 

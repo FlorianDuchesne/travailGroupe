@@ -6,6 +6,7 @@ use App\Entity\Session;
 use App\Entity\Formation;
 use App\Entity\Stagiaire;
 
+use App\Form\ProgrammerType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -71,6 +72,16 @@ class SessionType extends AbstractType
                 ],
             ])
 
+            ->add('programmeSession', CollectionType::class, [
+                'label' => false,
+                'entry_type' => ProgrammerType::class,
+                'entry_options' => [
+                    'label' => "Module et durée : "
+                ],
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+            ])
             ->add('Envoyer', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-success m-3'],
             ]);
