@@ -6,13 +6,14 @@ use App\Entity\Session;
 use App\Entity\Formation;
 use App\Entity\Stagiaire;
 
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class SessionType extends AbstractType
 {
@@ -54,15 +55,20 @@ class SessionType extends AbstractType
                 },
 
             ])
-            ->add('inscrit', EntityType::class, [
-                'attr' => [
-                    'class' => 'form-control'
+            ->add('inscrit', CollectionType::class, [
+                'entry_type' => EntityType::class,
+                'entry_options' => [
+                    'label' => 'Choisir un stagiaire',
+                    'class' => Stagiaire::class,
                 ],
-                'class' => Stagiaire::class,
-                'mapped' => false,
-                'choice_label' => function ($inscrit) {
-                    return $inscrit;
-                },
+                // 'multiple' => true,
+                'required' => false,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'label' => false,
+                'attr' => [
+                    'class' => 'form-control',
+                ],
             ])
 
             ->add('Envoyer', SubmitType::class, [

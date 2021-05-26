@@ -4,12 +4,44 @@
 {% endblock %}
 
 {% block body %}
+	{# si je suis en mode edit alors ce sera modification #}
 	{% if editMode %}
 		<h1 class="text-center m-3">Modification d'une session</h1>
 	{% else %}
+		{# sinon ce sera un mode ajout #}
 		<h1 class="text-center m-3">Ajout d'une session</h1>
 	{% endif %}
-	<div class="m-auto col-3">
-		{{ form(formAddSession) }}
-		</div>
-	{% endblock %}
+	<div
+		class="m-auto col-3">
+		{# ici j'appelle l'intégralité du formulaire  #}
+		{{ form_start(formAddSession) }}
+
+		{{ form_row(formAddSession.formation) }}
+		{{ form_row(formAddSession.dateDebut) }}
+		{{ form_row(formAddSession.dateFin) }}
+		{{ form_row(formAddSession.nbPlaces) }}
+
+		<ul id="stagiaires" data-prototype="{{ form_row(formAddSession.inscrit.vars.prototype) |e }}">
+
+			{% for stagiaire in formAddSession.inscrit %}
+
+				<li class="stagiaire">
+
+					{{ form_row(stagiaire) }}
+
+				</li>
+			{% endfor %}
+
+		</ul>
+		{{ form_row(formAddSession.Envoyer) }}
+
+		{{ form_end(formAddSession) }}
+	</div>
+{% endblock %}
+{% block javascripts %}
+
+	{{ parent() }}
+
+	<script src="/js/collectionHandler.js"></script>
+
+{% endblock %}
