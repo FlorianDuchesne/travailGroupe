@@ -9,28 +9,41 @@
 	{% endfor %}
 	{% if editMode %}
 		<h1>Modifier profil</h1>
+		{{ form_start(editUserForm) }}
+		{{ form_row(editUserForm.pseudo) }}
+		{{ form_row(editUserForm.nom) }}
+		{{ form_row(editUserForm.prenom) }}
+		{{ form_row(editUserForm.email) }}
+
+		{{ form_row(editUserForm.agreeTerms) }}
+		<button type="submit" class="btn">Modifier</button>
+		{{ form_end(editUserForm) }}
+
 
 	{% else %}
 		<h1>Register</h1>
 
-	{% endif %}
+		{# {% endif %} #}
 
-	{{ form_start(registrationForm) }}
-	{{ form_row(registrationForm.pseudo) }}
-	{{ form_row(registrationForm.nom) }}
-	{{ form_row(registrationForm.prenom) }}
+		{{ form_start(registrationForm) }}
+		{{ form_row(registrationForm.pseudo) }}
+		{{ form_row(registrationForm.nom) }}
+		{{ form_row(registrationForm.prenom) }}
 
-	{{ form_row(registrationForm.email) }}
-	{% if editMode %}
+		{{ form_row(registrationForm.email) }}
+		{# {% if editMode %} #}
 		<a>Modifier mot de passe</a>
-	{% else %}
+		{# {% else %} #}
 		{{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
 
-	{% endif %}
-	{{ form_row(registrationForm.agreeTerms) }}
+		{{ form_row(registrationForm.agreeTerms) }}
 
-	<button type="submit" class="btn">Register</button>
-	{{ form_end(registrationForm) }}
+		<button type="submit" class="btn">Register</button>
+		{{ form_end(registrationForm) }}
+
+	{% endif %}
+
+
 {% endblock %}

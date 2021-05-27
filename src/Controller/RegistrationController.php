@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\EditUserType;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,9 +37,15 @@ class RegistrationController extends AbstractController
     {
         if (!$user) {
             $user = new User();
+            
+            $form = $this->createForm(RegistrationFormType::class, $user);
         }
 
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        else {
+
+            $form = $this->createForm(EditUserType::class, $user);
+
+        }
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -60,6 +67,7 @@ class RegistrationController extends AbstractController
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
+            'editUserForm' => $form->createView(),
             'editMode' => $user->getId() !== null
         ]);
     }
