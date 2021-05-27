@@ -7,8 +7,13 @@
 	{% for flashError in app.flashes('verify_email_error') %}
 		<div class="alert alert-danger" role="alert">{{ flashError }}</div>
 	{% endfor %}
+	{% if editMode %}
+		<h1>Modifier profil</h1>
 
-	<h1>Register</h1>
+	{% else %}
+		<h1>Register</h1>
+
+	{% endif %}
 
 	{{ form_start(registrationForm) }}
 	{{ form_row(registrationForm.pseudo) }}
@@ -16,9 +21,14 @@
 	{{ form_row(registrationForm.prenom) }}
 
 	{{ form_row(registrationForm.email) }}
-	{{ form_row(registrationForm.plainPassword, {
+	{% if editMode %}
+		<a>Modifier mot de passe</a>
+	{% else %}
+		{{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
+
+	{% endif %}
 	{{ form_row(registrationForm.agreeTerms) }}
 
 	<button type="submit" class="btn">Register</button>
