@@ -21,11 +21,12 @@ class AjoutSalleToSessionType extends AbstractType
                 'attr' => [
                     'class' => 'form-control'
                 ],
+                // a quoi ça correspond?
                 'class' => Salle::class,
             ])
             ->add('envoyer', SubmitType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'btn btn-primary m-3'
                 ]
             ]);
     }

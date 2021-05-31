@@ -4,6 +4,8 @@
 {% endblock %}
 
 {% block body %}
+	<div class="m-auto col-3">
+
 	{# si je suis en mode edit alors ce sera modification #}
 	{% if editMode %}
 		<h1 class="text-center m-3">Modification d'une salle</h1>
@@ -11,8 +13,8 @@
 		{# sinon ce sera un mode ajout #}
 		<h1 class="text-center m-3">Ajout d'une salle</h1>
 	{% endif %}
-	<div
-		class="m-auto col-3">
+	{# <div
+		class="m-auto col-3"> #}
 		{# ici j'appelle l'intégralité du formulaire  #}
 		{{ form_start(formAddSalle) }}
 

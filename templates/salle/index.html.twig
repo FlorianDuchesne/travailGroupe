@@ -54,7 +54,7 @@
 	</table>
 	{% if is_granted("ROLE_ADMIN") %}
 
-		<a class="btn btn-success" href="{{ path('salle_add') }}">Ajouter une session</a>
+		<a class="btn btn-success" href="{{ path('salle_add') }}">Ajouter une salle</a>
 	{% endif %}
 </div>
-{# <a class="btn btn-secondary" href="{{ path('inscrit_add') }}">Ajouter un stagiaire à une session</a> #}{% endblock %}
+{% endblock %}
