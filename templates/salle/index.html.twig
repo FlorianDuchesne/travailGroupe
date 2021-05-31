@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste Sessions
+{% endblock %}
+
+{% block body %}
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
+
+	<div class="container">
+		<h1 class="text-center m-3">Liste des salles</h1>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th scope="col">Nom</th>
+					<th scope="col">Jauge de la salle</th>
+					{% if is_granted("ROLE_ADMIN") %}
+						<th scope="col">Modifier</th>
+						<th scope="col">Supprimer</th>
+					{% endif %}
+				</tr>
+			</thead>
+			<tbody>
+				{% for salle in salles %}
+					<tr>
+						<td>
+							<a class="text-body" href="{{ path('salle_show', {id: salle.id}) }}">{{salle.libelle}}</a>
+						</td>
+						<td>
+							{{ salle.nbPlaces }}
+						</td>
+						{% if is_granted("ROLE_ADMIN") %}
+							<td>
+								<a class="btn btn-warning" href="{{ path('salle_edit', {'id':salle.id}) }}">Modifier</a>
+							</td>
+							<td>
+								<a class="btn btn-danger" onclick="alert()" href="{{ path('salle_delete', {'id':salle.id}) }}">Supprimer</a>
+							</td>
+						{% endif %}
+					</tr>
+				</div>
+			{% endfor %}
+		</tbody>
+	</table>
+	{% if is_granted("ROLE_ADMIN") %}
+
+		<a class="btn btn-success" href="{{ path('salle_add') }}">Ajouter une session</a>
+	{% endif %}
+</div>
+{# <a class="btn btn-secondary" href="{{ path('inscrit_add') }}">Ajouter un stagiaire à une session</a> #}{% endblock %}

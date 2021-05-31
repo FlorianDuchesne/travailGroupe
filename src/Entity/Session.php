@@ -49,6 +49,11 @@ class Session
      */
     private $programmeSession;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Salle::class, inversedBy="sessions")
+     */
+    private $salle;
+
     public function __construct()
     {
         $this->inscrit = new ArrayCollection();
@@ -175,6 +180,18 @@ class Session
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    public function getSalle(): ?Salle
+    {
+        return $this->salle;
+    }
+
+    public function setSalle(?Salle $salle): self
+    {
+        $this->salle = $salle;
 
         return $this;
     }

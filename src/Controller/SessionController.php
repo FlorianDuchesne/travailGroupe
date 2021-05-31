@@ -6,6 +6,7 @@ use App\Entity\Session;
 use App\Entity\Stagiaire;
 use App\Form\SessionType;
 use App\Form\InscriptionType;
+use App\Form\AjoutSalleToSessionType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,36 +17,75 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class SessionController extends AbstractController
 {
 
+
+    // Fonction d'attribution d'une salle à une session
+
     /**
-     * @Route("/session/{id}/inscription", name="session_inscription")
+     * @Route("/session/{id}/ajoutSalle", name="ajoutSalle")
      * @IsGranted("ROLE_ADMIN")
      */
-    public function inscription(Session $session, Request $request): Response
+    public function ajoutSalle(Session $session, Request $request)
     {
-
-        $form = $this->createForm(InscriptionType::class);
+        $form = $this->createForm(AjoutSalleToSessionType::class, $session);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $stagiaire = $form->getData();
-            $session->addInscrit($stagiaire);
-            $entityManager = $this->getDoctrine()->getManager();
-            // $entityManager->persist($session);
-            $entityManager->flush();
+            $session = $form->getData();
+            // Si le nombre de places de la session est supérieur au nombre de places de la salle…
+            if ($session->getNbPlaces() > $form->get('salle')->getData()->getNbPlaces()) {
+                // on envoie un message d'erreur
+                $this->addFlash('warning', 'La jauge de la salle ne peut pas contenir tout l\'effectif de la session !');
+                // Et on retourne sur la page du formulaire
+                return $this->render('session/ajoutSalle.html.twig', [
+                    'formAddSalleToSession' => $form->createView(),
+                ]);
+            }
+            // Sinon, on poursuit normalement
+            else {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($session);
+                $entityManager->flush();
 
-            // dump($inscription);
-            // $entityManager = $this->getDoctrine()->getManager();
-            // $entityManager->persist($inscription);
-            // $entityManager->flush();
-
-            return $this->redirectToRoute('session');
+                return $this->redirectToRoute('session');
+            }
         }
-
-        return $this->render('session/inscription.html.twig', [
-            'formInscription' => $form->createView(),
-            'session' => $session
+        // Si le formulaire n'est pas soumis, on va sur le formulaire
+        return $this->render('session/ajoutSalle.html.twig', [
+            'formAddSalleToSession' => $form->createView(),
         ]);
     }
+
+    // On peut supprimer ça il me semble ?…
+    // /**
+    //  * @Route("/session/{id}/inscription", name="session_inscription")
+    //  * @IsGranted("ROLE_ADMIN")
+    //  */
+    // public function inscription(Session $session, Request $request): Response
+    // {
+
+    //     $form = $this->createForm(InscriptionType::class);
+
+    //     $form->handleRequest($request);
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $stagiaire = $form->getData();
+    //         $session->addInscrit($stagiaire);
+    //         $entityManager = $this->getDoctrine()->getManager();
+    //         // $entityManager->persist($session);
+    //         $entityManager->flush();
+
+    //         // dump($inscription);
+    //         // $entityManager = $this->getDoctrine()->getManager();
+    //         // $entityManager->persist($inscription);
+    //         // $entityManager->flush();
+
+    //         return $this->redirectToRoute('session');
+    //     }
+
+    //     return $this->render('session/inscription.html.twig', [
+    //         'formInscription' => $form->createView(),
+    //         'session' => $session
+    //     ]);
+    // }
 
     /**
      * @IsGranted("ROLE_ADMIN")
@@ -89,33 +129,35 @@ class SessionController extends AbstractController
         ]);
     }
 
-    /**
-     * @IsGranted("ROLE_ADMIN")
-     * @Route("/session/addInscrit", name="inscrit_add")
-     */
-    public function addInscrit(Session $session = null, Request $request): Response
-    {
-        if (!$session) {
-            $session = new Session();
-        }
+    // On peut supprimer ça il me semble ?…
 
-        $form = $this->createForm(InscriptionType::class, $session);
+    // /**
+    //  * @IsGranted("ROLE_ADMIN")
+    //  * @Route("/session/addInscrit", name="inscrit_add")
+    //  */
+    // public function addInscrit(Session $session = null, Request $request): Response
+    // {
+    //     if (!$session) {
+    //         $session = new Session();
+    //     }
 
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $session = $form->getData();
+    //     $form = $this->createForm(InscriptionType::class, $session);
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($session);
-            $entityManager->flush();
+    //     $form->handleRequest($request);
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $session = $form->getData();
 
-            return $this->redirectToRoute('session');
-        }
+    //         $entityManager = $this->getDoctrine()->getManager();
+    //         $entityManager->persist($session);
+    //         $entityManager->flush();
 
-        return $this->render('session/inscription.html.twig', [
-            'formInscription' => $form->createView(),
-        ]);
-    }
+    //         return $this->redirectToRoute('session');
+    //     }
+
+    //     return $this->render('session/inscription.html.twig', [
+    //         'formInscription' => $form->createView(),
+    //     ]);
+    // }
 
 
     /**
