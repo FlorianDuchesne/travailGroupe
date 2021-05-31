@@ -78,29 +78,25 @@ class SecurityController extends AbstractController
                     $manager->flush();
                 } catch (\Exception $e) {
                     $this->addFlash('Warning', $e->getMessage());
-                return $this->redirectToRoute('app_login');
+                    return $this->redirectToRoute('app_login');
+                }
+
+                // on génère une URL qui va comporter la route permettant de changer le mot de passe
+
+                $url = $this->generateUrl('resetPassword', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
+
+                // on envoie le mail
+                $message = (new Email())
+                    ->from('symfonyFloEtJp@gmail.com')
+                    ->to($user->getEmail())
+                    ->subject('Récuperation de mot de passe test')
+                    ->text("Voici le lien de récupération de votre mot de passe :" . $url, 'text/html')
+                    ->html("<p> Ceci est un test: " . $url, 'text/html' . "</p>");
+
+                $mailer->send($message);
+
+                $this->addFlash('info', 'Le mail de récupération de mot passe a bien été envoyé vous pouvez aller le consulter.');
             }
-
-// on génère une URL qui va comporter la route permettant de changer le mot de passe
-
-$url = $this->generateUrl('resetPassword', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
-
-// on envoie le mail
-$message = (new Email())
-    ->from('symfonyFloEtJp@gmail.com')
-    ->to($user->getEmail())
-    ->subject('Récuperation de mot de passe test')
-    ->text("Voici le lien de récupération de votre mot de passe :" .$url, 'text/html')
-    ->html("<p> Ceci est un test: ".$url, 'text/html' . "</p>");
-
-$mailer->send($message);
-
-$this->addFlash('info', 'Le mail de récupération de mot passe a bien été envoyé vous pouvez aller le consulter.');
-
-
-
-        }
-
         }
 
 
@@ -110,45 +106,46 @@ $this->addFlash('info', 'Le mail de récupération de mot passe a bien été env
         ]);
     }
 
-        /**
+    /**
      * @Route("/resetPassword/{token}", name="resetPassword")
      */
-public function resetPassword(EntityManagerInterface $manager, Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder, UserRepository $userRepository){
-    
-    $form = $this->createForm(ChangePasswordType::class);
-    $form -> handleRequest($request);
+    public function resetPassword(EntityManagerInterface $manager, Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder, UserRepository $userRepository)
+    {
 
-    // redefinir le token
+        // $form = $this->createForm(ChangePasswordType::class);
+        // $form -> handleRequest($request);
 
-    $user = $userRepository->findOneByResetToken($token);
+        // redefinir le token
 
-    if($form->isSubmitted() && $form->isValid()){
+        if ($request->isMethod('POST')) {
 
-        if ($request->isMethod('POST')){
 
-            $user-> setResetToken(NULL);
+            // $user = $userRepository->findOneByResetToken($token);
+            $user = $manager->getRepository(User::class)
+                ->findOneByResetToken($token);
 
-            $newPassword = $form->get('password')->getData();
+            // if($form->isSubmitted() && $form->isValid()){
+
+            $user->setResetToken(NULL);
+
+            // $newPassword = $form->get('password')->getData();
 
             $user->setPassword(
-                $passwordEncoder->encodePassword($user, $newPassword)
+                $passwordEncoder->encodePassword($user, $request->request->get('password'))
             );
             $manager->flush();
             $this->addFlash('info', 'Votre mot de passe a bien été reinitialisé !');
 
             return $this->redirectToRoute('app_login');
 
+            // }
         }
+
+        return $this->render('security/resetPassword.html.twig', [
+            'token' => $token,
+            // 'form' => $form->createView(),
+            'title' => "Reinitialisation du mot de passe"
+
+        ]);
     }
-
-    return $this->render('security/resetPassword.html.twig', [
-        'token' => $token,
-        'form' => $form->createView(),
-        'title' => "Reinitialisation du mot de passe"
-
-    ]);
-
-
-}
-
 }
