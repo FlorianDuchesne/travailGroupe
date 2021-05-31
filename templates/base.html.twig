@@ -8,11 +8,11 @@
 			{% endblock %}
 		</title>
 		{# Run `composer require symfony/webpack-encore-bundle`
-																																																																								           and uncomment the following Encore helpers to start using Symfony UX #}
+																																																																										           and uncomment the following Encore helpers to start using Symfony UX #}
 		{% block stylesheets %}
 			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 		{# <link
-																																																															rel="stylesheet" href="{{ asset('css/style.css') }}"> #}
+																																																																	rel="stylesheet" href="{{ asset('css/style.css') }}"> #}
 			{#{{ encore_entry_link_tags('app') }}#}
 		{% endblock %}
 		<script src="https://kit.fontawesome.com/e2a8fec256.js" crossorigin="anonymous"></script>
@@ -26,7 +26,11 @@
 						<img class="w-50" src="{{ asset('img/hibouSmall.png') }}">
 					</figure>
 				</a>
-				<a href=" {{ path('home') }}"><h4 class="text-white">Chouette Formation</h4></a>
+				<a href=" {{ path('home') }}">
+					<h4 class="text-white">Chouette Formation</h4>
+				</a>
+				<p>Hello
+					{{ app.user.pseudo}}</p>
 				<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
 					<span class="navbar-toggler-icon"></span>
 				</button>
