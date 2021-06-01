@@ -52,11 +52,21 @@
 					{{ session.nbPlaces - session.inscrit | length }}
 				</p>
 				{% if is_granted("ROLE_ADMIN") %}
-
+					<p class="card-text">
+						Salle :
+						<br>
+						{% if session.salle is empty %}
+							pas de salle attribuée
+						{% else %}
+							salle
+							{{ session.salle }}<br>
+							<a href="{{ path('delete_salle_session', {id:session.id})}}">(supprimer la salle attribuée)</a>
+						</p>
+					{% endif %}
 					<p class="card-text">
 						Stagiaires inscrits :<br>
 						{% if session.inscrit is empty %}
-							<li>Pas de stagiaires inscrits pour le moment</li>
+							Pas de stagiaires inscrits pour le moment
 						{% else %}
 							{% for inscrit in session.inscrit %}
 
@@ -67,8 +77,8 @@
 							{% endfor %}
 						{% endif %}
 						{# {% if (session.nbPlaces - session.inscrit | length != 0) %}
-																															<a class="btn btn-info text-white m-3" href="{{ path('session_inscription', {id:session.id})}}">Inscrire un stagiaire à cette session</a>
-																														{% endif %} #}
+																																																																																																	<a class="btn btn-info text-white m-3" href="{{ path('session_inscription', {id:session.id})}}">Inscrire un stagiaire à cette session</a>
+																																																																																																{% endif %} #}
 					</p>
 					<div>
 						<div class="d-flex">

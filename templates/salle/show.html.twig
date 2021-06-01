@@ -31,7 +31,10 @@
 				{# <div class="alert alert-warning alert-dismissible fade show" role="alert"> #}
 
 				<h6>Prochaines sessions dans cette salle :</h6>
-				{% if salle.sessions %}
+				{% if salle.sessions is empty %}
+					<p>Pas de session prévue actuellement</p>
+
+				{% else %}
 					<ul>
 						{% for session in salle.sessions %}
 							<a class="text-info" href=" {{ path('session_show', {id:session.id})}}">
@@ -39,8 +42,7 @@
 							</a>
 						{% endfor %}
 					</ul>
-				{% else %}
-					<p>Pas de session prévue actuellement</p>
+
 				{% endif %}
 				{# </div> #}
 				{% if is_granted("ROLE_ADMIN") %}
