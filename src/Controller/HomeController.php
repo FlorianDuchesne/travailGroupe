@@ -19,7 +19,7 @@ class HomeController extends AbstractController
     {
         $sessions = $this->getDoctrine()
             ->getRepository(Session::class)
-            ->findAll();
+            ->prochainesSessions();
 
         return $this->render('home/index.html.twig', [
             'sessions' => $sessions,
