@@ -135,11 +135,27 @@ class SessionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $session = $form->getData();
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($session);
-            $entityManager->flush();
+            if ($session->getNbPlaces() < count($form->get('inscrit')->getData())) {
+                // on envoie un message d'erreur
+                $this->addFlash('warningStagiaires', 'Vous ne pouvez pas inscrire autant de stagiaires à cette session');
+                // Et on retourne sur la page du formulaire
+                return $this->render('session/add_edit.html.twig', [
+                    'formAddSession' => $form->createView(),
+                    'editMode' => $session->getId() !== null
+                ]);
+            }
+            // Sinon, on poursuit normalement
+            else {
 
-            return $this->redirectToRoute('session');
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($session);
+                $entityManager->flush();
+
+                return $this->render('session/show.html.twig', [
+                    'session' => $session
+                ]);
+            }
         }
 
         return $this->render('session/add_edit.html.twig', [
