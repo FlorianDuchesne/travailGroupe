@@ -34,6 +34,11 @@ class Salle
      */
     private $sessions;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Materiel::class, inversedBy="salle")
+     */
+    private $materiel;
+
     public function __construct()
     {
         $this->sessions = new ArrayCollection();
@@ -101,5 +106,17 @@ class Salle
     public function __toString()
     {
         return $this->getLibelle();
+    }
+
+    public function getMateriel(): ?Materiel
+    {
+        return $this->materiel;
+    }
+
+    public function setMateriel(?Materiel $materiel): self
+    {
+        $this->materiel = $materiel;
+
+        return $this;
     }
 }

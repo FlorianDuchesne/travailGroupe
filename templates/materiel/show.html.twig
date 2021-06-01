@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ materiel }}
+{% endblock %}
+{% block body %}
+	<div class="container">
+		<h2 class="text-center m-3">Détail sur le matériel</h2>
+		<button class="btn btn-info">
+			<a class="text-white" href="{{ path('materielList') }}">Retour à la liste</a>
+		</button>
+
+		<div class="card" style="width: 18rem;">
+			<div class="card-body">
+				<h2 class="card-title">{{ materiel }}</h2>
+			</div>
+			<div
+				class="card-text">
+
+				<h6>Matériel affecté à la salle :</h6>
+				{% if is_granted("ROLE_ADMIN") %}
+					<div class="d-flex">
+						<a class="btn btn-info text-white w-50 m-3" href="{{ path('materiel_edit', {'id':materiel.id}) }}">
+							<i class="fas fa-edit"></i>
+						</a>
+						<a class="btn btn-danger text-white w-50 m-3" onclick="alert()" href="{{ path('materiel_delete', {'id':materiel.id}) }}">
+							<i class="fas fa-trash-alt"></i>
+						</a>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	{% endblock %}
