@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout d'un matériel
+{% endblock %}
+
+{% block body %}
+	{% if editMode %}
+		<h1 class="text-center m-3">Modification du matériel</h1>
+	{% else %}
+		<h1 class="text-center m-3">Ajout d'un matériel</h1>
+	{% endif %}
+	<div class="m-auto col-3">
+		{{ form(formAddMateriel) }}
+		</div>
+	{% endblock %}
