@@ -67,20 +67,21 @@ class SessionType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'label' => false,
-                'attr' => [
-                    'class' => 'form-control',
-                ],
             ])
 
             ->add('programmeSession', CollectionType::class, [
                 'label' => false,
                 'entry_type' => ProgrammerType::class,
                 'entry_options' => [
-                    'label' => "Module et durée : "
+                    'label' => "Module et durée : ",
+                    'attr' => [
+                        'class' => 'form-control',
+                    ],
                 ],
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
+                
             ])
             ->add('Envoyer', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-success m-3'],
