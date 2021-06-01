@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Salle;
 use App\Entity\Session;
 use App\Entity\Stagiaire;
 use App\Form\SessionType;
@@ -16,6 +17,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SessionController extends AbstractController
 {
+
+
+    /**
+     * @Route("/session/{id}/deleteSalle", name="delete_salle_session")
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function deleteSalle(Session $session, Salle $salle = null, EntityManagerInterface $manager)
+    {
+        $salle = $session->getSalle();
+        // $salle = $manager->getRepository(Salle::class)->findOneById($id);
+        $salle->removeSession($session);
+        $manager->flush();
+        return $this->render('session/show.html.twig', [
+            'session' => $session
+        ]);
+    }
 
 
     // Fonction d'attribution d'une salle à une session
@@ -46,7 +63,9 @@ class SessionController extends AbstractController
                 $entityManager->persist($session);
                 $entityManager->flush();
 
-                return $this->redirectToRoute('session');
+                return $this->render('session/show.html.twig', [
+                    'session' => $session
+                ]);
             }
         }
         // Si le formulaire n'est pas soumis, on va sur le formulaire
@@ -116,11 +135,27 @@ class SessionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $session = $form->getData();
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($session);
-            $entityManager->flush();
+            if ($session->getNbPlaces() < count($form->get('inscrit')->getData())) {
+                // on envoie un message d'erreur
+                $this->addFlash('warningStagiaires', 'Vous ne pouvez pas inscrire autant de stagiaires à cette session');
+                // Et on retourne sur la page du formulaire
+                return $this->render('session/add_edit.html.twig', [
+                    'formAddSession' => $form->createView(),
+                    'editMode' => $session->getId() !== null
+                ]);
+            }
+            // Sinon, on poursuit normalement
+            else {
 
-            return $this->redirectToRoute('session');
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($session);
+                $entityManager->flush();
+
+                return $this->render('session/show.html.twig', [
+                    'session' => $session
+                ]);
+            }
         }
 
         return $this->render('session/add_edit.html.twig', [

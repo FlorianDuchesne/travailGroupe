@@ -12,12 +12,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-/** 
- * @IsGranted("ROLE_ADMIN")
- */
 class SalleController extends AbstractController
 {
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/salle/list", name="salle")
      */
     public function index()
@@ -33,6 +31,7 @@ class SalleController extends AbstractController
 
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/salle/{id}/delete", name="salle_delete")
      */
 
@@ -44,6 +43,7 @@ class SalleController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/salle/add", name="salle_add")
      * @Route("/salle/{id}/edit", name="salle_edit")
      */

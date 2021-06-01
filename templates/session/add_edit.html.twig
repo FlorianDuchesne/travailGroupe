@@ -11,8 +11,14 @@
 		{# sinon ce sera un mode ajout #}
 		<h1 class="text-center m-3">Ajout d'une session</h1>
 	{% endif %}
-	<div
-		class="m-auto col-3">
+	<div class="m-auto col-3">
+
+		{% for message in app.flashes('warningStagiaires') %}
+			<div class="alert alert-danger">
+				{{ message }}
+			</div>
+		{% endfor %}
+
 		{# ici j'appelle l'intégralité du formulaire  #}
 		{{ form_start(formAddSession) }}
 
