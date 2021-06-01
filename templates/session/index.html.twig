@@ -19,6 +19,9 @@
 
 	<div class="container">
 		<h1 class="text-center m-3">Liste des sessions</h1>
+		{% if is_granted("ROLE_ADMIN") %}
+			<a class="btn btn-success" href="{{ path('session_add') }}">Ajouter une session</a>
+		{% endif %}
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -56,10 +59,5 @@
 			{% endfor %}
 		</tbody>
 	</table>
-	{% if is_granted("ROLE_ADMIN") %}
-
-		<a class="btn btn-success" href="{{ path('session_add') }}">Ajouter une session</a>
-	{% endif %}
 </div>
-	{# <a class="btn btn-secondary" href="{{ path('inscrit_add') }}">Ajouter un stagiaire à une session</a> #}
-{% endblock %}
+{# <a class="btn btn-secondary" href="{{ path('inscrit_add') }}">Ajouter un stagiaire à une session</a> #}{% endblock %}

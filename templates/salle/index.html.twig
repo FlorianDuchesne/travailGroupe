@@ -19,6 +19,11 @@
 
 	<div class="container">
 		<h1 class="text-center m-3">Liste des salles</h1>
+		{% if is_granted("ROLE_ADMIN") %}
+
+			<a class="btn btn-success" href="{{ path('salle_add') }}">Ajouter une salle</a>
+		{% endif %}
+
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -52,9 +57,4 @@
 			{% endfor %}
 		</tbody>
 	</table>
-	{% if is_granted("ROLE_ADMIN") %}
-
-		<a class="btn btn-success" href="{{ path('salle_add') }}">Ajouter une salle</a>
-	{% endif %}
-</div>
-{% endblock %}
+</div>{% endblock %}

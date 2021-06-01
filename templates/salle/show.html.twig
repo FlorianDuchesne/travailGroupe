@@ -26,6 +26,13 @@
 			<div class="card-body">
 				<h2 class="card-title">{{ salle }}</h2>
 			</div>
+			<div class="card-text">
+				{% for materiel in salle.materiel %}
+					<p>Matériel mis en place:
+						{{ materiel.denomination }}
+					</p>
+				{% endfor %}
+			</div>
 			<div
 				class="card-text">
 				{# <div class="alert alert-warning alert-dismissible fade show" role="alert"> #}

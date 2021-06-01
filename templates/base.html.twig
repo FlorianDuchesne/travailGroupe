@@ -58,10 +58,12 @@
 							<a class="nav-item nav-link text-white" href="{{ path('app_logout') }}">Logout</a>
 						{% elseif (is_granted("ROLE_USER")) %}
 							<a class="nav-item nav-link text-white" href="{{ path('session') }}">Sessions</a>
+							<a class="nav-item nav-link text-white" href="{{ path('formation_index') }}">Formations</a>
 							<a class="nav-item nav-link text-white" href="{{ path('userShow', {id: app.user.id}) }}">Profil</a>
 							<a class="nav-item nav-link text-white" href="{{ path('app_logout') }}">Logout</a>
 						{% else %}
 							<a class="nav-item nav-link text-white" href="{{ path('session') }}">Sessions</a>
+							<a class="nav-item nav-link text-white" href="{{ path('formation_index') }}">Formations</a>
 							<a class="nav-item nav-link text-white" href="{{ path('app_login') }}">Login</a>
 						{% endif %}
 
