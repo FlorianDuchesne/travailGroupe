@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class RegistrationController extends AbstractController
 {
@@ -32,25 +33,31 @@ class RegistrationController extends AbstractController
      * @IsGranted("ROLE_USER")
      * @Route("/{id}/edit", name="editProfil")
      */
-    public function edit(Request $request, User $user): Response
+    public function edit(Request $request, User $user, UserInterface $userlogged): Response
     {
 
-        $form = $this->createForm(EditUserType::class, $user);
-        $form->handleRequest($request);
+        // checker id user connecté et id route et conditionner la suite (user interface ?)
+        if ($user->getEmail() == $userlogged->getUsername()) {
+            $form = $this->createForm(EditUserType::class, $user);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
-            // do anything else you need here, like send an email
+            if ($form->isSubmitted() && $form->isValid()) {
+                // encode the plain password
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($user);
+                $entityManager->flush();
+                // do anything else you need here, like send an email
+
+                return $this->redirectToRoute('home');
+            }
+            return $this->render('registration/edit.html.twig', [
+                'editUserForm' => $form->createView(),
+            ]);
+        } else {
+            $this->addFlash('essaiHacking', 'Vous ne pouvez modifier ou supprimer que votre propre compte.');
 
             return $this->redirectToRoute('home');
         }
-
-        return $this->render('registration/edit.html.twig', [
-            'editUserForm' => $form->createView(),
-        ]);
     }
 
     /**
