@@ -21,11 +21,11 @@ class SessionRepository extends ServiceEntityRepository
 
     public function prochainesSessions()
     {
-        // $currentdate = new \DateTime('now'); //Date du jour
+        $currentdate = (new \DateTime('now'))->format('Y-m-d'); //Date du jour
 
         $qb = $this->createQueryBuilder('s')
-            // ->where('s.dateDebut >= :date')
-            // ->setParameter('date', $currentdate)
+            ->where('s.dateDebut >= :date')
+            ->setParameter('date', $currentdate)
             ->orderBy('s.dateDebut', 'DESC')
             ->setMaxResults(3);
         $query = $qb->getQuery();
