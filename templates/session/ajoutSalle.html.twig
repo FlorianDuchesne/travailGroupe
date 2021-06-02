@@ -6,16 +6,23 @@
 {% block body %}
 	<div class="m-auto col-3">
 
-	{% for message in app.flashes('warning') %}
-		<div class="alert alert-danger">
-			{{ message }}
-		</div>
-	{% endfor %}
+		{% for message in app.flashes('warning') %}
+			<div class="alert alert-danger">
+				{{ message }}
+			</div>
+		{% endfor %}
 
-	{# si je suis en mode edit alors ce sera modification #}
-	<h1 class="text-center m-3">Ajout d'une salle à une session</h1>
-	{# <div
-		class="m-auto col-3"> #}
+		{% for message in app.flashes('danger') %}
+			<div class="alert alert-danger">
+				{{ message }}
+			</div>
+		{% endfor %}
+
+
+		{# si je suis en mode edit alors ce sera modification #}
+		<h1 class="text-center m-3">Ajout d'une salle à une session</h1>
+		{# <div
+				class="m-auto col-3"> #}
 		{# ici j'appelle l'intégralité du formulaire  #}
 		{{ form_start(formAddSalleToSession) }}
 

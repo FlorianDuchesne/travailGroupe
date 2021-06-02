@@ -57,20 +57,34 @@ class SessionController extends AbstractController
                     'formAddSalleToSession' => $form->createView(),
                 ]);
             }
+            $salle = $session->getSalle();
+            $start = $session->getDateDebut();
+            $end = $session->getDatefin();
+            $taken = $this->getDoctrine()->getRepository(Session::class)->findIfTaken($start, $end, $salle->getId());
+            // dd($taken);
+            if ($taken) {
+
+                $this->addFlash('danger', 'salle déjà prise à ces dates');
+
+                return $this->render('session/ajoutSalle.html.twig', [
+                    'formAddSalleToSession' => $form->createView(),
+                ]);
+            }
+
             // else if{
 
             // }
             // Sinon, on poursuit normalement
-            else {
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($session);
-                $entityManager->flush();
+            // else {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($session);
+            $entityManager->flush();
 
-                return $this->render('session/show.html.twig', [
-                    'session' => $session
-                ]);
-            }
+            return $this->render('session/show.html.twig', [
+                'session' => $session
+            ]);
         }
+        // }
         // Si le formulaire n'est pas soumis, on va sur le formulaire
         return $this->render('session/ajoutSalle.html.twig', [
             'formAddSalleToSession' => $form->createView(),
