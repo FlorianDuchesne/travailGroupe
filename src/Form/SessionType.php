@@ -63,7 +63,7 @@ class SessionType extends AbstractType
                     'class' => Stagiaire::class,
                 ],
                 // 'multiple' => true,
-                'required' => false,
+                'required' => true,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'label' => false,
@@ -74,13 +74,14 @@ class SessionType extends AbstractType
                 'entry_type' => ProgrammerType::class,
                 'entry_options' => [
                     'label' => "Module et durée : ",
-                    'attr' => [
-                        'class' => 'form-control',
-                    ],
+                    // 'attr' => [
+                    //     'class' => 'form-control',
+                    // ],
                 ],
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
+                'required'=> true,
                 
             ])
             ->add('Envoyer', SubmitType::class, [

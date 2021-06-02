@@ -29,10 +29,6 @@ class Materiel
      */
     private $quantite;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Salle::class, mappedBy="materiel")
-     */
-    private $salle;
 
     public function __construct()
     {
@@ -68,35 +64,8 @@ class Materiel
         return $this;
     }
 
-    /**
-     * @return Collection|Salle[]
-     */
-    public function getSalle(): Collection
-    {
-        return $this->salle;
-    }
-
-    public function addSalle(Salle $salle): self
-    {
-        if (!$this->salle->contains($salle)) {
-            $this->salle[] = $salle;
-            $salle->setMateriel($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSalle(Salle $salle): self
-    {
-        if ($this->salle->removeElement($salle)) {
-            // set the owning side to null (unless already changed)
-            if ($salle->getMateriel() === $this) {
-                $salle->setMateriel(null);
-            }
-        }
-
-        return $this;
-    }
+       
+    
     public function __toString()
     {
         return $this->getDenomination();

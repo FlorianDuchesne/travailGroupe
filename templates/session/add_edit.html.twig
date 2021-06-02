@@ -2,16 +2,20 @@
 
 {% block title %}Ajout session
 {% endblock %}
+{% block stylesheets %}
+{{ parent()}} 
+{% endblock %}
 
 {% block body %}
+<div class="container"
 	{# si je suis en mode edit alors ce sera modification #}
 	{% if editMode %}
 		<h1 class="text-center">Modification d'une session</h1>
 	{% else %}
 		{# sinon ce sera un mode ajout #}
 		<h1 class="text-center">Ajout d'une session</h1>
+
 	{% endif %}
-<div class="container"
 	{# <div class="m-auto col-3"> #}
 
 		{% for message in app.flashes('warningStagiaires') %}
@@ -21,25 +25,25 @@
 		{% endfor %}
 
 		{# ici j'appelle l'intégralité du formulaire  #}
-		<form>
-		<div class="form-group">
+		{# <form>
+		<div class="form-group"> #}
 		{{ form_start(formAddSession) }}
-</div>
-		<div class="form-group">
+{# </div> #}
+		{# <div class="form-group"> #}
 		{{ form_row(formAddSession.formation) }}
-		</div>
-				<div class="form-group">
+		{# </div>
+				<div class="form-group"> #}
 		{{ form_row(formAddSession.dateDebut) }}
-		</div>
-				<div class="form-group">
+		{# </div>
+				<div class="form-group"> #}
 		{{ form_row(formAddSession.dateFin) }}
-		</div>
-				<div class="form-group">
+		{# </div>
+				<div class="form-group"> #}
 		{{ form_row(formAddSession.nbPlaces) }}
-		</div>
-				<div class="form-group">
-		<ul id="stagiaires" data-prototype="{{ form_row(formAddSession.inscrit.vars.prototype) |e }}">
-						<div class="form-group">
+		{# </div>
+				<div class="form-group"> #}
+		<ul id="stagiaires" data-prototype="{{ form_row(formAddSession.inscrit.vars.prototype)|e }}">
+						{# <div class="form-group"> #}
 
 			{% for stagiaire in formAddSession.inscrit %}
 
@@ -49,12 +53,12 @@
 
 				</li>
 			{% endfor %}
-		</div>
+		{# </div> #}
 
 		</ul>
-		</div>
+		{# </div> #}
 
-		<ul id="modules" data-prototype="{{ form_row(formAddSession.programmeSession.vars.prototype) |e }}">
+		<ul id="modules" data-prototype="{{ form_row(formAddSession.programmeSession.vars.prototype)|e }}">
 
 			{% for module in formAddSession.programmeSession %}
 
