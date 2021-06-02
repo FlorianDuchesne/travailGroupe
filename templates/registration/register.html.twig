@@ -12,19 +12,6 @@
 	{% endfor %}
 
 	<h1>Register</h1>
-             {# <form>
-               <fieldset>
-                 <legend>Exemple de formulaire Bootstrap</legend>
-                 
-                 <div class="form-group">
-                   <label for="nom">Entrez votre nom</label>
-                   <input type="text" class="form-control" id="nom" placeholder="Pierre GIRAUD">
-                 </div>
-                 
-                 <div class="form-group">
-                   <label for="email">Entrez votre mail</label>
-                   <input type="email" class="form-control" id="email" placeholder="pierre.giraud@edhec.com">
-                 </div> #}
 
 	{{ form_start(registrationForm) }}
 	{{ form_row(registrationForm.pseudo) }}
