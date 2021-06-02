@@ -3,25 +3,26 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\EditPasswordType;
 use Doctrine\ORM\EntityManager;
 use App\Form\ChangePasswordType;
+use Symfony\Component\Mime\Email;
 use App\Repository\UserRepository;
 use App\Form\ForgottenPasswordType;
+use Symfony\Bridge\Twig\AppVariable;
 use Doctrine\ORM\EntityManagerInterface;
+// use Symfony\Component\Security\Core\User\User;
 use Symfony\Component\HttpFoundation\Request;
+// use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
-// use Symfony\Component\Security\Core\User\User;
 use Symfony\Component\Routing\Annotation\Route;
-// use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
-use Symfony\Component\Mime\Email;
-use Symfony\Bridge\Twig\AppVariable;
 
 class SecurityController extends AbstractController
 {
@@ -48,6 +49,42 @@ class SecurityController extends AbstractController
     public function logout()
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+
+
+
+    /**
+     * @Route("/security/editPassword", name="editPassword")
+     */
+    public function editPassword(User $user = null, EntityManagerInterface $manager, Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $user = $this->getUser();
+
+        $form = $this->createForm(EditPasswordType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isvalid()) {
+
+            $oldPassword = $form->get('oldPassword')->getData();
+            $newPassword = $form->get('newPassword')->getData();
+
+
+            if (password_verify($oldPassword, $user->getPassword())) {
+
+                $user->setPassword(
+                    $passwordEncoder->encodePassword($user, $newPassword)
+                );
+                $manager->flush();
+                $this->addFlash('info', 'Votre mot de passe a bien été reinitialisé !');
+            } else {
+                $this->addFlash('danger', 'Votre ancien mot de passe n\'est pas bon.');
+            }
+        }
+        return $this->render('security/editPassword.html.twig', [
+            'form' => $form->createView(),
+            'title' => "Reinitialisation du mot de passe"
+        ]);
     }
 
     /**
