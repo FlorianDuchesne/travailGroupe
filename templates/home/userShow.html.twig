@@ -30,6 +30,11 @@
 				<button class="btn btn-info">
 					<a class="text-white" href="{{ path('usersList') }}">Retour à la liste</a>
 				</button>
+				<button class="btn btn-danger">
+					<a class="text-white" href="{{ path('makeAdmin', {id:user.id}) }}">Rendre
+						{{ user.pseudo}}
+						administrateur</a>
+				</button>
 			{% endif %}
 
 			{% if user == app.user %}
@@ -46,8 +51,8 @@
 
 			<!-- Button trigger modal -->
 			{# <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-																												Launch demo modal
-																											</button> #}
+																																																		Launch demo modal
+																																																	</button> #}
 
 			<!-- Modal -->
 				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> <div class="modal-dialog">

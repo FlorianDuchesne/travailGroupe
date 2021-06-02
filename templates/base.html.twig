@@ -8,11 +8,11 @@
 			{% endblock %}
 		</title>
 		{# Run `composer require symfony/webpack-encore-bundle`
-																		and uncomment the following Encore helpers to start using Symfony UX #}
+																				and uncomment the following Encore helpers to start using Symfony UX #}
 		{% block stylesheets %}
 			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 		{# <link
-																		rel="stylesheet" href="{{ asset('css/style.css') }}"> #}
+																				rel="stylesheet" href="{{ asset('css/style.css') }}"> #}
 			{#{{ encore_entry_link_tags('app') }}#}
 		{% endblock %}
 	</head>
@@ -78,56 +78,57 @@
 
 				{# </header> #}
 				{% block body %}
-				{# <div class="container"></div> #}
+					{# <div class="container"></div> #}
 				{% endblock %}
-				<footer class="page-footer bg-info fixed-bottom">
-									{# <div class="footer-copyright text-center py-3">
-										<div>© 2021 Copyright: FloEtJp
-											<a class="text-info" href="{{ path('home') }}">ProjetSymfony
-											</a>
-										</div>
-										<div>Inscrivez-vous à notre:
-											<a class="text-info" href="#">
-												Newsletter</a>
-										</div>
-									</div> #}
-				
-				<div
-					class="row d-flex align-items-center">
+				<footer
+					class="page-footer bg-info fixed-bottom">
+					{# <div class="footer-copyright text-center py-3">
+															<div>© 2021 Copyright: FloEtJp
+																<a class="text-info" href="{{ path('home') }}">ProjetSymfony
+																</a>
+															</div>
+															<div>Inscrivez-vous à notre:
+																<a class="text-info" href="#">
+																	Newsletter</a>
+															</div>
+														</div> #}
 
-					<!-- Grid column -->
 					<div
-						class="col-md-6 col-lg-8">
+						class="row d-flex align-items-center">
 
-						<!--Copyright-->
-						<div class="footer-copyright text-center">
-										<div>© 2021 Copyright: FloEtJp
-											<a class="text-white" href="{{ path('home') }}">ProjetSymfony
-											</a>
-										</div> 
+						<!-- Grid column -->
+						<div
+							class="col-md-6 col-lg-8">
 
-					</div>
-					</div>
-					<!-- Grid column -->
+							<!--Copyright-->
+							<div class="footer-copyright text-center">
+								<div>© 2021 Copyright: FloEtJp
+									<a class="text-white" href="{{ path('home') }}">ProjetSymfony
+									</a>
+								</div>
 
-					<!-- Grid column -->
-					<div
-						class="col-md-6 col-lg-4 ml-lg-0">
-
-						<!-- Social buttons -->
-						<form class="input-group">
-							<input type="text" class="form-control form-control-sm" placeholder="Inscrivez-vous à notre newsletter avec votre email" aria-label="Your email" aria-describedby="basic-addon2">
-							<div class="input-group-append">
-								<button class="btn btn-sm btn-outline-white my-0" type="button">Envoyer</button>
 							</div>
-						</form>
+						</div>
+						<!-- Grid column -->
 
+						<!-- Grid column -->
+						<div
+							class="col-md-6 col-lg-4 ml-lg-0">
+
+							<!-- Social buttons -->
+							<form class="input-group">
+								<input type="text" class="form-control form-control-sm" placeholder="Inscrivez-vous à notre newsletter avec votre email" aria-label="Your email" aria-describedby="basic-addon2">
+								<div class="input-group-append">
+									<button class="btn btn-sm btn-outline-white my-0" type="button">Envoyer</button>
+								</div>
+							</form>
+
+
+						</div>
+						<!-- Grid column -->
 
 					</div>
-					<!-- Grid column -->
-
-				</div>
-								</footer>
+				</footer>
 
 				{% block javascripts %}
 					<script>
@@ -144,4 +145,4 @@ return confirm("Êtes-vous bien sûr de vouloir effectuer cette suppression irr�
 			</body>
 		</html>
 	</body>
-</html></body></html></body></html></body></html></body></html>
+</html>
