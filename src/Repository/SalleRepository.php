@@ -19,6 +19,24 @@ class SalleRepository extends ServiceEntityRepository
         parent::__construct($registry, Salle::class);
     }
 
+    public function findIfTaken()
+    {
+
+        // On a une salle désirée et une session.
+        // Détecter si la salle est déjà prise par une autre session sur la même période.
+
+
+        $qb = $this->createQueryBuilder('s')
+            ->where('s.dateDebut >= :date')
+            // ->setParameter('date')
+            ->orderBy('s.dateDebut', 'DESC')
+            ->setMaxResults(3);
+        $query = $qb->getQuery();
+        return $query->execute();
+    }
+
+
+
     // /**
     //  * @return Salle[] Returns an array of Salle objects
     //  */

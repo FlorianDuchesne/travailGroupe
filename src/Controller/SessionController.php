@@ -57,6 +57,9 @@ class SessionController extends AbstractController
                     'formAddSalleToSession' => $form->createView(),
                 ]);
             }
+            // else if{
+
+            // }
             // Sinon, on poursuit normalement
             else {
                 $entityManager = $this->getDoctrine()->getManager();

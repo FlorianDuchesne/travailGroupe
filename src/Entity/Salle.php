@@ -35,14 +35,14 @@ class Salle
     private $sessions;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Materiel::class, inversedBy="salle")
+     * @ORM\OneToMany(targetEntity=Materiel::class, mappedBy="salle")
      */
-    private $materiel;
-
+    private $materiels;
 
     public function __construct()
     {
         $this->sessions = new ArrayCollection();
+        $this->materiels = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -108,14 +108,44 @@ class Salle
     {
         return $this->getLibelle();
     }
-    public function getMateriel(): ?Materiel
+    // public function getMateriel(): ?Materiel
+    // {
+    //     return $this->materiel;
+    // }
+
+    // public function setMateriel(?Materiel $materiel): self
+    // {
+    //     $this->materiel = $materiel;
+
+    //     return $this;
+    // }
+
+    /**
+     * @return Collection|Materiel[]
+     */
+    public function getMateriels(): Collection
     {
-        return $this->materiel;
+        return $this->materiels;
     }
 
-    public function setMateriel(?Materiel $materiel): self
+    public function addMateriel(Materiel $materiel): self
     {
-        $this->materiel = $materiel;
+        if (!$this->materiels->contains($materiel)) {
+            $this->materiels[] = $materiel;
+            $materiel->setSalle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMateriel(Materiel $materiel): self
+    {
+        if ($this->materiels->removeElement($materiel)) {
+            // set the owning side to null (unless already changed)
+            if ($materiel->getSalle() === $this) {
+                $materiel->setSalle(null);
+            }
+        }
 
         return $this;
     }

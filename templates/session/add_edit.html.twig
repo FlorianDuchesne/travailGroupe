@@ -3,20 +3,21 @@
 {% block title %}Ajout session
 {% endblock %}
 {% block stylesheets %}
-{{ parent()}} 
+	{{ parent()}}
 {% endblock %}
 
 {% block body %}
-<div class="container"
-	{# si je suis en mode edit alors ce sera modification #}
-	{% if editMode %}
-		<h1 class="text-center">Modification d'une session</h1>
-	{% else %}
-		{# sinon ce sera un mode ajout #}
-		<h1 class="text-center">Ajout d'une session</h1>
+	<div
+		class="container">
+		{# si je suis en mode edit alors ce sera modification #}
+		{% if editMode %}
+			<h1 class="text-center">Modification d'une session</h1>
+		{% else %}
+			{# sinon ce sera un mode ajout #}
+			<h1 class="text-center">Ajout d'une session</h1>
 
-	{% endif %}
-	{# <div class="m-auto col-3"> #}
+		{% endif %}
+		{# <div class="m-auto col-3"> #}
 
 		{% for message in app.flashes('warningStagiaires') %}
 			<div class="alert alert-danger">
@@ -26,24 +27,24 @@
 
 		{# ici j'appelle l'intégralité du formulaire  #}
 		{# <form>
-		<div class="form-group"> #}
+								<div class="form-group"> #}
 		{{ form_start(formAddSession) }}
-{# </div> #}
+		{# </div> #}
 		{# <div class="form-group"> #}
 		{{ form_row(formAddSession.formation) }}
 		{# </div>
-				<div class="form-group"> #}
+										<div class="form-group"> #}
 		{{ form_row(formAddSession.dateDebut) }}
 		{# </div>
-				<div class="form-group"> #}
+										<div class="form-group"> #}
 		{{ form_row(formAddSession.dateFin) }}
 		{# </div>
-				<div class="form-group"> #}
+										<div class="form-group"> #}
 		{{ form_row(formAddSession.nbPlaces) }}
 		{# </div>
-				<div class="form-group"> #}
-		<ul id="stagiaires" data-prototype="{{ form_row(formAddSession.inscrit.vars.prototype)|e }}">
-						{# <div class="form-group"> #}
+										<div class="form-group"> #}
+			<ul
+			id="stagiaires" data-prototype="{{ form_row(formAddSession.inscrit.vars.prototype)|e }}"> {# <div class="form-group"> #}
 
 			{% for stagiaire in formAddSession.inscrit %}
 
@@ -53,7 +54,7 @@
 
 				</li>
 			{% endfor %}
-		{# </div> #}
+			{# </div> #}
 
 		</ul>
 		{# </div> #}
@@ -74,7 +75,7 @@
 		{{ form_row(formAddSession.Envoyer) }}
 
 		{{ form_end(formAddSession) }}
-	{# </div> #}
+		{# </div> #}
 	</div>
 {% endblock %}
 {% block javascripts %}
