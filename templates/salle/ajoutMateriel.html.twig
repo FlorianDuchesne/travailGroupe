@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout materiel
+{% endblock %}
+
+{% block body %}
+	<div class="m-auto col-3">
+
+	{% for message in app.flashes('warning') %}
+		<div class="alert alert-danger">
+			{{ message }}
+		</div>
+	{% endfor %}
+
+	{# si je suis en mode edit alors ce sera modification #}
+	<h1 class="text-center m-3">Ajout de matériel à une salle</h1>
+	{# <div
+		class="m-auto col-3"> #}
+		{# ici j'appelle l'intégralité du formulaire  #}
+		{{ form_start(formAddMaterielToSalle) }}
+
+		{{ form_row(formAddMaterielToSalle.materiel) }}
+
+		{{ form_row(formAddMaterielToSalle.envoyer) }}
+
+		{{ form_end(formAddMaterielToSalle) }}
+	</div>
+{% endblock %}
+{% block javascripts %}{% endblock %}

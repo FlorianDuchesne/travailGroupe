@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Salle;
 use App\Entity\Session;
 use App\Form\SalleType;
+use App\Entity\Materiel;
+use App\Form\AjoutMaterielToSalleType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -76,5 +78,34 @@ class SalleController extends AbstractController
         return $this->render('salle/show.html.twig', [
             'salle' => $salle
         ]);
+    }
+        // Fonction d'attribution de matériel à une salle
+
+    /**
+     * @Route("/salle/{id}/ajoutMateriel", name="ajout_materiel")
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function ajoutMateriel(Salle $salle, Request $request)
+    {
+        $form = $this->createForm(AjoutMaterielToSalleType::class, $salle);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $salle = $form->getData();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($salle);
+            $entityManager->flush();
+            
+            return $this->render('salle/show.html.twig', [
+                'salle' => $salle
+                ]);
+            }
+            else {
+                // Si le formulaire n'est pas soumis, on va sur le formulaire
+                return $this->render('salle/ajoutMateriel.html.twig', [
+                    'formAddMaterielToSalle' => $form->createView(),
+                ]
+        );
+    }
     }
 }

@@ -29,13 +29,12 @@ class MaterielType extends AbstractType
                 ],
                 'required' => true,
             ])
-            // ->add('salle', EntityType::class, [
-            //     // 'allow_add' => true,
-            //     'attr' => [
-            //         'class' => 'form-control'
-            //     ],
-            //     'class' => Salle::class
-            // ])
+            ->add('salle', EntityType::class, [
+                'attr' => [
+                    'class' => 'form-control'
+                ],
+                'class' => Salle::class
+            ])
 
             ->add(
                 'envoyer',

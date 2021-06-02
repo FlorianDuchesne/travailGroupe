@@ -26,12 +26,28 @@
 			<div class="card-body">
 				<h2 class="card-title">{{ salle }}</h2>
 			</div>
-			<div class="card-text">
+			{# ****************************** #}
+			{# <div class="card-text">
 				{% for materiel in salle.materiels %}
 					<p>Matériel mis en place:
 						{{ materiel.denomination }}
 					</p>
-				{% endfor %}
+				{% endfor %} #}
+				{# *************************** #}
+			<div class="card-text">
+						Matériels mis en place :<br>
+						{% if salle.materiels is empty %}
+							Pas de matériel mis en place pour le moment
+						{% else %}
+							{% for materiel in salle.materiels %}
+
+								<li>
+									<a class="text-info" href="#">
+										{{ materiel.denomination }}</a>
+								</li>
+							{% endfor %}
+						{% endif %}
+
 			</div>
 			<div
 				class="card-text">
@@ -54,6 +70,10 @@
 				{# </div> #}
 				{% if is_granted("ROLE_ADMIN") %}
 					<div class="d-flex">
+						{# <a class="btn btn-info text-white w-50 m-3" href="{{ path('ajout_materiel', {'id':salle.id}) }}">
+						Affecter du matériel
+						</a> #}
+
 						<a class="btn btn-info text-white w-50 m-3" href="{{ path('salle_edit', {'id':salle.id}) }}">
 							<i class="fas fa-edit"></i>
 							{# Modifier #}

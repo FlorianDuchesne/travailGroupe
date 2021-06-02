@@ -108,17 +108,6 @@ class Salle
     {
         return $this->getLibelle();
     }
-    // public function getMateriel(): ?Materiel
-    // {
-    //     return $this->materiel;
-    // }
-
-    // public function setMateriel(?Materiel $materiel): self
-    // {
-    //     $this->materiel = $materiel;
-
-    //     return $this;
-    // }
 
     /**
      * @return Collection|Materiel[]
