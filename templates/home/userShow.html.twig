@@ -53,6 +53,10 @@
 					<a class="text-white" href="{{ path('editProfil', {id:app.user.id}) }}">Modifier profil</a>
 				</button>
 
+				<button class="btn btn-info">
+					<a class="text-white" href="{{ path('editPassword', {id:app.user.id}) }}">Modifier mon mot de passe</a>
+				</button>
+
 				<button class="btn btn-warning">
 					<a class="text-white" data-toggle="modal" data-target="#exampleModal" {# href="{{ path('deleteProfil', {id:app.user.id}) }}" #}>Supprimer le compte</a>
 				</button>
@@ -61,8 +65,8 @@
 
 			<!-- Button trigger modal -->
 			{# <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-																																																																																																												Launch demo modal
-																																																																																																											</button> #}
+																																																																																																																					Launch demo modal
+																																																																																																																				</button> #}
 
 			<!-- Modal -->
 				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> <div class="modal-dialog">
