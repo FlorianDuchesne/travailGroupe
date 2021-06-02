@@ -33,7 +33,8 @@ class FormationType extends AbstractType
                 'attr' => [
                     'class' => 'btn btn-success m-3'
                 ]
-            ]);
+            ])
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

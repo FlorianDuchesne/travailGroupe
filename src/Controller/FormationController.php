@@ -42,7 +42,7 @@ class FormationController extends AbstractController
             return $this->redirectToRoute('formation_index');
         }
         
-        return $this->render('formation/new.html.twig', [
+        return $this->render('formation/add_edit.html.twig', [
             'formAddFormation' => $form->createView(),
             'editMode' => $formation->getId() !== null
 

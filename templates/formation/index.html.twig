@@ -35,15 +35,34 @@
 						</td>
 						{% if is_granted("ROLE_ADMIN") %}
 							<td>
-								<button type="button" class="btn btn-warning">
+							{# ***************Debut bouton écriture entière modifier********************************** #}
+								{# <button type="button" class="btn btn-warning">
 									<a class=" text-white" href="{{ path('formation_edit', {'id':formation.id}) }}">Modifier</a>
-								</button>
+								</button> #}
+								{# ************Fin bouton écriture entière************************************* #}
+								{# ********* Début bouton symbole modifier ****************#}
+								<a class="btn btn-info text-white w-50 m-3" href="{{ path('formation_edit', {'id':formation.id}) }}">
+							<i class="fas fa-edit"></i>
+							{# Modifier #}
+						</a>
+						{# ************ Fin bouton symbole ************************#}
+
 							</td>
 							<td>
-								<button type="button" class="btn btn-danger" onclick="alert()">
+
+							{# ****** Debut bouton écriture entière supprimer ******************** #}
+								{# <button type="button" class="btn btn-danger" onclick="alert()">
 									<a class=" text-white" href="{{ path('formation_delete', {'id':formation.id}) }}">Supprimer</a>
-								</button>
+								</button> #}
+								{# ****** Fin bouton écriture entière ****************** #}
+
+								{# ********* Début bouton symbole corbeille ****************#}
+								<a class="btn btn-danger text-white w-50 m-3" onclick="alert()" href="{{ path('formation_delete', {'id':formation.id}) }}">
+							<i class="fas fa-trash-alt"></i>
+						</a>
+						{# ************ Fin bouton symbole ************************#}
 							</td>
+
 						{% endif %}
 					</tr>
 				{% endfor %}
