@@ -73,4 +73,26 @@ class HomeController extends AbstractController
             'users' => $users,
         ]);
     }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/adminPanel/{id}/makeUser", name="makeUser")
+     */
+
+    public function makeUser(User $user)
+    {
+
+        $users = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findAll();
+
+        $user->setRoles(['ROLE_USER']);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        return $this->render('home/usersList.html.twig', [
+            'users' => $users,
+        ]);
+    }
 }
