@@ -20,14 +20,20 @@ class EditPasswordType extends AbstractType
       ->add('oldPassword', PasswordType::class, [
         'label' => 'mot de passe actuel',
         'attr' => [
-          'class' => 'form-control'
+          'class' => 'form-control col-12'
         ]
       ])
       ->add('newPassword', RepeatedType::class, [
         'type' => PasswordType::class,
         'mapped' => false,
-        'first_options' => array('label' => 'Nouveau mot de passe'),
-        'second_options' => array('label' => 'Confirmez le nouveau mot de passe'),
+        'first_options' => array(
+          'label' => 'Nouveau mot de passe', 'attr' => [
+            'class' => 'form-control col-12'
+          ]
+        ),
+        'second_options' => array('label' => 'Confirmez le nouveau mot de passe', 'attr' => [
+          'class' => 'form-control col-12'
+        ]),
         'invalid_message' => 'Les mots de passe ne correspondent pas !',
         'constraints' => [
           new Length([
@@ -37,9 +43,6 @@ class EditPasswordType extends AbstractType
             'maxMessage' => "Veuillez mettre moins de {{ limit }} caracteres",
           ]),
         ],
-        'attr' => [
-          'class' => 'form-control'
-        ]
       ])
       ->add('Valider', SubmitType::class, [
         'attr' => [
