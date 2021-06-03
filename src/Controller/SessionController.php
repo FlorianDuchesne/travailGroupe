@@ -167,7 +167,7 @@ class SessionController extends AbstractController
 
             foreach ($stagiaire as $stagiaire) {
 
-                $taken = $this->getDoctrine()->getRepository(Session::class)->findIfStagiaireAvailable($start, $end, $stagiaire->getId());
+                $taken = $this->getDoctrine()->getRepository(Session::class)->findIfStagiaireAvailable($start, $end, $stagiaire->getId(), $session->getId());
                 // dd($taken);
                 if ($taken) {
 
@@ -180,6 +180,29 @@ class SessionController extends AbstractController
                 }
             }
 
+            if ($session->getNbPlaces() > $form->get('salle')->getData()->getNbPlaces()) {
+                // on envoie un message d'erreur
+                $this->addFlash('warning', 'La jauge de la salle ne peut pas contenir tout l\'effectif de la session !');
+                // Et on retourne sur la page du formulaire
+                return $this->render('session/add_edit.html.twig', [
+                    'formAddSession' => $form->createView(),
+                    'editMode' => $session->getId() !== null
+                ]);
+            }
+            $salle = $session->getSalle();
+            $start = $session->getDateDebut();
+            $end = $session->getDatefin();
+            $taken = $this->getDoctrine()->getRepository(Session::class)->findIfTaken($start, $end, $salle->getId(), $session->getId());
+            // dd($taken);
+            if ($taken) {
+
+                $this->addFlash('dangerSalle', 'salle déjà prise à ces dates');
+
+                return $this->render('session/add_edit.html.twig', [
+                    'formAddSession' => $form->createView(),
+                    'editMode' => $session->getId() !== null
+                ]);
+            }
 
             // Sinon, on poursuit normalement
 

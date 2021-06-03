@@ -2,10 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\Salle;
 use App\Entity\Session;
 use App\Entity\Formation;
-use App\Entity\Stagiaire;
 
+use App\Entity\Stagiaire;
 use App\Form\ProgrammerType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -59,7 +60,10 @@ class SessionType extends AbstractType
             ->add('inscrit', CollectionType::class, [
                 'entry_type' => EntityType::class,
                 'entry_options' => [
-                    'label' => 'Choisir un stagiaire',
+                    'attr' => [
+                        'class' => 'form-control',
+                    ],
+                    'label' => 'Choisir un stagiaire : ',
                     'class' => Stagiaire::class,
                 ],
                 // 'multiple' => true,
@@ -73,7 +77,7 @@ class SessionType extends AbstractType
                 'label' => false,
                 'entry_type' => ProgrammerType::class,
                 'entry_options' => [
-                    'label' => "Module et durée : ",
+                    'label' => false,
                     // 'attr' => [
                     //     'class' => 'form-control',
                     // ],
@@ -81,11 +85,19 @@ class SessionType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'required'=> true,
-                
+                'required' => true,
+
+            ])
+            ->add('salle', EntityType::class, [
+                'label' => false,
+                'attr' => [
+                    'class' => 'form-control'
+                ],
+                // a quoi ça correspond?
+                'class' => Salle::class,
             ])
             ->add('Envoyer', SubmitType::class, [
-                'attr' => ['class' => 'btn btn-success m-3'],
+                'attr' => ['class' => 'btn btn-primary m-3'],
             ]);
     }
 

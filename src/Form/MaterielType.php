@@ -25,7 +25,9 @@ class MaterielType extends AbstractType
             ])
             ->add('quantite', IntegerType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'min' => 0,
+
                 ],
                 'required' => true,
             ])
@@ -45,7 +47,6 @@ class MaterielType extends AbstractType
                     ]
                 ]
             );
-
     }
 
     public function configureOptions(OptionsResolver $resolver)

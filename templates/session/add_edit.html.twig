@@ -19,7 +19,20 @@
 		{% endif %}
 		{# <div class="m-auto col-3"> #}
 
+		{% for message in app.flashes('warning') %}
+			<div class="alert alert-danger">
+				{{ message }}
+			</div>
+		{% endfor %}
+
 		{% for message in app.flashes('danger') %}
+			<div class="alert alert-danger">
+				{{ message }}
+			</div>
+		{% endfor %}
+
+
+		{% for message in app.flashes('dangerSalle') %}
 			<div class="alert alert-danger">
 				{{ message }}
 			</div>
@@ -33,51 +46,72 @@
 
 		{# ici j'appelle l'intégralité du formulaire  #}
 		{# <form>
-												<div class="form-group"> #}
+																																																												<div class="form-group"> #}
 		{{ form_start(formAddSession) }}
 		{# </div> #}
+		<div class="d-flex">
+			<div class="col-3">
+				{{ form_row(formAddSession.formation) }}
+			</div>
+			{# </div>
+																																																																																						<div class="form-group"> #}
+			<div class="col-3">
+				{{ form_row(formAddSession.dateDebut) }}
+			</div>
+			{# </div>
+																																																																																						<div class="form-group"> #}
+			<div class="col-3">
+				{{ form_row(formAddSession.dateFin) }}
+			</div>
+			{# </div>
+																																																																																						<div class="form-group"> #}
+			<div class="col-3">
+				{{ form_row(formAddSession.nbPlaces) }}
+			</div>
+		</div>
 		{# <div class="form-group"> #}
-		{{ form_row(formAddSession.formation) }}
-		{# </div>
-														<div class="form-group"> #}
-		{{ form_row(formAddSession.dateDebut) }}
-		{# </div>
-														<div class="form-group"> #}
-		{{ form_row(formAddSession.dateFin) }}
-		{# </div>
-														<div class="form-group"> #}
-		{{ form_row(formAddSession.nbPlaces) }}
-		{# </div>
-														<div class="form-group"> #}
-			<ul
-			id="stagiaires" data-prototype="{{ form_row(formAddSession.inscrit.vars.prototype)|e }}"> {# <div class="form-group"> #}
+		<div class="d-flex">
+			<div class="flex-column col-4">
+				<h4 class="m-3 text-info">Ajout de stagiaire(s)</h4>
+				<ul
+					id="stagiaires" data-prototype="{{ form_row(formAddSession.inscrit.vars.prototype)|e }}">
+					{# <div class="form-group"> #}
 
-			{% for stagiaire in formAddSession.inscrit %}
+					{% for stagiaire in formAddSession.inscrit %}
 
-				<li class="stagiaire">
+						<li class="stagiaire list-group-item">
 
-					{{ form_row(stagiaire) }}
+							{{ form_row(stagiaire) }}
 
-				</li>
-			{% endfor %}
+						</li>
+					{% endfor %}
+					{# </div> #}
+
+				</ul>
+			</div>
 			{# </div> #}
+			<div class="flex-column col-4">
+				<h4 class="m-3 text-info">Ajout de module(s)</h4>
 
-		</ul>
-		{# </div> #}
+				<ul id="modules" data-prototype="{{ form_row(formAddSession.programmeSession.vars.prototype)|e }}">
 
-		<ul id="modules" data-prototype="{{ form_row(formAddSession.programmeSession.vars.prototype)|e }}">
+					{% for module in formAddSession.programmeSession %}
 
-			{% for module in formAddSession.programmeSession %}
+						<li class="module list-group-item">
 
-				<li class="module">
+							{{ form_row(module) }}
 
-					{{ form_row(module) }}
+						</li>
+					{% endfor %}
 
-				</li>
-			{% endfor %}
+				</ul>
+			</div>
+			<div class="flex-column ml-5 col-4">
+				<h4 class="m-3 text-info">Salle :</h4>
+				{{ form_row(formAddSession.salle) }}
+			</div>
 
-		</ul>
-
+		</div>
 		{{ form_row(formAddSession.Envoyer) }}
 
 		{{ form_end(formAddSession) }}

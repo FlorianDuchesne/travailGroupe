@@ -1,12 +1,14 @@
 //création de 3 éléments HTMLElement
 var $addCollectionButtonModule = $(
-  '<button type="button" class="add_collection_link">Ajouter Module</button>'
+  '<button type="button" class="add_collection_link btn btn-success">Ajouter Module</button>'
 );
 var $delCollectionButtonModule = $(
-  '<button type="button" class="del_collection_link">Supprimer</button>'
+  '<button type="button" class="del_collection_link btn btn-danger m-2"><i class="fas fa-trash-alt"></i></button>'
 );
 //le premier élément li de la liste (celui qui contient le bouton 'ajouter')
-var $newLinkLiModule = $("<li></li>").append($addCollectionButtonModule);
+var $newLinkLiModule = $("<li class='list-group-item'></li>").append(
+  $addCollectionButtonModule
+);
 
 function generateDeleteButton() {
   var $btn = $delCollectionButtonModule.clone();
@@ -28,7 +30,7 @@ function addCollectionForm($collection, $newLinkLiModule) {
   //on modifie le data index de la collection par le nouveau nombre d'éléments
   $collection.data("index", index + 1);
   //on construit l'élément li avec le champ et le bouton supprimer
-  var $newFormLi = $("<li></li>")
+  var $newFormLi = $("<li class='list-group-item'></li>")
     .append(newForm)
     .append(generateDeleteButton());
   //on ajoute la nouvelle li au dessus de celle qui contient le bouton "ajouter"
