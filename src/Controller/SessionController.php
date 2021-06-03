@@ -161,18 +161,35 @@ class SessionController extends AbstractController
                     'editMode' => $session->getId() !== null
                 ]);
             }
-            // Sinon, on poursuit normalement
-            else {
+            $stagiaire = $session->getInscrit();
+            $start = $session->getDateDebut();
+            $end = $session->getDatefin();
 
+            foreach ($stagiaire as $stagiaire) {
 
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($session);
-                $entityManager->flush();
+                $taken = $this->getDoctrine()->getRepository(Session::class)->findIfStagiaireAvailable($start, $end, $stagiaire->getId());
+                // dd($taken);
+                if ($taken) {
 
-                return $this->render('session/show.html.twig', [
-                    'session' => $session
-                ]);
+                    $this->addFlash('danger', 'Au moins un des stagiaires est déjà pris sur une autre session à la même période !');
+
+                    return $this->render('session/add_edit.html.twig', [
+                        'formAddSession' => $form->createView(),
+                        'editMode' => $session->getId() !== null
+                    ]);
+                }
             }
+
+
+            // Sinon, on poursuit normalement
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($session);
+            $entityManager->flush();
+
+            return $this->render('session/show.html.twig', [
+                'session' => $session
+            ]);
         }
 
         return $this->render('session/add_edit.html.twig', [
