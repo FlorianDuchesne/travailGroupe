@@ -58,6 +58,7 @@ class SecurityController extends AbstractController
      */
     public function editPassword(User $user = null, EntityManagerInterface $manager, Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
+        //$this->getUser() récupère user en session !
         $user = $this->getUser();
 
         $form = $this->createForm(EditPasswordType::class);
@@ -69,7 +70,7 @@ class SecurityController extends AbstractController
             $oldPassword = $form->get('oldPassword')->getData();
             $newPassword = $form->get('newPassword')->getData();
 
-
+            // on compare le mot de passe rentré avec le mot de passe du user en session
             if (password_verify($oldPassword, $user->getPassword())) {
 
                 $user->setPassword(

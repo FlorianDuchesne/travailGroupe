@@ -9,10 +9,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class RegistrationController extends AbstractController
 {
@@ -22,11 +23,13 @@ class RegistrationController extends AbstractController
      * @IsGranted("ROLE_USER")
      * @Route("/{id}/delete", name="deleteProfil")
      */
-    public function delete(User $user, EntityManagerInterface $manager)
+    public function delete(Request $request, User $user, EntityManagerInterface $manager, TokenStorageInterface $tokenStorage)
     {
         $manager->remove($user);
         $manager->flush();
-        return $this->redirectToRoute('app_login');
+        $request->getSession()->invalidate();
+        $tokenStorage->setToken(); // TokenStorageInterface
+        return $this->redirectToRoute('home');
     }
 
     /**

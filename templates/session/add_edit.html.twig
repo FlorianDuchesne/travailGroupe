@@ -19,6 +19,12 @@
 		{% endif %}
 		{# <div class="m-auto col-3"> #}
 
+		{% for message in app.flashes('danger') %}
+			<div class="alert alert-danger">
+				{{ message }}
+			</div>
+		{% endfor %}
+
 		{% for message in app.flashes('warningStagiaires') %}
 			<div class="alert alert-danger">
 				{{ message }}
@@ -27,22 +33,22 @@
 
 		{# ici j'appelle l'intégralité du formulaire  #}
 		{# <form>
-								<div class="form-group"> #}
+												<div class="form-group"> #}
 		{{ form_start(formAddSession) }}
 		{# </div> #}
 		{# <div class="form-group"> #}
 		{{ form_row(formAddSession.formation) }}
 		{# </div>
-										<div class="form-group"> #}
+														<div class="form-group"> #}
 		{{ form_row(formAddSession.dateDebut) }}
 		{# </div>
-										<div class="form-group"> #}
+														<div class="form-group"> #}
 		{{ form_row(formAddSession.dateFin) }}
 		{# </div>
-										<div class="form-group"> #}
+														<div class="form-group"> #}
 		{{ form_row(formAddSession.nbPlaces) }}
 		{# </div>
-										<div class="form-group"> #}
+														<div class="form-group"> #}
 			<ul
 			id="stagiaires" data-prototype="{{ form_row(formAddSession.inscrit.vars.prototype)|e }}"> {# <div class="form-group"> #}
 
