@@ -36,13 +36,13 @@
 						{% if is_granted("ROLE_ADMIN") %}
 
 							<td>
-								<button type="button" class="btn btn-warning">
-									<a class=" text-white" href="{{ path('categorie_edit', {'id':categorie.id}) }}">Modifier</a>
+								<button type="button" class="btn btn-success">
+									<a class=" text-white" href="{{ path('categorie_edit', {'id':categorie.id}) }}"><i class="fas fa-edit"></i></a>
 								</button>
 							</td>
 							<td>
 								<button type="button" class="btn btn-danger" onclick="alert()">
-									<a class=" text-white" href="{{ path('categorie_delete', {'id':categorie.id}) }}">Supprimer</a>
+									<a class=" text-white" href="{{ path('categorie_delete', {'id':categorie.id}) }}"><i class="fas fa-trash-alt"></i></a>
 								</button>
 							</td>
 						{% endif %}
