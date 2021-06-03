@@ -9,12 +9,62 @@
 	{% else %}
 		<h1 class="text-center m-3">Ajout d'un stagiaire</h1>
 	{% endif %}
-	<div class="m-auto col-3">
-		{{ form(formAddStagiaire) }}
-				<button class="btn btn-info">
-			<a class="text-white" href="{{ path('stagiaire') }}"><i class="fas fa-undo"></i></a>
-		</button>
-
-
+	{# ************* ESSAI mise en Forme ************************************************** #}
+	<div class="form-group">
+		{{ form_start(formAddStagiaire) }}
+		<div class="d-flex">
+			<div class="col-6">
+				{{ form_row(formAddStagiaire.prenom) }}
+			</div>
+			<div class="col-6">
+				{{ form_row(formAddStagiaire.nom) }}
+			</div>
+			<div class="col-5">
+				{{ form_row(formAddStagiaire.dateNaissance) }}
+			</div>
+			<div class="col-5">
+				{{ form_row(formAddStagiaire.telephone) }}
+			</div>
+			<div class="col-2">
+				{{ form_row(formAddStagiaire.sexe) }}
+			</div>
+			<div class="col-12">
+				{{ form_row(formAddStagiaire.courriel) }}
+			</div>
+			<div class="col-12">
+				{{ form_row(formAddStagiaire.adresse) }}
+			</div>
+			<div class="col-6">
+				{{ form_row(formAddStagiaire.ville) }}
+			</div>
+			<div class="col-6">
+				{{ form_row(formAddStagiaire.codePostal) }}
+			</div>
+			<div class="col-12">
+				{{ form_row(formAddStagiaire.envoyer) }}
+			</div>
 		</div>
-	{% endblock %}
+
+	</div>
+	{{ form_end(formAddStagiaire) }}
+	<button class="btn btn-info">
+		<a class="text-white" href="{{ path('stagiaire') }}">
+			<i class="fas fa-undo"></i>
+		</a>
+	</button>
+
+
+	{# ************************************************************************************ #}
+{# **************** CA Fonctionne ***************************************************** #}
+
+	{# <div class="m-auto col-3">
+			{{ form(formAddStagiaire) }}
+				<button class="btn btn-info">
+					<a class="text-white" href="{{ path('stagiaire') }}">
+						<i class="fas fa-undo"></i>
+					</a>
+				</button>
+			</div> #}
+	{# ************************************************************************************ #}
+
+{% endblock %}
