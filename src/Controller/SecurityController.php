@@ -51,8 +51,6 @@ class SecurityController extends AbstractController
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
-
-
     /**
      * @Route("/security/editPassword", name="editPassword")
      */
@@ -168,13 +166,21 @@ class SecurityController extends AbstractController
 
             // $newPassword = $form->get('password')->getData();
 
-            $user->setPassword(
-                $passwordEncoder->encodePassword($user, $request->request->get('password'))
-            );
-            $manager->flush();
-            $this->addFlash('info', 'Votre mot de passe a bien été reinitialisé !');
+            $password = $request->request->get('password');
+            $passwordRepeat = $request->request->get('passwordRepeat');
 
-            return $this->redirectToRoute('app_login');
+            if ($password == $passwordRepeat) {
+                $user->setPassword(
+                    $passwordEncoder->encodePassword($user, $request->request->get('password'))
+                );
+                $manager->flush();
+                $this->addFlash('info', 'Votre mot de passe a bien été reinitialisé !');
+
+                return $this->redirectToRoute('app_login');
+            } else {
+                $this->addFlash('warning', 'Les deux mots de passe ne sont pas identiques');
+            }
+
 
             // }
         }
