@@ -165,39 +165,63 @@ class SessionController extends AbstractController
             $start = $session->getDateDebut();
             $end = $session->getDatefin();
 
-            foreach ($stagiaire as $stagiaire) {
+            $salle = $session->getSalle();
+            $start = $session->getDateDebut();
+            $end = $session->getDatefin();
 
-                $taken = $this->getDoctrine()->getRepository(Session::class)->findIfStagiaireAvailable($start, $end, $stagiaire->getId(), $session->getId());
-                // dd($taken);
-                if ($taken) {
+            if ($session->getId()) {
 
-                    $this->addFlash('danger', 'Au moins un des stagiaires est déjà pris sur une autre session à la même période !');
+                $salleOccupee = $this->getDoctrine()->getRepository(Session::class)->findIfTaken($start, $end, $salle->getId(), $session->getId());
 
-                    return $this->render('session/add_edit.html.twig', [
-                        'formAddSession' => $form->createView(),
-                        'editMode' => $session->getId() !== null
-                    ]);
+                foreach ($stagiaire as $stagiaire) {
+
+                    $stagiaireOccupe = $this->getDoctrine()->getRepository(Session::class)->findIfStagiaireAvailable($start, $end, $stagiaire->getId(), $session->getId());
+                    // dd($taken);
+                    if ($stagiaireOccupe) {
+
+                        $this->addFlash('danger', 'Au moins un des stagiaires est déjà pris sur une autre session à la même période !');
+
+                        return $this->render('session/add_edit.html.twig', [
+                            'formAddSession' => $form->createView(),
+                            'editMode' => $session->getId() !== null
+                        ]);
+                    }
                 }
+            } else {
+
+                $salleOccupee = $this->getDoctrine()->getRepository(Session::class)->findIfTakenNewSession($start, $end, $salle->getId());
+                // dd($taken);
+
+                foreach ($stagiaire as $stagiaire) {
+
+                    $stagiaireOccupe = $this->getDoctrine()->getRepository(Session::class)->findIfStagiaireAvailableNewSession($start, $end, $stagiaire->getId());
+                    // dd($taken);
+                    if ($stagiaireOccupe) {
+
+                        $this->addFlash('danger', 'Au moins un des stagiaires est déjà pris sur une autre session à la même période !');
+
+                        return $this->render('session/add_edit.html.twig', [
+                            'formAddSession' => $form->createView(),
+                            'editMode' => $session->getId() !== null
+                        ]);
+                    }
+                }
+            }
+
+            if ($salleOccupee) {
+
+                $this->addFlash('dangerSalle', 'salle déjà prise à ces dates');
+
+                return $this->render('session/add_edit.html.twig', [
+                    'formAddSession' => $form->createView(),
+                    'editMode' => $session->getId() !== null
+                ]);
             }
 
             if ($session->getNbPlaces() > $form->get('salle')->getData()->getNbPlaces()) {
                 // on envoie un message d'erreur
                 $this->addFlash('warning', 'La jauge de la salle ne peut pas contenir tout l\'effectif de la session !');
                 // Et on retourne sur la page du formulaire
-                return $this->render('session/add_edit.html.twig', [
-                    'formAddSession' => $form->createView(),
-                    'editMode' => $session->getId() !== null
-                ]);
-            }
-            $salle = $session->getSalle();
-            $start = $session->getDateDebut();
-            $end = $session->getDatefin();
-            $taken = $this->getDoctrine()->getRepository(Session::class)->findIfTaken($start, $end, $salle->getId(), $session->getId());
-            // dd($taken);
-            if ($taken) {
-
-                $this->addFlash('dangerSalle', 'salle déjà prise à ces dates');
-
                 return $this->render('session/add_edit.html.twig', [
                     'formAddSession' => $form->createView(),
                     'editMode' => $session->getId() !== null

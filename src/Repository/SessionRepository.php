@@ -19,15 +19,31 @@ class SessionRepository extends ServiceEntityRepository
         parent::__construct($registry, Session::class);
     }
 
+
+    public function findIfStagiaireAvailableNewSession($debut, $fin, $id)
+    {
+
+        return $this->createQueryBuilder('s')
+            ->innerJoin('s.inscrit', 'stag')
+            ->where(':debut < s.dateFin AND :fin > s.dateDebut')
+            // ->where(':debut BETWEEN s.dateDebut AND s.dateFin OR :fin BETWEEN s.dateDebut AND s.dateFin')
+            ->andWhere('stag.id = :id')
+            ->setParameter('debut', $debut)
+            ->setParameter('fin', $fin)
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+    }
+
     public function findIfStagiaireAvailable($debut, $fin, $id, $idSession)
     {
 
         return $this->createQueryBuilder('s')
             ->innerJoin('s.inscrit', 'stag')
             ->where(':debut < s.dateFin AND :fin > s.dateDebut')
-            ->andWhere('s.id != :idSession')
             // ->where(':debut BETWEEN s.dateDebut AND s.dateFin OR :fin BETWEEN s.dateDebut AND s.dateFin')
             ->andWhere('stag.id = :id')
+            ->andWhere('s.id != :idSession')
             ->setParameter('debut', $debut)
             ->setParameter('fin', $fin)
             ->setParameter('id', $id)
@@ -36,7 +52,23 @@ class SessionRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findIfTaken($debut, $fin, $id, $idSession)
+    public function findIfTakenNewSession($debut, $fin, $id)
+    {
+
+        return $this->createQueryBuilder('s')
+            ->innerJoin('s.salle', 'sa')
+            ->where(':debut < s.dateFin AND :fin > s.dateDebut')
+            // ->where(':debut BETWEEN s.dateDebut AND s.dateFin OR :fin BETWEEN s.dateDebut AND s.dateFin')
+            ->andWhere('sa.id = :id')
+            ->setParameter('debut', $debut)
+            ->setParameter('fin', $fin)
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+    }
+
+
+    public function findIfTaken($debut, $fin, $id, $idSession = null)
     {
 
         return $this->createQueryBuilder('s')
