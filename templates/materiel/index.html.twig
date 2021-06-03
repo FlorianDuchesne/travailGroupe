@@ -34,7 +34,7 @@
 						</td>
 						{% if is_granted("ROLE_ADMIN") %}
 							<td>
-								<a class="btn btn-warning" href="{{ path('materiel_edit', {'id':materiel.id}) }}">Modifier</a>
+								<a class="btn btn-success" href="{{ path('materiel_edit', {'id':materiel.id}) }}"><i class="fas fa-edit"></i></a>
 							</td>
 							<td>
 								<a class="btn btn-danger" onclick="alert()" href="{{ path('materiel_delete', {'id':materiel.id}) }}">Supprimer</a>

@@ -19,7 +19,7 @@
 	<div class="container">
 		<h2 class="text-center m-3">Informations sur la salle</h2>
 		<button class="btn btn-info">
-			<a class="text-white" href="{{ path('salle') }}">Retour à la liste</a>
+			<a class="text-white" href="{{ path('salle') }}"><i class="fas fa-undo"></i></a>
 		</button>
 
 		<div class="card" style="width: 18rem;">
@@ -74,11 +74,11 @@
 						Affecter du matériel
 						</a> #}
 
-						<a class="btn btn-info text-white w-50 m-3" href="{{ path('salle_edit', {'id':salle.id}) }}">
+						<a class="btn btn-success text-white m-3" href="{{ path('salle_edit', {'id':salle.id}) }}">
 							<i class="fas fa-edit"></i>
 							{# Modifier #}
 						</a>
-						<a class="btn btn-danger text-white w-50 m-3" onclick="alert()" href="{{ path('salle_delete', {'id':salle.id}) }}">
+						<a class="btn btn-danger text-white m-3" onclick="alert()" href="{{ path('salle_delete', {'id':salle.id}) }}">
 							<i class="fas fa-trash-alt"></i>
 							{# Supprimer #}
 						</a>

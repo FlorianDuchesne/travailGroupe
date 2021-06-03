@@ -28,17 +28,17 @@
 		<div>
 			{% if is_granted("ROLE_ADMIN")  %}
 				<button class="btn btn-info">
-					<a class="text-white" href="{{ path('usersList') }}">Retour à la liste</a>
+					<a class="text-white" href="{{ path('usersList') }}"><i class="fas fa-undo"></i></a>
 				</button>
 
 				{% if user.roles == "ROLE_ADMIN" %}
-					<button class="btn btn-danger">
+					<button class="btn btn-secondary">
 						<a class="text-white" href="{{ path('makeAdmin', {id:user.id}) }}">Rendre
 							{{ user.pseudo}}
 							administrateur</a>
 					</button>
 				{% else %}
-					<button class="btn btn-danger">
+					<button class="btn btn-secondary">
 						<a class="text-white" href="{{ path('makeUser', {id:user.id}) }}">Rendre
 							{{ user.pseudo}}
 							utilisateur</a>
@@ -61,12 +61,12 @@
 					<a class="text-white" href="{{ path('editPassword', {id:app.user.id}) }}">Modifier mon mot de passe</a>
 				</button> #}
 
-				<a class="btn btn-info text-white m-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier votre mot de passe" href="{{ path('editPassword', {id:app.user.id}) }}">
+				<a class="btn btn-warning text-white m-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier votre mot de passe" href="{{ path('editPassword', {id:app.user.id}) }}">
 				<i class="fas fa-key"></i>
 
 {# *********************************************************** #}
 				{# <button class="btn btn-danger"> #}
-					<a class="btn btn-danger text-white m-3" data-toggle="modal" data-target="#exampleModal" {# href="{{ path('deleteProfil', {id:app.user.id}) }}"#} ><i class="fas fa-trash-alt"></i></a>
+					<a class="btn btn-danger text-white m-3" data-toggle="modal" data-target="#exampleModal" data-bs-toggle="tooltip" data-bs-placement="top" title="Supprimer votre compte" {# href="{{ path('deleteProfil', {id:app.user.id}) }}"#} ><i class="fas fa-trash-alt"></i></a>
 				{# </button> #}
 
 				{# <a class="btn btn-danger text-white m-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Supprimer votre compte" onclick="alert()" href="{{ path('deleteProfil', {id:app.user.id}) }}">

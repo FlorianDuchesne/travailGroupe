@@ -46,10 +46,10 @@
 						</td>
 						{% if is_granted("ROLE_ADMIN") %}
 							<td>
-								<a class="btn btn-warning" href="{{ path('salle_edit', {'id':salle.id}) }}">Modifier</a>
+								<a class="btn btn-success" href="{{ path('salle_edit', {'id':salle.id}) }}"><i class="fas fa-edit"></i></a>
 							</td>
 							<td>
-								<a class="btn btn-danger" onclick="alert()" href="{{ path('salle_delete', {'id':salle.id}) }}">Supprimer</a>
+								<a class="btn btn-danger" onclick="alert()" href="{{ path('salle_delete', {'id':salle.id}) }}"><i class="fas fa-trash-alt"></i></a>
 							</td>
 						{% endif %}
 					</tr>

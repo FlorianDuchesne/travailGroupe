@@ -41,7 +41,7 @@
 								</button> #}
 								{# ************Fin bouton écriture entière************************************* #}
 								{# ********* Début bouton symbole modifier ****************#}
-								<a class="btn btn-info text-white w-50 m-3" href="{{ path('formation_edit', {'id':formation.id}) }}">
+								<a class="btn btn-success text-white m-3" href="{{ path('formation_edit', {'id':formation.id}) }}">
 							<i class="fas fa-edit"></i>
 							{# Modifier #}
 						</a>
@@ -57,7 +57,7 @@
 								{# ****** Fin bouton écriture entière ****************** #}
 
 								{# ********* Début bouton symbole corbeille ****************#}
-								<a class="btn btn-danger text-white w-50 m-3" onclick="alert()" href="{{ path('formation_delete', {'id':formation.id}) }}">
+								<a class="btn btn-danger text-white m-3" onclick="alert()" href="{{ path('formation_delete', {'id':formation.id}) }}">
 							<i class="fas fa-trash-alt"></i>
 						</a>
 						{# ************ Fin bouton symbole ************************#}

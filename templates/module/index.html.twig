@@ -53,7 +53,7 @@
 				{% if is_granted("ROLE_ADMIN") %}
 
 					<td>
-						<a class="btn btn-warning" href="{{ path('module_edit', {'id':module.id}) }}">Modifier</a>
+						<a class="btn btn-success" href="{{ path('module_edit', {'id':module.id}) }}"><i class="fas fa-edit"></i></a>
 					</td>
 					<td>
 						<a class="btn btn-danger" onclick="alert()" href="{{ path('module_delete', {'id':module.id}) }}">Supprimer</a>
