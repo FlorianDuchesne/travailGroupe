@@ -2,15 +2,21 @@
 
 {% block title %}Ajout stagiaire
 {% endblock %}
+{% block stylesheets %}
+	{{ parent()}}
+{% endblock %}
+
 
 {% block body %}
-	{% if editMode %}
-		<h1 class="text-center m-3">Modification d'un stagiaire</h1>
-	{% else %}
-		<h1 class="text-center m-3">Ajout d'un stagiaire</h1>
-	{% endif %}
-	{# ************* ESSAI mise en Forme ************************************************** #}
-	<div class="form-group">
+	<div class="container">
+
+		{% if editMode %}
+			<h1 class="text-center m-3">Modification d'un stagiaire</h1>
+		{% else %}
+			<h1 class="text-center m-3">Ajout d'un stagiaire</h1>
+		{% endif %}
+		{# ************* ESSAI mise en Forme ************************************************** #}
+		{# <div class="form-group"> #}
 		{{ form_start(formAddStagiaire) }}
 		<div class="d-flex">
 			<div class="col-6">
@@ -54,18 +60,19 @@
 				{{ form_row(formAddStagiaire.envoyer) }}
 			</div>
 		</div>
+		<button class="btn btn-info">
+			<a class="text-white" href="{{ path('stagiaire') }}">
+				<i class="fas fa-undo"></i>
+			</a>
+		</button>
 	</div>
 
+	{{ form_end(formAddStagiaire) }}
 </div>
-{{ form_end(formAddStagiaire) }}
-<button class="btn btn-info">
-	<a class="text-white" href="{{ path('stagiaire') }}">
-		<i class="fas fa-undo"></i>
-	</a>
-</button>
 
 
-{# ************************************************************************************ #}{# **************** CA Fonctionne ***************************************************** #}
+{# ************************************************************************************ #}
+{# **************** CA Fonctionne ***************************************************** #}
 
 {# <div class="m-auto col-3">
 			{{ form(formAddStagiaire) }}
@@ -75,4 +82,5 @@
 					</a>
 				</button>
 			</div> #}
-{# ************************************************************************************ #}{% endblock %}
+{# ************************************************************************************ #}
+{% endblock %}
