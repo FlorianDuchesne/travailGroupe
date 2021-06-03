@@ -11,5 +11,9 @@
 	{% endif %}
 	<div class="m-auto col-3">
 		{{ form(formAddMateriel) }}
+				<button class="btn btn-info">
+			<a class="text-white text-center" href="{{ path('materielList') }}"><i class="fas fa-undo"></i></a>
+		</button>
+
 		</div>
 	{% endblock %}

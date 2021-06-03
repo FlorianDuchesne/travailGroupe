@@ -4,7 +4,9 @@
 {% endblock %}
 
 {% block body %}
-			{# <a class="text-white" href="{{ path('salle') }}"><i class="fas fa-undo"></i></a> #}
+		<button class="btn btn-info">
+			<a class="text-white" href="{{ path('salle') }}"><i class="fas fa-undo"></i></a>
+		</button>
 
 	<div class="m-auto col-3">
 
@@ -18,6 +20,8 @@
 	{# <div
 		class="m-auto col-3"> #}
 		{# ici j'appelle l'intégralité du formulaire  #}
+			{# <div class="m-auto col-3"> #}
+
 		{{ form_start(formAddSalle) }}
 
 		{{ form_row(formAddSalle.libelle) }}
@@ -26,6 +30,7 @@
 		{{ form_row(formAddSalle.envoyer) }}
 
 		{{ form_end(formAddSalle) }}
+
 	</div>
 {% endblock %}
 {% block javascripts %}{% endblock %}
