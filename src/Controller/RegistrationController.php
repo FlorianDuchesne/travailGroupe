@@ -23,13 +23,20 @@ class RegistrationController extends AbstractController
      * @IsGranted("ROLE_USER")
      * @Route("/{id}/delete", name="deleteProfil")
      */
-    public function delete(Request $request, User $user, EntityManagerInterface $manager, TokenStorageInterface $tokenStorage)
+    public function delete(Request $request, User $user, EntityManagerInterface $manager, UserInterface $userlogged, TokenStorageInterface $tokenStorage)
     {
-        $manager->remove($user);
-        $manager->flush();
-        $request->getSession()->invalidate();
-        $tokenStorage->setToken(); // TokenStorageInterface
-        return $this->redirectToRoute('home');
+        if ($user->getEmail() == $userlogged->getUsername()) {
+
+            $manager->remove($user);
+            $manager->flush();
+            $request->getSession()->invalidate();
+            $tokenStorage->setToken(); // TokenStorageInterface
+            return $this->redirectToRoute('home');
+        } else {
+            $this->addFlash('essaiHacking', 'Vous ne pouvez modifier ou supprimer que votre propre compte.');
+
+            return $this->redirectToRoute('home');
+        }
     }
 
     /**

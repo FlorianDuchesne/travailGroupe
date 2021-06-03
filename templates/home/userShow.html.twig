@@ -48,18 +48,17 @@
 			{% endif %}
 
 			{% if user == app.user %}
-			<div class="d-flex">
-{# ********************************************************* #}
-				{# <button class="btn btn-info">
-					<a class="text-white" href="{{ path('editProfil', {id:app.user.id}) }}">Modifier profil</a>
-				</button> #}
+				<div class="d-flex">
+					{# ********************************************************* #}
+					{# <button class="btn btn-info">
+																									<a class="text-white" href="{{ path('editProfil', {id:app.user.id}) }}">Modifier profil</a>
+																								</button> #}
 
-				<a class="btn btn-success text-white m-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier votre profil" href="{{ path('editProfil', {id:app.user.id}) }}">
-				<i class="fas fa-edit"></i>
-{# ********************************************************** #}
-				{# <button class="btn btn-info">
-					<a class="text-white" href="{{ path('editPassword', {id:app.user.id}) }}">Modifier mon mot de passe</a>
-				</button> #}
+						<a class="btn btn-success text-white m-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier votre profil" href="{{ path('editProfil', {id:app.user.id}) }}"> <i class="fas fa-edit"></i>
+						{# ********************************************************** #}
+						{# <button class="btn btn-info">
+																													<a class="text-white" href="{{ path('editPassword', {id:app.user.id}) }}">Modifier mon mot de passe</a>
+																												</button> #}
 
 				<a class="btn btn-warning text-white m-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier votre mot de passe" href="{{ path('editPassword', {id:app.user.id}) }}">
 				<i class="fas fa-key"></i>
@@ -69,38 +68,55 @@
 					<a class="btn btn-danger text-white m-3" data-toggle="modal" data-target="#exampleModal" data-bs-toggle="tooltip" data-bs-placement="top" title="Supprimer votre compte" {# href="{{ path('deleteProfil', {id:app.user.id}) }}"#} ><i class="fas fa-trash-alt"></i></a>
 				{# </button> #}
 
-				{# <a class="btn btn-danger text-white m-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Supprimer votre compte" onclick="alert()" href="{{ path('deleteProfil', {id:app.user.id}) }}">
-							<i class="fas fa-trash-alt"></i>
-						</a> #}
-{# ************************************************************ #}
-			{% endif %}
+						{# <a class="btn btn-danger text-white m-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Supprimer votre compte" onclick="alert()" href="{{ path('deleteProfil', {id:app.user.id}) }}">
+													<i class="fas fa-trash-alt"></i>
+												</a> #}
+							{# ************************************************************ #}
+						{% endif %}
 
-			<!-- Button trigger modal -->
-			{# <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-																																																																																																																					Launch demo modal
-																																																																																																																				</button> #}
+						<!-- Button trigger modal -->
+						{# <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+																					Launch demo modal
+																				</button> #}
 
-			<!-- Modal -->
-				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> <div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title text-danger" id="exampleModalLabel">Action irréversible</h5>
-							<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+						<!-- Modal -->
+							<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> <div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title text-danger" id="exampleModalLabel">Action irréversible</h5>
+										<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										Êtes-vous bien sûr de vouloir effectuer cette suppression irréversible ?
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+										<a class="btn btn-primary" href="{{ path('deleteProfil', {id:app.user.id}) }}">Supprimer le compte</a>
+									</div>
+								</div>
+							</div>
 						</div>
-						<div class="modal-body">
-							Êtes-vous bien sûr de vouloir effectuer cette suppression irréversible ?
+
+						<!-- Modal -->
+						<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title text-danger" id="exampleModalLabel">Action irréversible</h5>
+										<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										Êtes-vous bien sûr de vouloir effectuer cette suppression irréversible ?
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+										<a class="btn btn-danger" href="{{ path('deleteProfil', {id:app.user.id}) }}">Supprimer le compte</a>
+									</div>
+								</div>
+							</div>
 						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-							<a class="btn btn-danger" href="{{ path('deleteProfil', {id:app.user.id}) }}">Supprimer le compte</a>
-						</div>
+						<div></div>
 					</div>
-				</div>
-			</div>
-<div>
-
-		</div>
-	</div>
 
 
-{% endblock %}
+				{% endblock %}
