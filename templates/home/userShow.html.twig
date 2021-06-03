@@ -48,19 +48,32 @@
 			{% endif %}
 
 			{% if user == app.user %}
-
-				<button class="btn btn-info">
+			<div class="d-flex">
+{# ********************************************************* #}
+				{# <button class="btn btn-info">
 					<a class="text-white" href="{{ path('editProfil', {id:app.user.id}) }}">Modifier profil</a>
-				</button>
+				</button> #}
 
-				<button class="btn btn-info">
+				<a class="btn btn-success text-white m-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier votre profil" href="{{ path('editProfil', {id:app.user.id}) }}">
+				<i class="fas fa-edit"></i>
+{# ********************************************************** #}
+				{# <button class="btn btn-info">
 					<a class="text-white" href="{{ path('editPassword', {id:app.user.id}) }}">Modifier mon mot de passe</a>
-				</button>
+				</button> #}
 
-				<button class="btn btn-warning">
-					<a class="text-white" data-toggle="modal" data-target="#exampleModal" {# href="{{ path('deleteProfil', {id:app.user.id}) }}" #}>Supprimer le compte</a>
-				</button>
+				<a class="btn btn-info text-white m-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier votre mot de passe" href="{{ path('editPassword', {id:app.user.id}) }}">
+				<i class="fas fa-shield-alt"></i>
 
+{# *********************************************************** #}
+				{# <button class="btn btn-warning">
+					<a class="text-white" data-toggle="modal" data-target="#exampleModal" href="{{ path('deleteProfil', {id:app.user.id}) }}">Supprimer le compte</a>
+				</button> #}
+
+				<a class="btn btn-danger text-white m-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Supprimer votre compte" onclick="alert()" href="{{ path('deleteProfil', {id:app.user.id}) }}">
+							<i class="fas fa-trash-alt"></i>
+						</a>
+{# ************************************************************ #}
+<div>
 			{% endif %}
 
 			<!-- Button trigger modal -->
@@ -69,7 +82,7 @@
 																																																																																																																				</button> #}
 
 			<!-- Modal -->
-				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> <div class="modal-dialog">
+				{# <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> <div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title text-danger" id="exampleModalLabel">Action irréversible</h5>
@@ -81,10 +94,9 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
 							<a class="btn btn-primary" href="{{ path('deleteProfil', {id:app.user.id}) }}">Supprimer le compte</a>
-							{# <button type="button" class="btn btn-primary">Save changes</button> #}
 						</div>
 					</div>
-				</div>
+				</div> #}
 			</div>
 
 		</div>
