@@ -27,7 +27,7 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_ADMIN", message="No access! Get out!")
      * @Route("/adminPanel", name="usersList")
      */
 
