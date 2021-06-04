@@ -40,7 +40,7 @@ class CategorieController extends AbstractController
             return $this->redirectToRoute('categorie');
         }
 
-        return $this->render('categorie/new.html.twig', [
+        return $this->render('categorie/add_edit.html.twig', [
             'formAddCategorie' => $form->createView(),
             'editMode' => $categorie->getId() !== null
 
