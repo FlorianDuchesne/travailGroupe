@@ -33,47 +33,34 @@
 					</a>
 				</button>
 
-				{% for role in user.roles %}
-					{% if role == "ROLE_ADMIN"  %}
-						<button class="btn btn-secondary">
-							<a class="text-white" href="{{ path('makeUser', {id:user.id}) }}">Rendre
-								{{ user.pseudo}}
-								utilisateur</a>
-						</button>
-					{% endif %}
-					{% if role != "ROLE_ADMIN" %}
-						<button class="btn btn-secondary">
-							<a class="text-white" href="{{ path('makeAdmin', {id:user.id}) }}">Rendre
-								{{ user.pseudo}}
-								administrateur</a>
-						</button>
-					{% endif %}
-				{% endfor %}
-
-				{# {% for role in user.roles %}
-																																												{% if role == "ROLE_USER" %}
-																																													<button class="btn btn-secondary">
-																																														<a class="text-white" href="{{ path('makeAdmin', {id:user.id}) }}">Rendre
-																																															{{ user.pseudo}}
-																																															administrateur</a>
-																																													</button>
-																																												{% endif %}
-																																											{% endfor %} #}
-
+				{% if user.roles[0] == "ROLE_ADMIN" %}
+					<button class="btn btn-secondary">
+						<a class="text-white" href="{{ path('makeUser', {id:user.id}) }}">Rendre
+							{{ user.pseudo}}
+							utilisateur</a>
+					</button>
+				{% else %}
+					{# {% if 'userMode' == true %} #}
+					<button class="btn btn-secondary">
+						<a class="text-white" href="{{ path('makeAdmin', {id:user.id}) }}">Rendre
+							{{ user.pseudo}}
+							administrateur</a>
+					</button>
+				{% endif %}
 			{% endif %}
 
 			{% if user == app.user %}
 				<div class="d-flex">
 					{# ********************************************************* #}
 					{# <button class="btn btn-info">
-																																																																																																																																																																																																												<a class="text-white" href="{{ path('editProfil', {id:app.user.id}) }}">Modifier profil</a>
-																																																																																																																																																																																																											</button> #}
+																																																																																																																																																																																																																																																																																												<a class="text-white" href="{{ path('editProfil', {id:app.user.id}) }}">Modifier profil</a>
+																																																																																																																																																																																																																																																																																											</button> #}
 
 						<a class="btn btn-success text-white m-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier votre profil" href="{{ path('editProfil', {id:app.user.id}) }}"> <i class="fas fa-edit"></i>
 						{# ********************************************************** #}
 						{# <button class="btn btn-info">
-																																																																																																																																																																																																																																																			<a class="text-white" href="{{ path('editPassword', {id:app.user.id}) }}">Modifier mon mot de passe</a>
-																																																																																																																																																																																																																																																		</button> #}
+																																																																																																																																																																																																																																																																																																																																																			<a class="text-white" href="{{ path('editPassword', {id:app.user.id}) }}">Modifier mon mot de passe</a>
+																																																																																																																																																																																																																																																																																																																																																		</button> #}
 
 						<a class="btn btn-warning text-white m-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier votre mot de passe" href="{{ path('editPassword', {id:app.user.id}) }}">
 							<i class="fas fa-key"></i>
@@ -86,15 +73,15 @@
 							{# </button> #}
 
 						{# <a class="btn btn-danger text-white m-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Supprimer votre compte" onclick="alert()" href="{{ path('deleteProfil', {id:app.user.id}) }}">
-																																																																																																																																																																																																																																			<i class="fas fa-trash-alt"></i>
-																																																																																																																																																																																																																																		</a> #}
+																																																																																																																																																																																																																																																																																																																																			<i class="fas fa-trash-alt"></i>
+																																																																																																																																																																																																																																																																																																																																		</a> #}
 							{# ************************************************************ #}
 						{% endif %}
 
 						<!-- Button trigger modal -->
 						{# <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-																																																																																																																																																																																																																																											Launch demo modal
-																																																																																																																																																																																																																																										</button> #}
+																																																																																																																																																																																																																																																																																																																																											Launch demo modal
+																																																																																																																																																																																																																																																																																																																																										</button> #}
 
 						<!-- Modal -->
 							<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> <div class="modal-dialog">
