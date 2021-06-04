@@ -37,59 +37,59 @@ class SessionController extends AbstractController
 
     // Fonction d'attribution d'une salle à une session
 
-    /**
-     * @Route("/session/{id}/ajoutSalle", name="ajoutSalle")
-     * @IsGranted("ROLE_ADMIN")
-     */
-    public function ajoutSalle(Session $session, Request $request)
-    {
-        $form = $this->createForm(AjoutSalleToSessionType::class, $session);
+    // /**
+    //  * @Route("/session/{id}/ajoutSalle", name="ajoutSalle")
+    //  * @IsGranted("ROLE_ADMIN")
+    //  */
+    // public function ajoutSalle(Session $session, Request $request)
+    // {
+    //     $form = $this->createForm(AjoutSalleToSessionType::class, $session);
 
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $session = $form->getData();
-            // Si le nombre de places de la session est supérieur au nombre de places de la salle…
-            if ($session->getNbPlaces() > $form->get('salle')->getData()->getNbPlaces()) {
-                // on envoie un message d'erreur
-                $this->addFlash('warning', 'La jauge de la salle ne peut pas contenir tout l\'effectif de la session !');
-                // Et on retourne sur la page du formulaire
-                return $this->render('session/ajoutSalle.html.twig', [
-                    'formAddSalleToSession' => $form->createView(),
-                ]);
-            }
-            $salle = $session->getSalle();
-            $start = $session->getDateDebut();
-            $end = $session->getDatefin();
-            $taken = $this->getDoctrine()->getRepository(Session::class)->findIfTaken($start, $end, $salle->getId());
-            // dd($taken);
-            if ($taken) {
+    //     $form->handleRequest($request);
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $session = $form->getData();
+    //         // Si le nombre de places de la session est supérieur au nombre de places de la salle…
+    //         if ($session->getNbPlaces() > $form->get('salle')->getData()->getNbPlaces()) {
+    //             // on envoie un message d'erreur
+    //             $this->addFlash('warning', 'La jauge de la salle ne peut pas contenir tout l\'effectif de la session !');
+    //             // Et on retourne sur la page du formulaire
+    //             return $this->render('session/ajoutSalle.html.twig', [
+    //                 'formAddSalleToSession' => $form->createView(),
+    //             ]);
+    //         }
+    //         $salle = $session->getSalle();
+    //         $start = $session->getDateDebut();
+    //         $end = $session->getDatefin();
+    //         $taken = $this->getDoctrine()->getRepository(Session::class)->findIfTaken($start, $end, $salle->getId());
+    //         // dd($taken);
+    //         if ($taken) {
 
-                $this->addFlash('danger', 'salle déjà prise à ces dates');
+    //             $this->addFlash('danger', 'salle déjà prise à ces dates');
 
-                return $this->render('session/ajoutSalle.html.twig', [
-                    'formAddSalleToSession' => $form->createView(),
-                ]);
-            }
+    //             return $this->render('session/ajoutSalle.html.twig', [
+    //                 'formAddSalleToSession' => $form->createView(),
+    //             ]);
+    //         }
 
-            // else if{
+    //         // else if{
 
-            // }
-            // Sinon, on poursuit normalement
-            // else {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($session);
-            $entityManager->flush();
+    //         // }
+    //         // Sinon, on poursuit normalement
+    //         // else {
+    //         $entityManager = $this->getDoctrine()->getManager();
+    //         $entityManager->persist($session);
+    //         $entityManager->flush();
 
-            return $this->render('session/show.html.twig', [
-                'session' => $session
-            ]);
-        }
-        // }
-        // Si le formulaire n'est pas soumis, on va sur le formulaire
-        return $this->render('session/ajoutSalle.html.twig', [
-            'formAddSalleToSession' => $form->createView(),
-        ]);
-    }
+    //         return $this->render('session/show.html.twig', [
+    //             'session' => $session
+    //         ]);
+    //     }
+    //     // }
+    //     // Si le formulaire n'est pas soumis, on va sur le formulaire
+    //     return $this->render('session/ajoutSalle.html.twig', [
+    //         'formAddSalleToSession' => $form->createView(),
+    //     ]);
+    // }
 
     // On peut supprimer ça il me semble ?…
     // /**

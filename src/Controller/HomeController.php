@@ -47,6 +47,8 @@ class HomeController extends AbstractController
      */
     public function show(User $user)
     {
+
+        // dd($user);
         return $this->render('home/userShow.html.twig', [
             'user' => $user
         ]);
