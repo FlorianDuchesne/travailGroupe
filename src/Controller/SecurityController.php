@@ -75,7 +75,7 @@ class SecurityController extends AbstractController
                     $passwordEncoder->encodePassword($user, $newPassword)
                 );
                 $manager->flush();
-                $this->addFlash('info', 'Votre mot de passe a bien été reinitialisé !');
+                $this->addFlash('info', 'Votre mot de passe a bien été changé !');
             } else {
                 $this->addFlash('danger', 'Votre ancien mot de passe n\'est pas bon.');
             }
