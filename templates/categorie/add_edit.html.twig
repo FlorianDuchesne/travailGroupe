@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout catégorie
+{% endblock %}
+
+{% block body %}
+	{% if editMode %}
+		<h1 class="text-center m-3">Modification d'une catégorie</h1>
+	{% else %}
+		<h1 class="text-center m-3">Ajout d'une catégorie</h1>
+	{% endif %}
+	<div class="m-auto col-3">
+		{{ form(formAddCategorie) }}
+				<button class="btn btn-info">
+			<a class="text-white text-center" href="{{ path('categorie') }}"><i class="fas fa-undo"></i></a>
+		</button>
+
+		</div>
+	{% endblock %}
