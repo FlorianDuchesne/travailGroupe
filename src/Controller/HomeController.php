@@ -53,23 +53,34 @@ class HomeController extends AbstractController
         ]);
     }
 
+    // La fonction suivante n'est accessible qu'à un administrateur.
+    // Elle requiert un identifiant, qui a dû être rentrée dans le chemin de la vue twig.
+
     /**
      * @IsGranted("ROLE_ADMIN")
      * @Route("/adminPanel/{id}/makeAdmin", name="makeAdmin")
      */
 
+    // On paramètre une instance de la classe User grâce à l'identifiant de la route.
+
     public function makeAdmin(User $user)
     {
+
+        // On rassemble tous les users instanciés grâce à Doctrine, qui appelle la méthode findAll du repository de la classe User,
+        // De manière à les restituer dans la vue twig qu'on retournera à la fin de cette fonction
 
         $users = $this->getDoctrine()
             ->getRepository(User::class)
             ->findAll();
 
-        $user->setRoles(['ROLE_ADMIN']);
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($user);
-        $entityManager->flush();
+        // On appelle la méthode setRoles de l'entité User pour définir le rôle du user paramétré comme admin
 
+        $user->setRoles(['ROLE_ADMIN']);
+        // On appelle le manager de Doctrine, qui nous permet d'interagir avec la base de donnée
+        $entityManager = $this->getDoctrine()->getManager();
+        // On demande au manager d'enregistrer la modification effectuée en base de données
+        $entityManager->flush();
+        // On retourne la vue twig qui suit, "chargée" du data 'users'.
         return $this->render('home/usersList.html.twig', [
             'users' => $users,
         ]);
@@ -89,7 +100,6 @@ class HomeController extends AbstractController
 
         $user->setRoles(['ROLE_USER']);
         $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($user);
         $entityManager->flush();
 
         return $this->render('home/usersList.html.twig', [
