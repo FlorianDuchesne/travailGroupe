@@ -143,60 +143,94 @@ class SessionController extends AbstractController
     public function add(Session $session = null, Request $request): Response
     {
         if (!$session) {
+            // Si aucune session n'est paramétrée dans la fonction,
             $session = new Session();
+            // On instancie une nouvelle session
         }
 
         $form = $this->createForm(SessionType::class, $session);
+        // On crée un formulaire en paramétrant le form Builder 'SessionType' et l'instance de session
 
         $form->handleRequest($request);
+        // On inspecte la requête http pour vérifier si le formulaire est soumis
+
         if ($form->isSubmitted() && $form->isValid()) {
+            // s'il est soumis et qu'il est valide, on applique la condition suivante
+
             $session = $form->getData();
+            // on attribue le data du formulaire validé à l'instance de Session
 
             if ($session->getNbPlaces() < count($form->get('inscrit')->getData())) {
-                // on envoie un message d'erreur
+                // Si le nombre de places de la session est inférieur au nombre de stagiaires inscrits dans le formulaire, alors…
                 $this->addFlash('warningStagiaires', 'Vous ne pouvez pas inscrire autant de stagiaires à cette session');
-                // Et on retourne sur la page du formulaire
+                // on envoie un message d'erreur
+
                 return $this->render('session/add_edit.html.twig', [
                     'formAddSession' => $form->createView(),
                     'editMode' => $session->getId() !== null
                 ]);
+                // Et on retourne sur la page du formulaire
+
             }
+            // on ferme la dernière condition
+
             $stagiaire = $session->getInscrit();
             $start = $session->getDateDebut();
             $end = $session->getDatefin();
-
             $salle = $session->getSalle();
-            $start = $session->getDateDebut();
-            $end = $session->getDatefin();
+
+            // On définit des variables à partir des champs remplis du formulaire
+
+            // $start = $session->getDateDebut();
+            // $end = $session->getDatefin();
 
             if ($session->getId()) {
+                // Si la session a déjà un identifiant (et donc qu'elle n'est pas une nouvelle instance)
 
                 $salleOccupee = $this->getDoctrine()->getRepository(Session::class)->findIfTaken($start, $end, $salle->getId(), $session->getId());
+                // On appelle la méthode 'findIfTaken' du Repository de la classe Session, issu de Doctrine, l'ORM de Symfony
+                // Cette méthode nous renseignera à partir des paramètres fournis  pour savoir si la salle est déjà prise ou non à cette période
 
                 foreach ($stagiaire as $stagiaire) {
-
+                    // Pour chaque stagiaire enregistré par le formulaire,
                     $stagiaireOccupe = $this->getDoctrine()->getRepository(Session::class)->findIfStagiaireAvailable($start, $end, $stagiaire->getId(), $session->getId());
+                    // On appelle une méthode qui permettra de savoir à partir des paramètres fournis si le stagiaire est déjà pris par une autre session à ces dates
+
                     // dd($taken);
+
                     if ($stagiaireOccupe) {
+                        // Si le stagiaire est déjà pris,
 
                         $this->addFlash('danger', 'Au moins un des stagiaires est déjà pris sur une autre session à la même période !');
+                        // On crée un message flash 
 
                         return $this->render('session/add_edit.html.twig', [
+                            // Et on retourne la vue twig du formulaire, chargé du contenu du formulaire et le l'identifiant de la session s'il existe
                             'formAddSession' => $form->createView(),
                             'editMode' => $session->getId() !== null
                         ]);
                     }
+                    // On sort de la condition (stagiaire occupé)
                 }
+                // Et on sort de la boucle 
             } else {
+                // Si la session n'a PAS d'identifiant,
 
                 $salleOccupee = $this->getDoctrine()->getRepository(Session::class)->findIfTakenNewSession($start, $end, $salle->getId());
+                // On appelle la méthode 'findIfTakenNewSession' qui ne paramètre pas d'identifiant de session, et qui retourne si la salle est occupée.
+
                 // dd($taken);
 
                 foreach ($stagiaire as $stagiaire) {
+                    // Pour chaque stagiaire enregistré par le formulaire,
 
                     $stagiaireOccupe = $this->getDoctrine()->getRepository(Session::class)->findIfStagiaireAvailableNewSession($start, $end, $stagiaire->getId());
+                    // On appelle une méthode (qui ne paramètre pas d'identifiant de session) retournant si le stagiaire est disponible ou non 
+
                     // dd($taken);
+
                     if ($stagiaireOccupe) {
+                        // Si le stagiaire est occupé, on envoie un message d'erreur et on retourne à la vue du formulaire
 
                         $this->addFlash('danger', 'Au moins un des stagiaires est déjà pris sur une autre session à la même période !');
 
@@ -209,6 +243,7 @@ class SessionController extends AbstractController
             }
 
             if ($salleOccupee) {
+                // Si la salle est occupée, on envoie un message d'erreur et la vue du formulaire
 
                 $this->addFlash('dangerSalle', 'salle déjà prise à ces dates');
 
@@ -219,25 +254,32 @@ class SessionController extends AbstractController
             }
 
             if ($session->getNbPlaces() > $form->get('salle')->getData()->getNbPlaces()) {
-                // on envoie un message d'erreur
+                // Si le nombre de places de la session est supérieur au nombre de places de la salle,
                 $this->addFlash('warning', 'La jauge de la salle ne peut pas contenir tout l\'effectif de la session !');
-                // Et on retourne sur la page du formulaire
+                // on envoie un message d'erreur
                 return $this->render('session/add_edit.html.twig', [
+                    // Et on retourne sur la page du formulaire
                     'formAddSession' => $form->createView(),
                     'editMode' => $session->getId() !== null
                 ]);
             }
 
-            // Sinon, on poursuit normalement
+            // Sinon, on poursuit normalement : on accède au manager de Doctrine, qui nous permet d'interagir avec la base de données :
+            // La méthode persiste prépare l'objet paramétré à être enregistré en base de données,
+            // et la méthode flush effectue l'enregistrement ou la modification le cas échéant en base de données
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($session);
             $entityManager->flush();
 
+            // On renvoie ensuite à la vue détaillant l'objet session instancié ou modifié
+
             return $this->render('session/show.html.twig', [
                 'session' => $session
             ]);
         }
+
+        // Si le formulaire n'a pas été soumis ou n'est pas valide, on retourne la vue twig du formulaire
 
         return $this->render('session/add_edit.html.twig', [
             'formAddSession' => $form->createView(),

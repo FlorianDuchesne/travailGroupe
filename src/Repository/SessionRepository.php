@@ -19,22 +19,30 @@ class SessionRepository extends ServiceEntityRepository
         parent::__construct($registry, Session::class);
     }
 
-
+    // On paramètre à la fonction les dates de début et de fin de la session en cours d'enregistrement, et l'identifiant du stagiaire
     public function findIfStagiaireAvailableNewSession($debut, $fin, $id)
     {
-
+        // On retourne la création de requête suivante, qui sélectionnera les sessions
         return $this->createQueryBuilder('s')
+            // On fait un inner join sur la propriété 'inscrit' de session, qui correspond aux objets stagiaires
             ->innerJoin('s.inscrit', 'stag')
+            // On cherche les sessions dont le début est avant la fin de la session en cours d'enregistrement,
+            // et dont la fin est après la début de la session en cours d'enregistrement
             ->where(':debut < s.dateFin AND :fin > s.dateDebut')
             // ->where(':debut BETWEEN s.dateDebut AND s.dateFin OR :fin BETWEEN s.dateDebut AND s.dateFin')
+            // Et où le stagiaire paramétré est inscrit
             ->andWhere('stag.id = :id')
+            // On met en place les paramètres à la requête
             ->setParameter('debut', $debut)
             ->setParameter('fin', $fin)
             ->setParameter('id', $id)
+            // On construit la requête
             ->getQuery()
+            // On cherche les résultats de la requête
             ->getResult();
     }
 
+    // La méthode suivante est très proche de la précédente, mais on paramètre en plus l'id de la session, qu'on ne vient pas d'instancier.
     public function findIfStagiaireAvailable($debut, $fin, $id, $idSession)
     {
 
@@ -44,6 +52,10 @@ class SessionRepository extends ServiceEntityRepository
             // ->where(':debut BETWEEN s.dateDebut AND s.dateFin OR :fin BETWEEN s.dateDebut AND s.dateFin')
             ->andWhere('stag.id = :id')
             ->andWhere('s.id != :idSession')
+            // En plus de chercher que la stagiaire paramétré est inscrit à la session passée en revue,
+            // On vérifie également que la session en revue n'est PAS la session paramétrée !
+            // En effet, la session paramétrée est forcément concernée par les conditions de cette requête,
+            // et on ne veut pas ça.
             ->setParameter('debut', $debut)
             ->setParameter('fin', $fin)
             ->setParameter('id', $id)
