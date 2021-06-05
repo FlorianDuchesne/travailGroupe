@@ -8,12 +8,14 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MaterielController extends AbstractController
 {
   
-        /**
+    /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/materiel/list", name="materielList")
      */
     public function index()
@@ -25,7 +27,8 @@ class MaterielController extends AbstractController
             'materiels' => $materiels
         ]);
     }
-        /**
+    /**
+    * @IsGranted("ROLE_ADMIN")
      * @Route("/materiel/add", name="materiel_add")
      * @Route("/materiel/{id}/edit", name="materiel_edit")
      */
@@ -49,9 +52,10 @@ class MaterielController extends AbstractController
             'editMode' => $materiel->getId() !== null
         ]);
     }
-        /**
-     * @Route("/materiel/{id}/delete", name="materiel_delete")
-     */
+    /**
+    * @IsGranted("ROLE_ADMIN")
+    * @Route("/materiel/{id}/delete", name="materiel_delete")
+    */
 
     public function delete(Materiel $materiel, EntityManagerInterface $manager)
     {
@@ -62,6 +66,7 @@ class MaterielController extends AbstractController
 
 
     /**
+     * @IsGranted("ROLE_ADMIN") 
      * @Route("materiel/{id}", name="materiel_show")
      */
     public function show(Materiel $materiel)
