@@ -53,11 +53,11 @@ class RegistrationFormType extends AbstractType
                 'type' => PasswordType::class,
                 'first_options' => [
                     'label' => 'Mot de passe',
-                    'attr' => ['class' =>'form-control']
+                    'attr' => ['class' => 'form-control']
                 ],
                 'second_options' => [
                     'label' => 'Répétez le mot de passe',
-                    'attr' => ['class' =>'form-control']
+                    'attr' => ['class' => 'form-control']
                 ],
                 'invalid_message' => 'Les mots de passe ne correspondent pas !',
                 'mapped' => false,
